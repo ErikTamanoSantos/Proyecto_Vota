@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php include 'header.php'; ?>
-    <h1>HOLA</h1>
+    <h1>VOTA EJA</h1>
     <?php include 'footer.php'; ?>
 </body>
 </html>
