@@ -6,7 +6,8 @@
     <title>Inici</title>
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <h1>HOLA</h1>
+    <?php include 'footer.php'; ?>
 </body>
-<?php include 'footer.php'; ?>
 </html>
