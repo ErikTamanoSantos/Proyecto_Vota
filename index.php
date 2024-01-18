@@ -8,6 +8,11 @@
 <body>
     <?php include 'header.php'; ?>
     <h1>VOTA EJA</h1>
+    <p>
+        Vota EJA es un proyecto para lograr hacer un portal de votaciones que permita crear, distribuir y administrar votaciones en linea.
+        Para nosotros la seguridad es lo primero, por eso todas las votaciones pasan por un sistema de seguridad y encriptacion riguroso 
+        con tal de lograr que ninguno de los datos proporcionados por los votantes se pueda filtrar o llegar a saber su identidad. 
+    </p>
     <?php include 'footer.php'; ?>
 </body>
 </html>
