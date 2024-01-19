@@ -3,36 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Inici</title>
-    <style>
-        .notification {
-            display: none;
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 50px;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-            cursor: pointer;
-        }
-
-        .success {
-            background-color: #4CAF50;
-            color: #fff;
-        }
-
-        .error {
-            background-color: #f44336;
-            color: #fff;
-        }
-
-        .close-icon {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <?php include 'header.php'; ?>
