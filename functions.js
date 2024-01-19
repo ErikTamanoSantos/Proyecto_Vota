@@ -24,5 +24,3 @@ function closeNotification(notification) {
   var container = document.getElementById('notificationContainer');
   container.removeChild(notification);
 }
-
-window.onload = showNotification("error", "Se produjo un error al realizar la operación");
