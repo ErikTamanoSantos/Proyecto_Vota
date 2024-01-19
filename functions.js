@@ -1,29 +1,29 @@
-function mostrarNotificacion(tipo, mensaje) {
-    var notificacion = document.createElement('div');
-    notificacion.className = 'notificacion ' + tipo;
-    notificacion.innerText = mensaje;
+$(document).ready(function () {
+  function showNotification(type, message) {
+    var notificationContainer = $(`
+      <div class="notification-container"></div>
+    `);
 
-    // Agregar ícono de cerrar
-    var cerrarIcono = document.createElement('span');
-    cerrarIcono.className = 'cerrar-icono';
-    cerrarIcono.innerHTML = '&times;'; // Carácter X
+    var notification = $(`
+      <div class="notification ${type}">${message}</div>
+    `);
 
-    cerrarIcono.addEventListener('click', function() {
-      cerrarNotificacion(notificacion);
+    var closeIcon = $(`
+      <span class="close-icon">x</span>
+    `);
+    closeIcon.on('click', function () {
+      closeNotification(notificationContainer);
     });
 
-    notificacion.appendChild(cerrarIcono);
+    notification.append(closeIcon);
+    notificationContainer.append(notification);
+    $('#notificationContainer').append(notificationContainer);
+    notification.css('display', 'block');
+    notification.hide().slideDown();
+  }
 
-    var contenedor = document.getElementById('contenedorNotificaciones');
-    contenedor.appendChild(notificacion);
-
-    notificacion.style.display = 'block';
-}
-
-function cerrarNotificacion(notificacion) {
-    notificacion.style.display = 'none';
-    var contenedor = document.getElementById('contenedorNotificaciones');
-    contenedor.removeChild(notificacion);
-}
-
-window.onload = mostrarNotificacion("error", "Se produjo un error al realizar la operación");
+  function closeNotification(notificationContainer) {
+    notificationContainer.css('display', 'none');
+    notificationContainer.remove();
+  }
+});

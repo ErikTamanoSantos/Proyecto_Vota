@@ -223,30 +223,39 @@ footer a {
 
 /* Notificaciones */ 
 
-.notificacion {
-            display: none;
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 50px;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-            cursor: pointer;
-        }
+#notificationContainer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    max-width: 500px;
+} 
+.notification-container {
+    position: relative;
+    margin-bottom: 4px;
+}
+.notification {
+    display: none;
+    padding: 50px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+}
 
-        .success {
-            background-color: #4CAF50;
-            color: #fff;
-        }
+.success {
+    background-color: #4CAF50;
+    color: #fff;
+}
 
-        .error {
-            background-color: #f44336;
-            color: #fff;
-        }
+.error {
+    background-color: #f44336;
+    color: #fff;
+}
 
-        .cerrar-icono {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-        }
+.close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 24px;
+}
