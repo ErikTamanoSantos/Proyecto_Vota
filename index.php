@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="functions.js"></script>
+
     <title>Vota EJA</title>
 </head>
 
 <body>
     <?php include 'header.php'; ?>
-    <div id="contenedorNotificaciones"></div>
+    <div id="notificationContainer"></div>
     <section class="firstSec flex flex-col justify-center">
         <h1>VOTA EJA</h1>
         <div class="firstSecFlex flex flex-row ">
