@@ -23,7 +23,7 @@
                 con tal de lograr que ninguno de los datos proporcionados por los votantes se pueda filtrar o llegar a saber su identidad. </p>        
                 </div>
             <div class="firstSecImg">
-                <img src="img/firstSecImg.png" alt="Imagen de la primera seccion">
+                <img src="./img/votacion.png" alt="Imagen de la primera seccion" width="100%" height="100%" class="imgFirstSec">
             </div>
         </div>
     </section>

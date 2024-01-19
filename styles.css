@@ -125,6 +125,10 @@ footer a {
     color: var(--textoAzulOscuro)
 }
 
+.footerUser > p {
+    margin: 2%;
+}
+
 .footerUser:hover {
     background: rgba(255, 255, 255, 0.38);
 }
@@ -180,17 +184,14 @@ footer a {
 
 
 .firstSec {
-    background-image: url(img/background.jpeg);
+    background-image: url(./img/background.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     color: #000;
     font-weight: 400;
-    text-shadow: 4px 2px 3px rgba(0, 0, 0, 0.5);
     line-height: 1.4;
     height:750px;
-    clip-path: polygon(50% 100%, 100% 80%, 100% 0, 0 0, 0 80%);
-
 }
 
 .firstSec > h1 {
@@ -208,7 +209,7 @@ footer a {
     width: 50%;
     padding:5%;
     font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
+    font-size: 23px;
 }
 
 .firstSecText { 
@@ -219,6 +220,8 @@ footer a {
     -webkit-backdrop-filter: blur(4.1px);
     border: 1px solid rgba(0, 0, 0, 0.56);
 }
+
+
 
 
 /* Notificaciones */ 
