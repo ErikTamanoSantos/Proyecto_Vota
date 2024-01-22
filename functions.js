@@ -1,26 +1,33 @@
-function showNotification(type, message) {
-  var notification = document.createElement('div');
-  notification.className = 'notification ' + type;
-  notification.innerText = message;
+$(document).ready(function () {
+  function showNotification(type, message) {
+    var notificationContainer = $(`
+      <div class="notification-container"></div>
+    `);
 
-  var closeIcon = document.createElement('span');
-  closeIcon.className = 'close-icon';
-  closeIcon.innerHTML = '&times;'; // X character
+    var notification = $(`
+      <div class="notification ${type}">${message}</div>
+    `);
 
-  closeIcon.addEventListener('click', function() {
-      closeNotification(notification);
-  });
+    var closeIcon = $(`
+      <span class="close-icon">x</span>
+    `);
+    closeIcon.on('click', function () {
+      closeNotification(notificationContainer);
+    });
 
-  notification.appendChild(closeIcon);
+    notification.append(closeIcon);
+    notificationContainer.append(notification);
+    $('#notificationContainer').append(notificationContainer);
+    notification.css('display', 'block');
+    notification.hide().slideDown();
+  }
 
-  var container = document.getElementById('notificationContainer');
-  container.appendChild(notification);
+  function closeNotification(notificationContainer) {
+    notificationContainer.css('display', 'none');
+    notificationContainer.remove();
+  }
+  //showNotification('success', 'Funciono correctamentedasdasdasdasdasdasdsadddanfidsnfonasoifdniofdifasfndaslfdsafasfndasfiaunfl');
+  //showNotification('error', 'Mensaje de error');
+});
 
-  notification.style.display = 'block';
-}
 
-function closeNotification(notification) {
-  notification.style.display = 'none';
-  var container = document.getElementById('notificationContainer');
-  container.removeChild(notification);
-}
