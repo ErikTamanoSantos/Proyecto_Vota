@@ -72,13 +72,13 @@
                 echo "showStep(1);\n";
                 $errorShown = true;
             }
-        } else if (!preg_match('[A-Z]', $password)) {
+        } else if (!preg_match('/[A-Z]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos una mayúscula');\n";
             if (!$errorShown) {
                 echo "showStep(1);\n";
                 $errorShown = true;
             }
-        } else if (!preg_match('[a-z]', $password)) {
+        } else if (!preg_match('/[a-z]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos una minúscula');\n";
             if (!$errorShown) {
                 echo "showStep(1);\n";
@@ -105,8 +105,9 @@
                 $errorShown = true;
             }
         } else {
-            $query = $pdo -> prepare("SELECT * FROM Users WHERE Email = ?");
+            $query = $pdo -> prepare("SELECT * FROM Users WHERE `Email` = ?");
             $query->bindParam(1, $email);
+            $query -> execute();
             $row = $query -> fetch();
             if ($row) {
                 echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
@@ -117,14 +118,27 @@
             }
         }
 
-        if (strlen($phone) < 9) {
-            echo "showNotification('error', 'Su número de teléfono debe de tener 9 dígitos');\n";
+        if (!preg_match("/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im", $phone)) {
+            echo "showNotification('error', 'Su número de teléfono debe de tener 9 dígitos y un prefijo');\n";
             if (!$errorShown) {
                 echo "showStep(4);\n";
                 $errorShown = true;
             }
         } else {
-            // TODO: CHECK PHONE PREFIX
+            $numWithoutPrefix = substr($phone, 0 -9);
+            $prefix = str_replace($numWithoutPrefix, "", $phone);
+            $query = $pdo -> prepare("SELECT * FROM Countries WHERE PhoneCode = ? AND CountryName = ?;");
+            $query->bindParam(1, $prefix);
+            $query->bindParam(2, $country);
+            $query -> execute();
+            $row = $query -> fetch();
+            if (!$row) {
+                echo "showNotification('error', 'El prefijo del número de teléfono insertado no es válido');\n";
+                if (!$errorShown) {
+                    echo "showStep(4);\n";
+                    $errorShown = true;
+                }
+            }
         }
 
         if (strlen($country) == 0) {
@@ -142,6 +156,7 @@
         } else {
             $query = $pdo -> prepare("SELECT * FROM Countries WHERE CountryName = ?");
             $query->bindParam(1, $country);
+            $query -> execute();
             $row = $query -> fetch();
             if (!$row) {
                 echo "showNotification('error', 'El país insertado no existe');\n";
@@ -153,17 +168,17 @@
         }
 
         if (strlen($city) == 0) {
-            echo 'showNotification("error", "Inserte una ciudad");\n';
+            echo "showNotification('error', 'Inserte una ciudad');\n";
             if (!$errorShown) {
-                echo 'showStep(6);\n';
+                echo "showStep(6);\n";
                 $errorShown = true;
             }
         }
 
         if (strlen($postalCode) == 0) {
-            echo 'showNotification("error", "Inserte un código postal");\n'; 
+            echo "showNotification('error', 'Inserte un código postal');\n"; 
             if (!$errorShown) {
-                echo 'showStep(7);\n';
+                echo "showStep(7);\n";
                 $errorShown = true;
             }
         }

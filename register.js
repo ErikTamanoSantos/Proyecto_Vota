@@ -92,7 +92,7 @@ function showStep(step = 0, animate = true) {
             `)
             $("#next-step").click(function() {
                 phone = $("#phone").val()
-                if (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(phone)) {
+                if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(phone)) {
                     showNotification("error", "El número de teléfono insertado no es válido")
                 } else  if (Number.isInteger(phone) || phone.includes(";") || phone.includes("--") || phone.includes("/*") || phone.includes("*/")) {
                     showNotification("error", "El número de teléfono insertado contiene carácteres no permitidos")
