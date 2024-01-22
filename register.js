@@ -40,7 +40,7 @@ function showStep(step = 0, animate = true) {
                 password = $("#password").val()
                 if (password.length < 8) {
                     showNotification("error", "La contraseña debe tener un mínimo de 8 carácteres")
-                } else if (username.includes(";") || username.includes("--") || username.includes("/*") || username.includes("*/")) {
+                } else if (password.includes(";") || password.includes("--") || password.includes("/*") || password.includes("*/")) {
                     showNotification("error", "La contraseña contiene carácteres no permitidos")
                 } else if (!/\d/.test(password)) { /* if password doesn't contain numbers */
                     showNotification("error", "La contraseña debe contener al menos un carácter numérico")
@@ -87,13 +87,13 @@ function showStep(step = 0, animate = true) {
         case 4:
             $("form").html(`
                 <label for="phone">Introduzca su número de teléfono sin prefijo: </label>
-                <input type="number" id="phone" name="phone">
+                <input type="tel" id="phone" name="phone">
                 <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 phone = $("#phone").val()
-                if (phone.length < 9) {
-                    showNotification("error", "Su número de teléfono debe de tener 9 dígitos")
+                if (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(phone)) {
+                    showNotification("error", "El número de teléfono insertado no es válido")
                 } else  if (Number.isInteger(phone) || phone.includes(";") || phone.includes("--") || phone.includes("/*") || phone.includes("*/")) {
                     showNotification("error", "El número de teléfono insertado contiene carácteres no permitidos")
                 } else {
@@ -101,9 +101,9 @@ function showStep(step = 0, animate = true) {
                 }
             })
             break;
-        case 4:
+        case 5:
             $("form").html(`
-                <label for="phone">País: </label>
+                <label for="country">País: </label>
                 <input type="text" id="country" name="country">
                 <button type="button" id="next-step">Next</button>
             `)
@@ -118,7 +118,7 @@ function showStep(step = 0, animate = true) {
                 }
             })
             break;
-        case 5:
+        case 6:
             $("form").html(`
                 <label for="city">Ciudad: </label>
                 <input type="text" id="city" name="city">
@@ -127,7 +127,7 @@ function showStep(step = 0, animate = true) {
             $("#next-step").click(function() {
                 city = $("#city").val()
                 if (city.length == "") {
-
+                    showNotification("error", "Inserte una ciudad") 
                 } else if (city.includes(";") || city.includes("--") || city.includes("/*") || city.includes("*/")) {
                     showNotification("error", "La ciudad insertada contiene carácteres no permitidos")
                 } else {
@@ -135,7 +135,7 @@ function showStep(step = 0, animate = true) {
                 }
             })
             break;
-        case 6:
+        case 7:
             $("form").html(`
                 <label for="postalCode">Código Postal: </label>
                 <input type="number" id="postalCode" name="postalCode">
@@ -143,7 +143,11 @@ function showStep(step = 0, animate = true) {
             `)
             $("#next-step").click(function() {
                 postalCode = $("#postalCode").val()
-                submitForm();
+                if (postalCode.length == 0) {
+                    showNotification("error", "Inserte un código Postal")
+                } else {
+                    submitForm();
+                }
             })
             break;
     }

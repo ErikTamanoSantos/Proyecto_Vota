@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
   function showNotification(type, message) {
     var notificationContainer = $(`
       <div class="notification-container"></div>
@@ -28,6 +28,5 @@ $(document).ready(function () {
   }
   //showNotification('success', 'Funciono correctamentedasdasdasdasdasdasdsadddanfidsnfonasoifdniofdifasfndaslfdsafasfndasfiaunfl');
   //showNotification('error', 'Mensaje de error');
-});
 
 
