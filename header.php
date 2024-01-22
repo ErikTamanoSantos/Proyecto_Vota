@@ -23,7 +23,6 @@
                         <a href='login.php'>Inicia sesión</a>
                         <a href='register.php'>Regístrate</a>";
                 }
-            
                 echo "    
                 </div>
             </div>

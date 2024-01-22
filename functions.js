@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
   function showNotification(type, message) {
     var notificationContainer = $(`
       <div class="notification-container"></div>
@@ -26,8 +26,8 @@ $(document).ready(function () {
     notificationContainer.css('display', 'none');
     notificationContainer.remove();
   }
-  //showNotification('success', 'Funciono correctamentedasdasdasdasdasdasdsadddanfidsnfonasoifdniofdifasfndaslfdsafasfndasfiaunfl');
-  //showNotification('error', 'Mensaje de error');
-});
+  //showNotification('warning', 'Funciono correctamentedasdasdasdasdasdasdsadddanfidsnfonasoifdniofdifasfndaslfdsafasfndasfiaunfl');
+  //showNotification('info', 'Mensaje de error');
+
 
 
