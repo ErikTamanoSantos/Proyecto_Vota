@@ -14,6 +14,7 @@
     </form>
 
     <?php
+        session_start();
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
             try {
                 $pwd = $_POST['pwd'];

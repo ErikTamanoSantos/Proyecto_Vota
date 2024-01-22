@@ -17,7 +17,7 @@
                 if(isset($_SESSION["username"])){
                     echo "
                         <a href='dashboard.php'>Dashboard</a>
-                        <a href='index.php'>Salir</a>";
+                        <a href='logout.php'>Salir</a>";
                 } else{
                     echo "
                         <a href='login.php'>Inicia sesión</a>
