@@ -17,11 +17,11 @@
                 if(isset($_SESSION["username"])){
                     echo "
                         <a href='dashboard.php'>Dashboard</a>
-                        <a href='index.php'>Logout</a>";
+                        <a href='index.php'>Salir</a>";
                 } else{
                     echo "
-                        <a href='login.php'>Login</a>
-                        <a href='register.php'>Register</a>";
+                        <a href='login.php'>Inicia sesión</a>
+                        <a href='register.php'>Regístrate</a>";
                 }
             
                 echo "    

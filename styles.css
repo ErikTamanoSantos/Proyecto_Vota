@@ -56,9 +56,14 @@ body {
 
 
 .navbar {
+    position: fixed;
+    width: 100%;
     height: 40px;
     padding: 1%;
-    background-color: var(--azulOscuro);
+    background: transparent;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+
 }
 
 .navbar div {
@@ -74,14 +79,17 @@ body {
 .navbar .userInterface {
     display: flex;
     justify-content: flex-end;
+    margin-right: 15px;
 }
 
 .navbar a {
     text-decoration: none;
-    color: var(--textoAzulOscuro);
+    text-align: center;
+    align-items: center;
+    color: var(--textoAzulNormal);
     font-weight: 700;
     font-size: 20px;
-    padding:5%
+    margin:5%
 }
 
 .navbar a:hover {
@@ -186,7 +194,6 @@ footer a {
 /* Index */
 
 
-
 .firstSec {
     background-image: url(./img/background.webp);
     background-repeat: no-repeat;
@@ -196,37 +203,72 @@ footer a {
     font-weight: 400;
     line-height: 1.4;
     height:750px;
+    padding-bottom: 75px;
 }
 
 .firstSec > h1 {
     text-align: center;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
     color: var(--azulOscuro);
-    font-size: 70px;
+    font-size: 75px;
+    margin: 225px 0 0 0;
+}
+
+.firstSec > h3 {
+    text-align: center;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+    color: var(--azulOscuro);
+    font-size: 40px;
     margin: 0;
 }
 
 .firstSecFlex {
-    padding:  3% 10% 3% 10%;
+    padding:  1% 10% 3% 10%;
 }
 
 .firstSecText, .firstSecImg {
     width: 50%;
     padding:5%;
     font-family: 'Quicksand', sans-serif;
-    font-size: 23px;
+    font-size: 20px;
 }
 
-.firstSecText { 
+.firstSecImg img {
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+}
+
+.firstSecText p { 
     background: rgba(0, 0, 0, 0);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 30px rgba(0, 0, 0, 0.7);
+    text-shadow: 1px 0 5px rgba(4, 56, 77, 0.6);
     backdrop-filter: blur(4.1px);
     -webkit-backdrop-filter: blur(4.1px);
     border: 1px solid rgba(0, 0, 0, 0.56);
+    padding: 10%;
 }
 
-
-
+.btn {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.1em 0.1em 0;
+    border: 2px solid #000;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 700;
+    color: #000;
+    text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.5);
+    text-align: center;
+    transition: all 0.2s;
+  }
+  
+  .btn:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
 
 /* Notificaciones */ 
 

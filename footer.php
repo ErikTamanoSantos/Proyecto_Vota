@@ -28,6 +28,6 @@
         <a href="https://www.iesesteveterradas.cat">Institut Esteve Terrades</a>
         <a href="https://github.com/ErikTamanoSantos/Proyecto_Vota">GitHub</a>
 
-        <p>© Copyright EJA</p>
+        <p>© Copyright 2024 EJA</p>
     </div>
 </footer>
