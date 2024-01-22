@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="footerUser">
-                <p>Alejandro Soldado</p><p>Impulsivo, se cree autosuficiente y tiende hacia la <strong>violencia</strong>, trasladando su <strong>agresividad</strong> de forma general a compañeros, <strong>profesores</strong> y familiares</p>
+                <p>Alejandro Soldado</p><p>Breve descripción de la persona (opcional)</p>
                 <div class="linksUser">
                     <a href="mailto:asoldadopalomino.cf@iesesteveterradas.cat" target="_blank"><i class="fa-regular fa-envelope"></i></a><a href="https://github.com/AlejandroSoPa" target="_blank"><i class="fa-brands fa-github"></i></a>
                 </div>
@@ -28,6 +28,6 @@
         <a href="https://www.iesesteveterradas.cat">Institut Esteve Terrades</a>
         <a href="https://github.com/ErikTamanoSantos/Proyecto_Vota">GitHub</a>
 
-        <p>© Copyright EJA</p>
+        <p>© Copyright 2024 EJA</p>
     </div>
 </footer>
