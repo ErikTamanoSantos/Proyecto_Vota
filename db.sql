@@ -126,6 +126,7 @@ DROP TABLE IF EXISTS `Polls`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Polls` (
   `ID` int NOT NULL AUTO_INCREMENT,
+  `Question` varchar(255) DEFAULT NULL,
   `CreationDate` datetime DEFAULT NULL,
   `StartDate` datetime DEFAULT NULL,
   `EndDate` datetime DEFAULT NULL,

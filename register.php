@@ -41,67 +41,67 @@
         $postalCode = $_POST["postalCode"];
 
         if (strlen($username) == 0) {
-            echo 'showNotification("error", "Inserte un nombre de usuario");\n';
+            echo "showNotification('error', 'Inserte un nombre de usuario');\n";
             if (!$errorShown) {
-                echo 'showStep(0)';
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($username,';') or str_contains($username,'--') or str_contains($username,'/*') or str_contains($username, "*/")) {
-            echo 'showNotification("error", "El nombre de usuario contiene carácteres no permitidos")';
+            echo "showNotification('error', 'El nombre de usuario contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo 'showStep(0)';
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         }
 
         if (strlen($password) < 8) {
-            echo 'showNotification("error", "La contraseña debe tener un mínimo de 8 carácteres")';
+            echo "showNotification('error', 'La contraseña debe tener un mínimo de 8 carácteres');\n";
             if (!$errorShown) {
-                echo 'showStep(1)';
+                echo "showStep(1);\n";
                 $errorShown = true;
             }
         } else if (str_contains($password,';') or str_contains($password,'--') or str_contains($password,'/*') or str_contains($password, "*/")) {
-            echo 'showNotification("error", "La contraseña contiene carácteres no permitidos")';
+            echo "showNotification('error', 'La contraseña contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo 'showStep(1)';
+                echo "showStep(1);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/\d/', $password)) {
-            echo 'showNotification("error", "La contraseña debe contener al menos un carácter numérico")';
+            echo "showNotification('error', 'La contraseña debe contener al menos un carácter numérico');\n";
             if (!$errorShown) {
-                echo 'showStep(1)';
+                echo "showStep(1);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('[A-Z]', $password)) {
-            echo 'showNotification("error", "La contraseña debe contener al menos una mayúscula")';
+            echo "showNotification('error', 'La contraseña debe contener al menos una mayúscula');\n";
             if (!$errorShown) {
-                echo 'showStep(1)';
+                echo "showStep(1);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('[a-z]', $password)) {
-            echo 'showNotification("error", "La contraseña debe contener al menos una minúscula")';
+            echo "showNotification('error', 'La contraseña debe contener al menos una minúscula');\n";
             if (!$errorShown) {
-                echo 'showStep(1)';
+                echo "showStep(1);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[ `!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?~]/', $password)) {
-            echo 'showNotification("error", "La contraseña debe contener al menos un carácter especial")';
+            echo "showNotification('error', 'La contraseña debe contener al menos un carácter especial');\n";
             if (!$errorShown) {
-                echo 'showStep(1)';
+                echo "showStep(1);\n";
                 $errorShown = true;
             }
         }
 
         if (!preg_match('/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
-            echo 'showNotification("error", "La dirección de correo electrónico no es válida")';
+            echo "showNotification('error', 'La dirección de correo electrónico no es válida');\n";
             if (!$errorShown) {
-                echo 'showStep(3)';
+                echo "showStep(3);\n";
                 $errorShown = true;
             }
         } else if (str_contains($email,';') or str_contains($email,'--') or str_contains($email,'/*') or str_contains($email, "*/")) {
-            echo 'showNotification("error", "La dirección de correo electrónico contiene carácteres no permitidos")';
+            echo "showNotification('error', 'La dirección de correo electrónico contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo 'showStep(3)';
+                echo "showStep(3);\n";
                 $errorShown = true;
             }
         } else {
@@ -109,18 +109,18 @@
             $query->bindParam(1, $email);
             $row = $query -> fetch();
             if ($row) {
-                echo 'showNotification("error", "La dirección de correo electrónico ya está enlazada a una cuenta")';
+                echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
                 if (!$errorShown) {
-                    echo 'showStep(3)';
+                    echo "showStep(3);\n";
                     $errorShown = true;
                 }
             }
         }
 
         if (strlen($phone) < 9) {
-            echo 'showNotification("error", "Su número de teléfono debe de tener 9 dígitos")';
+            echo "showNotification('error', 'Su número de teléfono debe de tener 9 dígitos');\n";
             if (!$errorShown) {
-                echo 'showStep(4)';
+                echo "showStep(4);\n";
                 $errorShown = true;
             }
         } else {
@@ -128,15 +128,15 @@
         }
 
         if (strlen($country) == 0) {
-            echo 'showNotification("error", "Inserte un país")';
+            echo "showNotification('error', 'Inserte un país');\n";
             if (!$errorShown) {
-                echo 'showStep(5)';
+                echo "showStep(5);\n";
                 $errorShown = true;
             }
         } else if (str_contains($country,';') or str_contains($country,'--') or str_contains($country,'/*') or str_contains($country, "*/")) {
-            echo 'showNotification("error", "El país insertado contiene carácteres no permitidos")';
+            echo "showNotification('error', 'El país insertado contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo 'showStep(5)';
+                echo "showStep(5);\n";
                 $errorShown = true;
             }
         } else {
@@ -144,26 +144,26 @@
             $query->bindParam(1, $country);
             $row = $query -> fetch();
             if (!$row) {
-                echo 'showNotification("error", "El país insertado no existe")';
+                echo "showNotification('error', 'El país insertado no existe');\n";
                 if (!$errorShown) {
-                    echo 'showStep(5)';
+                    echo "showStep(5);\n";
                     $errorShown = true;
                 }
             }
         }
 
         if (strlen($city) == 0) {
-            echo 'showNotification("error", "Inserte una ciudad")';
+            echo 'showNotification("error", "Inserte una ciudad");\n';
             if (!$errorShown) {
-                echo 'showStep(6)';
+                echo 'showStep(6);\n';
                 $errorShown = true;
             }
         }
 
         if (strlen($postalCode) == 0) {
-            echo 'showNotification("error", "Inserte un código postal")'; 
+            echo 'showNotification("error", "Inserte un código postal");\n'; 
             if (!$errorShown) {
-                echo 'showStep(7)';
+                echo 'showStep(7);\n';
                 $errorShown = true;
             }
         }
