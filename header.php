@@ -7,10 +7,6 @@
                 <div class='logo'> 
                     <a href='index.php'>Vota EJA</a>
                 </div>
-                <div class='items'>
-                    <a href='index.php'>Inicio</a>
-                    <a href='votaciones.php'>Votaciones</a>
-                </div>
                 <div class='userInterface'>
                 ";
                 

@@ -54,7 +54,6 @@ body {
 
 /* Estilos propios */
 
-
 .navbar {
     position: fixed;
     width: 100%;
@@ -63,7 +62,7 @@ body {
     background: transparent;
     backdrop-filter: blur(10px);
     z-index: 100;
-
+    border-bottom: 1px solid var(--azulOscuroMedio);
 }
 
 .navbar div {
@@ -102,7 +101,6 @@ body {
 footer {
     display: flex;
     flex-direction: row;    
-
     padding: 1%;
     background-color: var(--azulOscuro);
 }
@@ -275,6 +273,7 @@ footer a {
 
 #notificationContainer {
     position: fixed;
+    z-index: 9999;
     top: 10px;
     right: 10px;
     max-width: 500px;
@@ -509,7 +508,7 @@ footer a {
     margin-top: 30px;
 }
 
-.dashboardItem button, a {
+.dashboardItem button, .dashboardItem a {
     text-decoration: none;
     color: var(--textoAzulNormal);
     font-weight: 700;
@@ -520,7 +519,7 @@ footer a {
     background: transparent;
 }
 
-.dashboardItem button:hover, a:hover {
+.dashboardItem button:hover, .dashboardItem a:hover {
     cursor: pointer;
 }
 
@@ -528,3 +527,131 @@ footer a {
     grid-area: 2 / 2 / 15 / 19;
  }
 
+
+/* Login */
+
+.navbarUpLogin {
+    display: flex;
+    height: 10vh;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbarUpLogin a {
+    font-size: 40px;
+    padding: 30px 30px 0 30px;
+    text-decoration: none;
+    color: var(--textoAzulOscuro);
+}
+
+.loginSection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    margin-bottom: 10vh;
+}
+
+.loginSection > h1 {
+    grid-area: 1 / 1 / 2 / 3;
+    height: 5vh;
+    margin: 0;
+    font-size: 50px;
+    text-align: center;
+    margin: 5%;
+    color: var(--textoAzulOscuro);
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
+}
+
+
+
+.loginForm {
+    grid-area: 2 / 1 / 4 / 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+
+}
+
+.loginImg {
+    grid-area: 2 / 2 / 4 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginImg img {
+    width: 75%;
+    height: 75%;
+    filter: drop-shadow(2px 1px 5px #000000);
+
+}
+
+.circleLoginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 25px;
+    border-radius: 30px;
+    height: 40vh;
+    width: 75%;
+    border: 1px solid var(--azulOscuro);
+    background: transparent;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    background-color: var(--azulOscuro);
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.circleLoginForm > p, .circleLoginForm > h3 {
+    margin: 0.2%;
+    font-family: 'Quicksand', sans-serif;
+    padding-left: 5%;
+    color: var(--textoAzulOscuro);
+}
+
+.circleLoginForm form {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.circleLoginForm form input {
+    margin: 5%;
+    
+    padding: 1%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    font-size: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+    color: #fff;
+}
+
+.circleLoginForm form input::placeholder {
+    color: #fff;
+}
+
+.circleLoginForm form input:focus {
+    outline: none;
+}   
+
+.btnForm {
+    width: 15vh;
+    height: 4vh;
+    margin-right: 5% ;
+    background-color: var(--textoAzulClaroMedio);
+    border: 1px solid var(--azulOscuro);
+    border-radius: 20px;
+    align-self: self-end;
+    color: #fff;
+}
+
+.btnForm:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}

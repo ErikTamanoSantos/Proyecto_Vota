@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Iniciar sesión | Vota EJA</title>
 </head>
 <body>
-    <h1>Inicia sesion</h1>
-    <form method="POST">
-        <input type="email" name="userEmail" placeholder="Email">
-        <input type="password" name="pwd" placeholder="Contrasenya">
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="navbarUpLogin">
+        <div class="navItem">
+            <a href="./"><i class="fas fa-home"></i></a>
+        </div>
+    </div>
+    <section class="loginSection">
 
+        <h1>Bienvenido de nuevo!</h1>
+        <div class="loginForm">
+            <div class="circleLoginForm">
+                <h3>Inicia sesión</h3>
+                <p>Introduce tus datos</p>
+                <form method="POST">
+                    <input type="email" name="userEmail" placeholder="Email">
+                    <input type="password" name="pwd" placeholder="Contrasenya">
+                    <button type="submit" class="btnForm">Entrar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="loginImg">
+            <img src="./img/login.svg">
+        </div>
+    </section>
+    <?php include 'footer.php'; ?>
     <?php
         session_start();
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
