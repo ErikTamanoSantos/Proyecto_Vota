@@ -16,24 +16,26 @@
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, 'super', '1q2w·E4r5t6y');
             
-            $query = $pdo->prepare("SELECT Question FROM Polls");
+            $query = $pdo->prepare("SELECT Question, State, StartDate, EndDate FROM Polls");
             $query->execute();
             
             $row = $query->fetch();
             $correct = false;
+            $questions = 0;
+            echo "<ul>";
             while ($row) {
-                echo "<h1>".$row["nom"]."<h1>";
+                $questions ++;
+                echo "<li>".$row["nom"]."<li>";
                 $row = $query->fetch();
                 $correct = true;
             }
+            echo "</ul>";
             if (!$correct) {
-                echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+                echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
             }
-            echo var_dump($correct);
-
         } catch (PDOException $e){
             echo $e->getMessage();
-            echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
+            echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
     ?>
     
