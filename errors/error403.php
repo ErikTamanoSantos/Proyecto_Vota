@@ -1,8 +1,7 @@
 <?php
         header("Location: ./error403.php");
         http_response_code(403);
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="es">
 <head>
         <meta charset="utf-8">

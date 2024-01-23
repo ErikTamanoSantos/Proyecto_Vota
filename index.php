@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+    <?php include './components/header.php'; ?>
     <div id="notificationContainer"></div>
     <section class="firstSec flex flex-col justify-center">
         <h1>VOTA EJA</h1>
@@ -28,7 +28,7 @@
             </div>
         </div>
     </section>
-    <?php include 'footer.php'; ?>
+    <?php include './components/footer.php'; ?>
 </body>
 
 </html>
