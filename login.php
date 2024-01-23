@@ -42,7 +42,7 @@
                 $dsn = "mysql:host=localhost;dbname=project_vota";
                 $pdo = new PDO($dsn, 'root', 'Thyr10N191103!--');
                 
-                $query = $pdo->prepare("SELECT Email FROM Users WHERE password = SHA2(:pwd, 512) AND Email = :userEmail");
+                $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(:pwd, 512) AND Email = :userEmail");
                 $query->bindParam(':pwd', $pwd, PDO::PARAM_STR);
                 $query->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
                 $query->execute();
@@ -51,6 +51,8 @@
                 $correct = false;
                 while ($row) {
                     $_SESSION["login"] = "correcto";
+                    $_SESSION["UserID"] = $row["ID"];
+                    $_SESSION["Username"] = $row["Username"];
                     $correct = true;
                     header("Location:./dashboard.php");
                 }

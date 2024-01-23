@@ -33,7 +33,7 @@
                 <script>
                     showNotification('error', 'El cuestionario debe contener al menos 2 respuestas');
                 </script>";
-            } elseif (!isset($_POST["dateStart"]) || !isset($_POST["dateFinish"]) || !(bool)strtotime($_POST["dateStart"]) || (bool)strtotime($_POST["dateFinish"])) {
+            } elseif (!isset($_POST["dateStart"]) || !isset($_POST["dateFinish"]) || !(bool)strtotime($_POST["dateStart"]) || !(bool)strtotime($_POST["dateFinish"])) {
                 echo "
                 <script>
                     showNotification('error', 'Las fechas insertadas no son válidas');
@@ -50,11 +50,16 @@
                     exit;
                 }
                 $date = new DateTime();
-                $query = $pdo -> prepare("INSERT INTO Polls(Question, CreationDate, StartDate, EndDate) VALUES (?, ?, ?, ?)");
+                $state = "not_begun";
+                $visibility = "hidden";
+                $query = $pdo -> prepare("INSERT INTO Polls(Question, CreationDate, StartDate, EndDate, `State`, CreatorID, QuestionVisibility) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $query->bindParam(1, $_POST["question"]);
                 $query->bindParam(2, $date->format('Y-m-d H:i:s'));
                 $query->bindParam(3, $_POST["dateStart"]);
                 $query->bindParam(4, $_POST["dateFinish"]);
+                $query->bindParam(5, $state);
+                $query->bindParam(6, $_SESSION["UserID"]);
+                $query->bindParam(7, $visibility);
                 $query->execute();
                 foreach ($_POST['answers'] as $key => $value) {
                     $query = $pdo -> prepare("SELECT * FROM Polls ORDER BY ID DESC");

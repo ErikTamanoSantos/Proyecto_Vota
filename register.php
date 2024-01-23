@@ -57,37 +57,37 @@
         if (strlen($password) < 8) {
             echo "showNotification('error', 'La contraseña debe tener un mínimo de 8 carácteres');\n";
             if (!$errorShown) {
-                echo "showStep(1);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($password,';') or str_contains($password,'--') or str_contains($password,'/*') or str_contains($password, "*/")) {
             echo "showNotification('error', 'La contraseña contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo "showStep(1);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/\d/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos un carácter numérico');\n";
             if (!$errorShown) {
-                echo "showStep(1);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[A-Z]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos una mayúscula');\n";
             if (!$errorShown) {
-                echo "showStep(1);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[a-z]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos una minúscula');\n";
             if (!$errorShown) {
-                echo "showStep(1);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[ `!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?~]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos un carácter especial');\n";
             if (!$errorShown) {
-                echo "showStep(1);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         }
@@ -95,13 +95,13 @@
         if (!preg_match('/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
             echo "showNotification('error', 'La dirección de correo electrónico no es válida');\n";
             if (!$errorShown) {
-                echo "showStep(3);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($email,';') or str_contains($email,'--') or str_contains($email,'/*') or str_contains($email, "*/")) {
             echo "showNotification('error', 'La dirección de correo electrónico contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo "showStep(3);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else {
@@ -112,7 +112,7 @@
             if ($row) {
                 echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
                 if (!$errorShown) {
-                    echo "showStep(3);\n";
+                    echo "showStep(0);\n";
                     $errorShown = true;
                 }
             }
@@ -121,7 +121,7 @@
         if (!preg_match("/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im", $phone)) {
             echo "showNotification('error', 'Su número de teléfono debe de tener 9 dígitos y un prefijo');\n";
             if (!$errorShown) {
-                echo "showStep(4);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else {
@@ -135,7 +135,7 @@
             if (!$row) {
                 echo "showNotification('error', 'El prefijo del número de teléfono insertado no es válido');\n";
                 if (!$errorShown) {
-                    echo "showStep(4);\n";
+                    echo "showStep(0);\n";
                     $errorShown = true;
                 }
             }
@@ -144,13 +144,13 @@
         if (strlen($country) == 0) {
             echo "showNotification('error', 'Inserte un país');\n";
             if (!$errorShown) {
-                echo "showStep(5);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($country,';') or str_contains($country,'--') or str_contains($country,'/*') or str_contains($country, "*/")) {
             echo "showNotification('error', 'El país insertado contiene carácteres no permitidos');\n";
             if (!$errorShown) {
-                echo "showStep(5);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else {
@@ -161,7 +161,7 @@
             if (!$row) {
                 echo "showNotification('error', 'El país insertado no existe');\n";
                 if (!$errorShown) {
-                    echo "showStep(5);\n";
+                    echo "showStep(0);\n";
                     $errorShown = true;
                 }
             }
@@ -170,7 +170,7 @@
         if (strlen($city) == 0) {
             echo "showNotification('error', 'Inserte una ciudad');\n";
             if (!$errorShown) {
-                echo "showStep(6);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         }
@@ -178,7 +178,7 @@
         if (strlen($postalCode) == 0) {
             echo "showNotification('error', 'Inserte un código postal');\n"; 
             if (!$errorShown) {
-                echo "showStep(7);\n";
+                echo "showStep(0);\n";
                 $errorShown = true;
             }
         }
@@ -194,6 +194,16 @@
             $query->bindParam(6, $city);
             $query->bindParam(7, $postalCode);
             $query -> execute();
+            session_start();
+            $query = $pdo -> prepare("SELECT * FROM Users WHERE `Email` = ?");
+            $query->bindParam(1, $email);
+            $query -> execute();
+            $row = $query->fetch();
+            if ($row) {
+                $_SESSION["UserID"] = $row["ID"];
+                $_SESSION["Username"] = $row["Username"];
+                header("Location:./dashboard.php");
+            }
         }
     }
     ?>

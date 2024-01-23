@@ -14,9 +14,9 @@
     <?php
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
-            $pdo = new PDO($dsn, 'super', '1q2w·E4r5t6y');
+            $pdo = new PDO($dsn, 'root', 'Thyr10N191103!--');
             
-            $query = $pdo->prepare("SELECT Question, State, StartDate, EndDate FROM Polls");
+            $query = $pdo->prepare("SELECT * FROM Polls");
             $query->execute();
             
             $row = $query->fetch();
@@ -25,7 +25,14 @@
             echo "<ul>";
             while ($row) {
                 $questions ++;
-                echo "<li>".$row["nom"]."<li>";
+                echo "<li><div>";
+                $creationDate = new DateTime($row["CreationDate"]);
+                echo "<span>".$creationDate->format("d/m/Y")."</span>";
+                echo "<span>".$row["Question"]."</span>";
+                if ($row["QuestionVisibility"] == "hidden") {
+                    echo "<span>Oculto</span>";
+                }
+                echo "</div></li>";
                 $row = $query->fetch();
                 $correct = true;
             }
