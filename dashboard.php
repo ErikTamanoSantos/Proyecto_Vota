@@ -11,24 +11,37 @@
     <title>Dashboard</title>
 </head>
 
+    <?php
+        if (isset($_SESSION['login'])) {
+            echo "<h1>Bienvenido</h1>";
+        } else {
+            header('HTTP/1.0 403 Forbidden');
+        }
+    ?>
 
 <body>
     <?php include 'header.php'; ?>
     <section class="dashboard">
-        <div class="navbarUpDashboard">
-            
-        </div>
-        <div class="navDashboard">
-            <div class="dashboardItem">
-                <button id="createQuestion"><i class="fas fa-plus"></i></button>
-            </div>
-            <div class="dashboardItem">
-                <a href="createQuestion.php"><i class="fas fa-minus"></i></a>
-            </div>
-        </div>
         <div class="pageDashboard">
-            
+            <div class="userInfo">
+                <h2>User name</h2>
+                <h4>User info 1</h4>
+                <h4>User info 1</h4>
+                <h4>User info 1</h4>
+                <h4>User info 1</h4>
+                <h4>User info 1</h4>
+            </div>
+            <div class="navDashboard">
+                <div class="dashboardItem">
+                    <a href="create_poll.php" id="createQuestion"><i class="fas fa-plus"></i><p>Crear encuesta</p></a>
+                </div>
+                <div class="dashboardItem">
+                <a href="list_polls.php" id="createQuestion"><i class="fas fa-minus"></i><p>Listar encuestas</p></a>
+                </div>
+            </div>  
         </div>
+
+
     </section> 
 
     <script>

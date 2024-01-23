@@ -15,19 +15,15 @@
 <body>
     <div id="notificationContainer"></div>
 
-    <div class="navbarUpLogin">
-        <div class="navItem">
-            <a href="./"><i class="fas fa-home"></i></a>
-        </div>
-    </div>
-    <section class="loginSection">
-        <h1>Bienvenido de nuevo!</h1>
+    <?php include 'header.php'; ?>
+
+    <section class="loginSection regSection">
+        <h1>Bienvenido a Vota EJA!</h1>
         <div class="registerForm">
             <div class="circleRegisterForm">
                 <div class="textReg">
                     <h3>Regístrate</h3>
                     <p>Completa todos los campos</p>
-
                 </div>
                 <form method="POST">
                     

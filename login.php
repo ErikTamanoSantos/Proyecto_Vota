@@ -9,11 +9,8 @@
     <title>Iniciar sesión | Vota EJA</title>
 </head>
 <body>
-    <div class="navbarUpLogin">
-        <div class="navItem">
-            <a href="./"><i class="fas fa-home"></i></a>
-        </div>
-    </div>
+<?php include 'header.php'; ?>
+
     <section class="loginSection">
 
         <h1>Bienvenido de nuevo!</h1>
