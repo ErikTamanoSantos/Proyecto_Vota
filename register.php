@@ -4,16 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
     <script src="register.js"></script>
-    <title>Document</title>
+    <title>Registro | Vota EJA</title>
 </head>
 <body>
-    <?php include("header.php")?>
     <div id="notificationContainer"></div>
-    <form method="POST">
-        
-    </form>
+
+    <div class="navbarUpLogin">
+        <div class="navItem">
+            <a href="./"><i class="fas fa-home"></i></a>
+        </div>
+    </div>
+    <section class="loginSection">
+        <h1>Bienvenido de nuevo!</h1>
+        <div class="registerForm">
+            <div class="circleRegisterForm">
+                <div class="textReg">
+                    <h3>Regístrate</h3>
+                    <p>Completa todos los campos</p>
+
+                </div>
+                <form method="POST">
+                    
+                </form>
+                <div class=""></div>
+            </div>
+        </div>
+
+        <div class="loginImg">
+            <img src="./img/register.svg">
+        </div>
+    </section>
+
     <?php include("footer.php")?>
 
     <?php 

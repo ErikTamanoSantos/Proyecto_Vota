@@ -21,19 +21,10 @@
             header("Location: ./error403.php");
         } */
     ?>
+    <div id="notificationContainer"></div>
+    <?php include 'header.php'; ?>
 
     <section class="dashboard">
-        <div class="navbarUpDashboard">
-            <div class="navItem">
-                <a href="./"><i class="fas fa-home"></i></a>
-            </div>
-            <div class="navItem">
-                <h1>Dashboard</h1>
-            </div>
-            <div class="navItem">
-                <a href="user.php"><i class="fas fa-user"></i></a>
-            </div>
-        </div>
         <div class="navDashboard">
             <div class="dashboardItem">
                 <button id="createQuestion"><i class="fas fa-plus"></i></button>
