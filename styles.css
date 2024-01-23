@@ -312,6 +312,16 @@ footer a {
     color: #fff;
 }
 
+.warning {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.info {
+    background-color: #ffeb3b;
+    color: #333;
+}
+
 .close-icon {
     position: absolute;
     top: 5px;

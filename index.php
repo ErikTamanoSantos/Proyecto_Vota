@@ -8,7 +8,6 @@
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
-
     <title>Vota EJA | 2024</title>
 </head>
 
@@ -29,8 +28,6 @@
             </div>
         </div>
     </section>
-
-    
     <?php include 'footer.php'; ?>
 </body>
 

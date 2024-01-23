@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,18 +13,11 @@
 
 
 <body>
-
-    <?php
-        /* if (isset($_SESSION['login'])) {
-            echo "<h1>Bienvenido ".$_SESSION['username']."</h1>";
-        } else {
-            header("Location: ./error403.php");
-        } */
-    ?>
-    <div id="notificationContainer"></div>
     <?php include 'header.php'; ?>
-
     <section class="dashboard">
+        <div class="navbarUpDashboard">
+            
+        </div>
         <div class="navDashboard">
             <div class="dashboardItem">
                 <button id="createQuestion"><i class="fas fa-plus"></i></button>

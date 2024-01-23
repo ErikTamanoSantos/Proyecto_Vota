@@ -26,7 +26,8 @@
     notificationContainer.css('display', 'none');
     notificationContainer.remove();
   }
-  //showNotification('success', 'Funciono correctamentedasdasdasdasdasdasdsadddanfidsnfonasoifdniofdifasfndaslfdsafasfndasfiaunfl');
-  //showNotification('error', 'Mensaje de error');
+  //showNotification('warning', 'Funciono correctamentedasdasdasdasdasdasdsadddanfidsnfonasoifdniofdifasfndaslfdsafasfndasfiaunfl');
+  //showNotification('info', 'Mensaje de error');
+
 
 

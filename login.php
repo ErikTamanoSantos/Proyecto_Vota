@@ -35,7 +35,6 @@
     </section>
     <?php include 'footer.php'; ?>
     <?php
-        session_start();
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
             try {
                 $pwd = $_POST['pwd'];
@@ -52,7 +51,8 @@
                 $correct = false;
                 while ($row) {
                     $_SESSION["login"] = "correcto";
-                    header("Location:./index.php");
+                    $correct = true;
+                    header("Location:./dashboard.php");
                 }
                 if (!$correct) {
                     echo "Login incorrecto";
