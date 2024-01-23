@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+<?php
+    if (!isset($_SESSION['userID'])) {
+        include('./errors/error403.php');
+    } else {
+?><!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +14,7 @@
     <script src="functions.js"></script>
     <title>Dashboard</title>
 </head>
-
-    <?php
-        if (isset($_SESSION['login'])) {
-            echo "<h1>Bienvenido</h1>";
-        } else {
-            header('HTTP/1.0 403 Forbidden');
-        }
-    ?>
-
 <body>
-    <?php include 'header.php'; ?>
     <section class="dashboard">
         <div class="pageDashboard">
             <div class="userInfo">
@@ -52,3 +46,6 @@
     </script>
 </body>
 </html>
+<?php
+    }
+?>
