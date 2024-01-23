@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+<?php
+    if (!isset($_SESSION['userID'])) {
+        include('./errors/error403.php');
+    } else {
+?><!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +14,18 @@
     <script src="functions.js"></script>
     <title>Dashboard</title>
 </head>
-
-
 <body>
-    <?php include 'header.php'; ?>
     <section class="dashboard">
         <div class="navbarUpDashboard">
-            
+            <div class="navItem">
+                <a href="./"><i class="fas fa-home"></i></a>
+            </div>
+            <div class="navItem">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="navItem">
+                <a href="user.php"><i class="fas fa-user"></i></a>
+            </div>
         </div>
         <div class="navDashboard">
             <div class="dashboardItem">
@@ -39,3 +48,6 @@
     </script>
 </body>
 </html>
+<?php
+    }
+?>
