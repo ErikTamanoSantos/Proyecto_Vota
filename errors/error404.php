@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+        header("Location: ./error404.php");
+        http_response_code(404);
+?><!DOCTYPE html>
 <html lang="es">
 
 <head>
