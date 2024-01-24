@@ -1,19 +1,26 @@
 <?php
+    session_start();
     if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Encuestas | Vota EJA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
+    <title>Lista de Encuestas | Vota EJA</title>
 </head>
 <body>
-    <h1>Listado de tus encuestas creadas</h1>
+    <?php include './components/header.php'; ?>
     <div id="notificationContainer"></div>
+    <div class="listPollDiv">
+    <h1>Listado de tus encuestas creadas</h1>
+
     <?php
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
@@ -28,12 +35,12 @@
             echo "<ul>";
             while ($row) {
                 $questions ++;
-                echo "<li><div>";
+                echo "<li><div class='pollItem'>";
                 $creationDate = new DateTime($row["CreationDate"]);
-                echo "<span>".$creationDate->format("d/m/Y")."</span>";
-                echo "<span>".$row["Question"]."</span>";
+                echo "<span class='datePollItem'>".$creationDate->format("d/m/Y")."</span>";
+                echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
                 if ($row["QuestionVisibility"] == "hidden") {
-                    echo "<span>Oculto</span>";
+                    echo "<span class='visibilityPollItem'>Oculto</span>";
                 }
                 echo "</div></li>";
                 $row = $query->fetch();
@@ -48,7 +55,9 @@
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
     ?>
-    
+        </div>
+
+    <?php include './components/footer.php'; ?>
 </body>
 </html>
 <?php

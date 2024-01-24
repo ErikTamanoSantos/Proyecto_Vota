@@ -57,7 +57,7 @@
             </div>
             <div class="navDashboard">
                 <div class="dashboardItem">
-                    <a href="create_poll.php" id="createQuestion"><i class="fas fa-plus"></i><p>Crear encuesta</p></a>
+                    <a href="newPoll.php" id="createQuestion"><i class="fas fa-plus"></i><p>Crear encuesta</p></a>
                 </div>
                 <div class="dashboardItem">
                 <a href="list_polls.php" id="createQuestion"><i class="fas fa-minus"></i><p>Listar encuestas</p></a>
