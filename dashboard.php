@@ -1,5 +1,6 @@
 <?php
-    if (!isset($_SESSION['userID'])) {
+    session_start();
+    if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
 ?>
@@ -20,12 +21,38 @@
     <section class="dashboard">
         <div class="pageDashboard">
             <div class="userInfo">
-                <h2>User name</h2>
-                <h4>User info 1</h4>
-                <h4>User info 1</h4>
-                <h4>User info 1</h4>
-                <h4>User info 1</h4>
-                <h4>User info 1</h4>
+            <?php
+                try {
+                    $dsn = "mysql:host=localhost;dbname=project_vota";
+                    $pdo = new PDO($dsn, 'root', 'Thyr10N191103!--');
+                    
+                    $query = $pdo->prepare('SELECT * FROM Users WHERE ID = :UserID');
+                    $query->bindParam(':UserID', $_SESSION['UserID']);
+                    $query->execute();
+                    
+                    $row = $query->fetch();
+                    $correct = false;
+                    while ($row) {
+                        echo "<h2>".$row["Username"]."</h2>";
+                        echo "<h4>".$row["Email"]."</h4>";
+                        echo "<h4>".$row["Phone"]."</h4>";
+                        echo "<h4>".$row["Country"]."</h4>";
+                        echo "<h4>".$row["City"]."</h4>";
+                        //echo "<h4>".$row["Username"]."</h4>"; futuro es validated
+
+                        $row = $query->fetch();
+                        $correct = true;
+                    }
+                    echo "</ul>";
+                    if (!$correct) {
+                        echo "<script>showNotification('info', 'Vaya, parece que no deberias estar aqui')</script>";
+                    }
+                } catch (PDOException $e){
+                    echo $e->getMessage();
+                    echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+                }
+            ?>
+                
             </div>
             <div class="navDashboard">
                 <div class="dashboardItem">
@@ -36,8 +63,6 @@
                 </div>
             </div>  
         </div>
-
-
     </section> 
     <?php include './components/footer.php'; ?>
 
