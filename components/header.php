@@ -9,8 +9,7 @@
                 </div>
                 <div class='userInterface'>
                 ";
-                
-                if(isset($_SESSION["login"])){
+                if(isset($_SESSION["UserID"])){
                     echo "
                         <a href='dashboard.php' id='dashboardLink' name='dashboardLink'>Dashboard</a>
                         <a href='logout.php' id='logoutLink' name='logoutLink'>Cerrar Sesion</a>";

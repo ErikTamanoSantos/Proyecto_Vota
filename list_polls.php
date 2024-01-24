@@ -1,5 +1,5 @@
 <?php
-    if (!isset($_SESSION['userID'])) {
+    if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
 ?><!DOCTYPE html>
@@ -7,8 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Encuestas</title>
- 
+    <title>Lista de Encuestas | Vota EJA</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
 </head>
