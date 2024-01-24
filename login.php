@@ -9,7 +9,7 @@
     <title>Iniciar sesión | Vota EJA</title>
 </head>
 <body>
-<?php include 'header.php'; ?>
+<?php include './components/header.php'; ?>
 
     <section class="loginSection">
 
@@ -30,7 +30,7 @@
             <img src="./img/login.svg">
         </div>
     </section>
-    <?php include 'footer.php'; ?>
+    <?php include './components/footer.php'; ?>
     <?php
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
             try {

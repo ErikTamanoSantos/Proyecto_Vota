@@ -15,7 +15,7 @@
 <body>
     <div id="notificationContainer"></div>
 
-    <?php include 'header.php'; ?>
+    <?php include './components/header.php'; ?>
 
     <section class="loginSection regSection">
         <h1>Bienvenido a Vota EJA!</h1>
@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    <?php include("footer.php")?>
+    <?php include("./components/footer.php")?>
 
     <?php 
     if (isset($_POST["username"])) {
