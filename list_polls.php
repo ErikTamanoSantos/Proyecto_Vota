@@ -1,15 +1,17 @@
 <?php
-    if (!isset($_SESSION['UserID'])) {
+    /*if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
-    } else {
+    } else {*/
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Encuestas | Vota EJA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
+    <title>Lista de Encuestas | Vota EJA</title>
 </head>
 <body>
     <h1>Listado de tus encuestas creadas</h1>
@@ -52,5 +54,5 @@
 </body>
 </html>
 <?php
-    }
+    /*}*/
 ?>
