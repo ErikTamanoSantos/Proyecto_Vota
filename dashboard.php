@@ -3,8 +3,9 @@
     if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
+
 ?><!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,10 @@
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
-    <title>Dashboard</title>
+    <title>Dashboard | Vota EJA</title>
 </head>
 <body>
+    <div id="notificationContainer"></div>
     <section class="dashboard">
         <div class="pageDashboard">
             <div class="userInfo">
@@ -72,5 +74,5 @@
 </body>
 </html>
 <?php
-    }
+    echo "<script>showNotification('success', 'Login Correcto');</script>";}
 ?>

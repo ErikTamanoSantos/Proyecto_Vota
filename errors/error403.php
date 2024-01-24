@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="./img/vota-si.png" />
-        <title>Error 403</title>
+        <title>Error 403 | Vota EJA</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
 
         <link type="text/css" rel="stylesheet" href="../styles.css" />

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,6 @@
 
     <?php 
     if (isset($_POST["username"])) {
-
         try {
             $hostname = "localhost";
             $dbname = "project_vota";
@@ -52,7 +51,6 @@
             echo "Failed to get DB handle: ". $e->getMessage();
             exit;
         }
-
         $errorShown = false;
         echo "<script>";
         $username = $_POST["username"];
@@ -62,7 +60,6 @@
         $country = $_POST["country"];
         $city = $_POST["city"];
         $postalCode = $_POST["postalCode"];
-
         if (strlen($username) == 0) {
             echo "showNotification('error', 'Inserte un nombre de usuario');\n";
             if (!$errorShown) {
@@ -76,7 +73,6 @@
                 $errorShown = true;
             }
         }
-
         if (strlen($password) < 8) {
             echo "showNotification('error', 'La contraseña debe tener un mínimo de 8 carácteres');\n";
             if (!$errorShown) {

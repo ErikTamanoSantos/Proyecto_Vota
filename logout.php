@@ -1,5 +1,6 @@
 <?php
-    if (!isset($_SESSION['userID'])) {
+    session_start();
+    if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
         if(isset($_POST['closeSession'])){
@@ -9,13 +10,12 @@
         if(isset($_POST['returnToDashboard'])){
             header("Location:./dashboard.php");
         }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerrar sesion</title>
+    <title>Cerrar sesion | Vota EJA</title>
 </head>
 <body>
     <h1>¿Quieres salir y cerrar tu sesion?<h1>
