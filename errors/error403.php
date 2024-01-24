@@ -11,7 +11,7 @@
         <title>Error 403</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
 
-        <link type="text/css" rel="stylesheet" href="../styles.css" />
+        <link type="text/css" rel="stylesheet" href="./styles.css" />
 </head>
 <body>
         <div id="notfound">
@@ -20,7 +20,7 @@
                                 <h1>403</h1>
                                 <h2>Permiso denegado</h2>
                         </div>
-                        <a href="../">Volver</a>
+                        <a href="./">Volver</a>
                 </div>
         </div>
 

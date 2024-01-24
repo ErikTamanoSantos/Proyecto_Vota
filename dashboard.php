@@ -2,7 +2,8 @@
     if (!isset($_SESSION['userID'])) {
         include('./errors/error403.php');
     } else {
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -15,6 +16,7 @@
     <title>Dashboard</title>
 </head>
 <body>
+    <?php include './components/header.php'; ?>
     <section class="dashboard">
         <div class="pageDashboard">
             <div class="userInfo">
@@ -37,6 +39,7 @@
 
 
     </section> 
+    <?php include './components/footer.php'; ?>
 
     <script>
         document.getElementById("createQuestion").addEventListener("click", function() {

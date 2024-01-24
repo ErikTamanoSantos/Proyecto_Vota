@@ -3,29 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="functions.js"></script>
     <script src="newPoll.js"></script>
     <title>Nueva Encuesta</title>
 </head>
 <body>
-    <?php include("header.php")?>
+    <?php include("./components/header.php")?>
     <div id="notificationContainer"></div>
-    <form method="POST">
-        <input type="text" id="question" name="question" placeholder="Pregunta">
-        <div id="answerContainer">
-            <input type="text" placeholder="Respuesta 1" name="answers[]">
-            <input type="text" placeholder="Respuesta 2" name="answers[]">
+    <div class="createPollDiv">
+        <div class="createPollForm">
+            <h2>Crea una nueva encuesta</h2>
+            <form method="POST">
+                <input type="text" id="question" name="question" placeholder="Pregunta">
+                <div id="answerContainer">
+                    <input type="text" placeholder="Respuesta 1" name="answers[]">
+                    <input type="text" placeholder="Respuesta 2" name="answers[]">
+                </div>
+                <button type="button" id="removeAnswer" disabled>-</button>
+                <button type="button" id="addAnswer">+</button>
+                <label for="dateStart">Inicio Encuesta:</label>
+                <input type="datetime-local" id="dateStart" name="dateStart">
+                <label for="dateFinish">Final Encuesta:</label>
+                <input type="datetime-local" id="dateFinish" name="dateFinish">
+                <input type="submit" value="Validar encuesta">
+            </form>
         </div>
-        <button type="button" id="removeAnswer" disabled>-</button>
-        <button type="button" id="addAnswer">+</button>
-        <label for="dateStart">Inicio Encuesta:</label>
-        <input type="datetime-local" id="dateStart" name="dateStart">
-        <label for="dateFinish">Final Encuesta:</label>
-        <input type="datetime-local" id="dateFinish" name="dateFinish">
-        <input type="submit" value="Validar encuesta">
-    </form>
-    <?php include("footer.php")?>
+        <div class="createPollImg">
+            <img src="./img/createPoll.svg">
+        </div>
+    </div>
+
+    <?php include("./components/footer.php")?>
     <?php 
         if (isset($_POST["question"])) {
             if (!isset($_POST["answers"][0]) || !isset($_POST["answers"][1]) || $_POST["answers"][0] == "" || $_POST["answers"][1] == "") {
