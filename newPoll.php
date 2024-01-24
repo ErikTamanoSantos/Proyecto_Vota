@@ -97,6 +97,8 @@
                     $query->bindParam(2, $pollID);
                     $query->execute();
                 }
+                header("Location:./dashboard.php");
+
             }    
         }
     ?>

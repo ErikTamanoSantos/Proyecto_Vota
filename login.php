@@ -14,7 +14,7 @@
     <div id="notificationContainer"></div>
     <section class="loginSection">
 
-        <h1>Bienvenido de nuevo!</h1>
+        <h1>¡Bienvenido de nuevo!</h1>
         <div class="loginForm">
             <div class="circleLoginForm">
                 <h3>Inicia sesión</h3>
