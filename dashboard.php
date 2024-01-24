@@ -1,5 +1,6 @@
 <?php
-    if (!isset($_SESSION['userID'])) {
+    session_start();
+    if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
 ?><!DOCTYPE html>
