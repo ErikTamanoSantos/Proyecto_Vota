@@ -936,6 +936,11 @@ footer a {
     margin-top: 10px;
 }
 
+#removeAnswer:disabled {
+    background-color: rgba(182, 30, 30, 0.4);
+    cursor: not-allowed;
+}
+
 .createPollForm button:nth-child(2) {
     background-color: rgb(78, 194, 35);
     margin-top: 10px;
