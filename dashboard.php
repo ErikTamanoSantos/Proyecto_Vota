@@ -15,19 +15,49 @@
 <body>
     <?php include 'header.php'; ?>
     <section class="dashboard">
-        <div class="navbarUpDashboard">
-            
-        </div>
-        <div class="navDashboard">
-            <div class="dashboardItem">
-                <button id="createQuestion"><i class="fas fa-plus"></i></button>
-            </div>
-            <div class="dashboardItem">
-                <a href="createQuestion.php"><i class="fas fa-minus"></i></a>
-            </div>
-        </div>
         <div class="pageDashboard">
-            
+            <div class="userInfo">
+            <?php
+                try {
+                    $dsn = "mysql:host=localhost;dbname=project_vota";
+                    $pdo = new PDO($dsn, 'root', 'Thyr10N191103!--');
+                    
+                    $query = $pdo->prepare('SELECT * FROM Users WHERE ID = :UserID');
+                    $query->bindParam(':UserID', $_SESSION['UserID']);
+                    $query->execute();
+                    
+                    $row = $query->fetch();
+                    $correct = false;
+                    while ($row) {
+                        echo "<h2>".$row["Username"]."</h2>";
+                        echo "<h4>".$row["Email"]."</h4>";
+                        echo "<h4>".$row["Phone"]."</h4>";
+                        echo "<h4>".$row["Country"]."</h4>";
+                        echo "<h4>".$row["City"]."</h4>";
+                        //echo "<h4>".$row["Username"]."</h4>"; futuro es validated
+
+                        $row = $query->fetch();
+                        $correct = true;
+                    }
+                    echo "</ul>";
+                    if (!$correct) {
+                        echo "<script>showNotification('info', 'Vaya, parece que no deberias estar aqui')</script>";
+                    }
+                } catch (PDOException $e){
+                    echo $e->getMessage();
+                    echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+                }
+            ?>
+                
+            </div>
+            <div class="navDashboard">
+                <div class="dashboardItem">
+                    <a href="create_poll.php" id="createQuestion"><i class="fas fa-plus"></i><p>Crear encuesta</p></a>
+                </div>
+                <div class="dashboardItem">
+                <a href="list_polls.php" id="createQuestion"><i class="fas fa-minus"></i><p>Listar encuestas</p></a>
+                </div>
+            </div>  
         </div>
     </section> 
 

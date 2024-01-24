@@ -86,7 +86,7 @@ function showStep(step = 0, animate = true) {
             break;
         case 4:
             $("form").html(`
-                <label for="phone">Introduzca su número de teléfono sin prefijo: </label>
+                <label for="phone">Introduzca su número de teléfono (con prefijo y sin espacios): </label>
                 <input type="tel" id="phone" name="phone">
                 <button type="button" id="next-step">Next</button>
             `)
