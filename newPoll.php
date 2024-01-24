@@ -23,8 +23,10 @@
                     <input type="text" placeholder="Respuesta 1" name="answers[]">
                     <input type="text" placeholder="Respuesta 2" name="answers[]">
                 </div>
-                <button type="button" id="removeAnswer" disabled>-</button>
-                <button type="button" id="addAnswer">+</button>
+                <div class="buttonsForm">
+                    <button type="button" id="removeAnswer" disabled><i class="fa-solid fa-minus"></i></button>
+                    <button type="button" id="addAnswer"><i class="fa-solid fa-plus"></i></button>
+                </div>
                 <label for="dateStart">Inicio Encuesta:</label>
                 <input type="datetime-local" id="dateStart" name="dateStart">
                 <label for="dateFinish">Final Encuesta:</label>

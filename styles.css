@@ -877,23 +877,92 @@ footer a {
 .createPollForm form input {
     background-color: rgba(0, 0, 0, 0.56);
     margin: 10px;
+    padding: 10px;
+    color: var(--azulClaro);
+    font-size: 15px;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+    font-family: 'Quicksand', sans-serif;
 }
 
 .createPollForm form input::placeholder {
     color: #fff;
+    font-weight: 700;
 }
 
 #answerContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-#answerContainer > input:nth-child(even) {
-    grid-area: 1 / 1 / 2 / 2;
+#answerContainer > input {
+    width: calc(50% - 10px); /* 50% del ancho menos el espacio entre los elementos */
+    margin: 5px;
+    box-sizing: border-box;
 }
-#answerContainer > input:nth-child(odd) {
-    grid-area: 1 / 2 / 2 / 3;
+
+.createPollForm input:focus {
+    outline: none;
+}
+
+.createPollForm form > input:nth-child(1) {
+    margin-left: 0;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+}
+
+.buttonsForm {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.createPollForm button {
+    width: 50px;
+    height: 50px;
+    margin-left: 3% ;
+    background-color: var(--textoAzulClaroMedio);
+    border: 1px solid var(--azulOscuro);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.createPollForm button:nth-child(1) {
+    background-color: rgb(182, 30, 30);
+    margin-top: 10px;
+}
+
+.createPollForm button:nth-child(2) {
+    background-color: rgb(78, 194, 35);
+    margin-top: 10px;
+}
+
+.createPollForm label {
+    font-weight: 700;
+}
+
+.createPollForm input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+
+}
+
+.createPollForm button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.createPollForm form > input:last-child {
+    border-radius: 10px;
+    background-color: var(--azulOscuroMedio);
+    font-weight: 700;
+}
+
+.createPollForm form > input:last-child:hover {
+    border-radius: 10px;
+    scale: 1.05;
+    font-weight: 700;
+    box-shadow: 2px 2px 20px var(--azulOscuroMedio);
 }
