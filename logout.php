@@ -1,11 +1,14 @@
 <?php
-    if(isset($_POST['closeSession'])){
-        session_destroy();
-        header("Location:./index.php");
-    }
-    if(isset($_POST['returnToDashboard'])){
-        header("Location:./dashboard.php");
-    }
+    if (!isset($_SESSION['userID'])) {
+        include('./errors/error403.php');
+    } else {
+        if(isset($_POST['closeSession'])){
+            session_destroy();
+            header("Location:./index.php");
+        }
+        if(isset($_POST['returnToDashboard'])){
+            header("Location:./dashboard.php");
+        }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,3 +25,6 @@
     </form>
 </body>
 </html>
+<?php
+    }
+?>

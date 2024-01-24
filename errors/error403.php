@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+<?php
+        header("Location: ./error403.php");
+        http_response_code(403);
+?><!DOCTYPE html>
 <html lang="es">
-
 <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +13,7 @@
 
         <link type="text/css" rel="stylesheet" href="../styles.css" />
 </head>
-
 <body>
-
         <div id="notfound">
                 <div class="notfound">
                         <div class="notfound-404">

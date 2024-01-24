@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+    if (!isset($_SESSION['userID'])) {
+        include('./errors/error403.php');
+    } else {
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -48,3 +52,6 @@
     
 </body>
 </html>
+<?php
+    }
+?>
