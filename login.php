@@ -14,7 +14,7 @@
     <div id="notificationContainer"></div>
     <section class="loginSection">
 
-        <h1>Bienvenido de nuevo!</h1>
+        <h1>¡Bienvenido de nuevo!</h1>
         <div class="loginForm">
             <div class="circleLoginForm">
                 <h3>Inicia sesión</h3>
@@ -34,6 +34,7 @@
     <?php include './components/footer.php'; ?>
     <?php
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
+            include("config.php");
             try {
                 $pwd = $_POST['pwd'];
                 $userEmail = $_POST['userEmail'];

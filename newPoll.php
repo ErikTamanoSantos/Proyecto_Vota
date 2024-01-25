@@ -58,6 +58,7 @@
                     showNotification('error', 'Las fechas insertadas no son válidas');
                 </script>";
             } else {
+                include("config.php");
                 try {
                     $hostname = "localhost";
                     $dbname = "project_vota";
@@ -97,6 +98,8 @@
                     $query->bindParam(2, $pollID);
                     $query->execute();
                 }
+                header("Location:./dashboard.php");
+
             }    
         }
     ?>

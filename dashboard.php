@@ -24,6 +24,7 @@
         <div class="pageDashboard">
             <div class="userInfo">
             <?php
+                include('config.php');
                 try {
                     $dsn = "mysql:host=localhost;dbname=project_vota";
                     $pdo = new PDO($dsn, 'user777', '');
@@ -35,11 +36,11 @@
                     $row = $query->fetch();
                     $correct = false;
                     while ($row) {
-                        echo "<h2>".$row["Username"]."</h2>";
-                        echo "<h4>".$row["Email"]."</h4>";
-                        echo "<h4>".$row["Phone"]."</h4>";
-                        echo "<h4>".$row["Country"]."</h4>";
-                        echo "<h4>".$row["City"]."</h4>";
+                        echo "<h2> Nombre: ".$row["Username"]."</h2>";
+                        echo "<h4> Email: ".$row["Email"]."</h4>";
+                        echo "<h4> Telefono: ".$row["Phone"]."</h4>";
+                        echo "<h4> Pais: ".$row["Country"]."</h4>";
+                        echo "<h4> Ciudad: ".$row["City"]."</h4>";
                         //echo "<h4>".$row["Username"]."</h4>"; futuro es validated
 
                         $row = $query->fetch();

@@ -41,6 +41,7 @@
 
     <?php 
     if (isset($_POST["username"])) {
+        include("config.php");
         try {
             $hostname = "localhost";
             $dbname = "project_vota";

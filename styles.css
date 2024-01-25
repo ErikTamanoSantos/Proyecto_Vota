@@ -621,6 +621,7 @@ footer a {
 .pageDashboard {
     display: flex;
     width: 100%;
+    min-height: 60vh;
 }
 
 .userInfo {
@@ -1098,3 +1099,41 @@ footer a {
     box-shadow: 2px 2px 20px var(--azulOscuroMedio);
 }
 
+/* List polls */
+
+.listPollDiv {
+    padding-top: calc(40px + 2%);
+    min-height: 70vh;
+}
+
+.listPollDiv > h1 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 20px;
+    color: var(--azulClaro)
+}
+
+.pollItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 50px;
+    padding:40px;
+    border: 1px solid var(--azulOscuroMedio);
+    border-radius: 16px;
+    background-color: var(--azulOscuro);
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.listPollDiv ul li{
+    list-style-type: none;
+    list-style: none;
+}
+
+
+.pollItem span{
+    font-size: 30px !important;
+    color: var(--azulClaro);
+    font-weight: 700;
+}

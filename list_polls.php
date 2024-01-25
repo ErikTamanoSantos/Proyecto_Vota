@@ -1,10 +1,12 @@
 <?php
-    /*if (!isset($_SESSION['UserID'])) {
+    session_start();
+    if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
-    } else {*/
+    } else {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="./img/vota-si.png" />
@@ -14,9 +16,13 @@
     <title>Lista de Encuestas | Vota EJA</title>
 </head>
 <body>
-    <h1>Listado de tus encuestas creadas</h1>
+    <?php include './components/header.php'; ?>
     <div id="notificationContainer"></div>
+    <div class="listPollDiv">
+    <h1>Listado de tus encuestas creadas</h1>
+
     <?php
+        include("config.php");
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, 'user777', '');
@@ -30,12 +36,12 @@
             echo "<ul>";
             while ($row) {
                 $questions ++;
-                echo "<li><div>";
+                echo "<li><div class='pollItem'>";
                 $creationDate = new DateTime($row["CreationDate"]);
-                echo "<span>".$creationDate->format("d/m/Y")."</span>";
-                echo "<span>".$row["Question"]."</span>";
+                echo "<span class='datePollItem'>".$creationDate->format("d/m/Y")."</span>";
+                echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
                 if ($row["QuestionVisibility"] == "hidden") {
-                    echo "<span>Oculto</span>";
+                    echo "<span class='visibilityPollItem'>Oculto</span>";
                 }
                 echo "</div></li>";
                 $row = $query->fetch();
@@ -50,9 +56,11 @@
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
     ?>
-    
+        </div>
+
+    <?php include './components/footer.php'; ?>
 </body>
 </html>
 <?php
-    /*}*/
+    }
 ?>
