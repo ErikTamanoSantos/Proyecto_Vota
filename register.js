@@ -20,27 +20,15 @@ $(function() {
 function showStep(step = 0, animate = true) {
     switch (step) {
         case 0:
-            $("form").html(`
+            $("form").append(`
                 <label for="username">Nombre de usuario: </label>
                 <input type="text" id="username" name="username">
-                <button type="button" id="next-step">Siguiente</button>
             `)
-            $("#next-step").click(function() {
-                username = $("#username").val()
-                if (username.length == 0) {
-                    showNotification("error", "Inserte un nombre de usuario")
-                } else if (username.includes(";") || username.includes("--") || username.includes("/*") || username.includes("*/")) {
-                    showNotification("error", "El nombre de usuario contiene carácteres no permitidos")
-                } else {
-                    showStep(step+1)
-                }
-            })
             break;
         case 1:
-            $("form").html(`
+            $("form").append(`
                 <label for="password">Contraseña: </label>
                 <input type="password" id="password" name="password">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 password = $("#password").val()
@@ -62,10 +50,9 @@ function showStep(step = 0, animate = true) {
             })
             break;
         case 2:
-            $("form").html(`
+            $("form").append(`
                 <label for="password2">Confirme la contraseña: </label>
                 <input type="password" id="password2" name="password2">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 if ($("#password2").val() != password) {
@@ -76,10 +63,9 @@ function showStep(step = 0, animate = true) {
             })
             break;
         case 3:
-            $("form").html(`
+            $("form").append(`
                 <label for="email">Correo electrónico: </label>
                 <input type="email" id="email" name="email">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 email = $("#email").val()
@@ -91,10 +77,9 @@ function showStep(step = 0, animate = true) {
             })
             break;
         case 4:
-            $("form").html(`
+            $("form").append(`
                 <label for="phone">Introduzca su número de teléfono (con prefijo y sin espacios): </label>
                 <input type="tel" id="phone" name="phone">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 phone = $("#phone").val()
@@ -108,10 +93,9 @@ function showStep(step = 0, animate = true) {
             })
             break;
         case 5:
-            $("form").html(`
+            $("form").append(`
                 <label for="country">País: </label>
                 <input type="text" id="country" name="country">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 country = $("#country").val()
@@ -125,10 +109,9 @@ function showStep(step = 0, animate = true) {
             })
             break;
         case 6:
-            $("form").html(`
+            $("form").append(`
                 <label for="city">Ciudad: </label>
                 <input type="text" id="city" name="city">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 city = $("#city").val()
@@ -142,10 +125,9 @@ function showStep(step = 0, animate = true) {
             })
             break;
         case 7:
-            $("form").html(`
+            $("form").append(`
                 <label for="postalCode">Código Postal: </label>
                 <input type="number" id="postalCode" name="postalCode">
-                <button type="button" id="next-step">Next</button>
             `)
             $("#next-step").click(function() {
                 postalCode = $("#postalCode").val()
@@ -157,6 +139,13 @@ function showStep(step = 0, animate = true) {
             })
             break;
     }
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+        event.preventDefault();
+        showStep(step+1)
+        return false;
+        }
+    });
 }
 
 // Function to submit form since AJAX is not alllowed

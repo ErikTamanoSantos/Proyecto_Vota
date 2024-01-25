@@ -58,11 +58,12 @@
                     showNotification('error', 'Las fechas insertadas no son válidas');
                 </script>";
             } else {
+                include("config.php");
                 try {
                     $hostname = "localhost";
                     $dbname = "project_vota";
-                    $username = "root";
-                    $pw = "Thyr10N191103!--";
+                    $username = $dbUser;
+                    $pw = $dbPass;
                     $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
                 } catch (PDOException $e) {
                     echo "Failed to get DB handle: ". $e->getMessage();
