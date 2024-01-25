@@ -4,13 +4,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="functions.js"></script>
+    <script src="log.php"></script>
     <link rel="icon" href="./img/vota-si.png" />
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Iniciar sesión | Vota EJA</title>
 </head>
 <body>
-<?php include './components/header.php'; ?>
+<?php
+include './components/header.php';
+include 'log.php'; 
+?>
     <div id="notificationContainer"></div>
     <section class="loginSection">
 
@@ -38,7 +42,7 @@
                 $pwd = $_POST['pwd'];
                 $userEmail = $_POST['userEmail'];
                 $dsn = "mysql:host=localhost;dbname=project_vota";
-                $pdo = new PDO($dsn, 'root', 'Thyr10N191103!--');
+                $pdo = new PDO($dsn, 'aleix', 'Caqjuueeemke64*');
                 
                 $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ?");
                 $query->bindParam(1, $pwd);
@@ -54,9 +58,23 @@
                     $correct = true;
                     header("Location:./dashboard.php");
                 }
+
+               
+
                 if (!$correct) {
+                    $queryUser = $pdo->prepare("SELECT * FROM Users WHERE Email = ?");
+                    $queryUser->bindParam(1, $userEmail);
+                    $queryUser->execute();
+                    $rowUser = $queryUser->fetch();
                     echo "<script>showNotification('error', 'Credenciales incorrectos');</script>";
+                    if (!$rowUser) {
+                        escribirEnLog("[LOGIN] Usuario incorrecto");
+                    } else {
+                        escribirEnLog("[LOGIN] Contraseña incorrecta");
+                    }
                 }
+                
+                
 
             } catch (PDOException $e){
                 echo $e->getMessage();
