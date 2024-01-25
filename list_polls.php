@@ -25,7 +25,7 @@
         include("config.php");
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
-            $pdo = new PDO($dsn, $dbUser, $dbPass);
+            $pdo = new PDO($dsn, 'user777', '');
             
             $query = $pdo->prepare("SELECT * FROM Polls");
             $query->execute();

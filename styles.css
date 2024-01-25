@@ -487,6 +487,7 @@ footer a {
 
 /* Dashboard */
 
+
 .dashboard {
     display: flex;
     padding-top: calc(40px + 2%);
@@ -497,6 +498,124 @@ footer a {
     flex-direction: row;
     width: 100%;
     background-color: rgb(200, 200, 200);
+}
+
+.authValidation {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.56);
+}
+
+.authCheck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    padding: 25px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--azulOscuro);
+}
+
+.authCheck .returnHome {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.authCheck .returnHome a {
+    text-decoration: none;
+    color: var(--textoAzulNormal);
+    font-weight: 700;
+    font-size: 40px;
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
+}
+
+.authCheck .returnHome a:hover {
+    color: var(--azulOscuro);
+}
+
+.authCheck > h2 {
+    font-size: 30px;
+    text-align: center;
+    color: var(--azulOscuro);
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7)
+}
+
+.authCheck form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.authCheck input[type="submit"] {
+    margin-left: auto;
+}
+
+.authCheck form input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    margin: 0 10px 0 0;
+    border-style: solid;
+    border-radius: 50%;
+    border: 1px solid var(--textoAzulNormal);
+    position: relative; 
+
+}
+
+.authCheck form input[type="checkbox"]::before {
+    content: '\2713'; 
+    font-size: 20px; 
+    color: transparent; 
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+.authCheck form input[type="checkbox"]:checked::before {
+    color: var(--textoAzulNormal); 
+}
+
+.authCheck form input[type="checkbox"]:hover {
+    box-shadow: 2px 2px 20px var(--azulOscuro);
+}
+
+.authCheck label {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--textoAzulNormal);
+}
+
+.authCheck input[type="submit"] {
+    background-color: var(--textoAzulClaroMedio);
+    padding: 20px;
+    border: 0;
+    border-radius: 40px;
+    box-shadow: 2px 2px 20px var(--azulOscuro);
+    font-size: 20px;
+    color: var(--azulClaro);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+.authCheck input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
 }
 
 .pageDashboard {
@@ -541,6 +660,7 @@ footer a {
     box-shadow: 3px 1px 20px var(--azulOscuro);
 }
 
+
 .dashboardItem p {
     font-size: 20px;
 }
@@ -575,11 +695,17 @@ footer a {
     cursor: pointer;
 }
 
-.dashboardItem > a:hover {
-    color: var(--textoAzulClaroMedio);
+.dashboardItem > a:hover:not(.disabledA) {
+    color: #fff;
     text-shadow: 2px 2px 20px #000;
 }
 
+.dashboardItem > a.disabledA {
+    color: var(--textoAzulNormal);
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
+    cursor: not-allowed;
+    pointer-events: none;
+}
 
 /* Login */
 

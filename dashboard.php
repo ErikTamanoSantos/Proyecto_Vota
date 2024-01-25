@@ -1,8 +1,8 @@
 <?php
     session_start();
-    if (!isset($_SESSION['UserID'])) {
+    /*if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
-    } else {
+    } else {*/
 
 ?><!DOCTYPE html>
 <html lang="es">
@@ -18,6 +18,7 @@
 </head>
 <body>
     <?php include './components/header.php'; ?>
+    
     <div id="notificationContainer"></div>
     <section class="dashboard">
         <div class="pageDashboard">
@@ -26,7 +27,7 @@
                 include('config.php');
                 try {
                     $dsn = "mysql:host=localhost;dbname=project_vota";
-                    $pdo = new PDO($dsn, $dbUser, $dbPass);
+                    $pdo = new PDO($dsn, 'user777', '');
                     
                     $query = $pdo->prepare('SELECT * FROM Users WHERE ID = :UserID');
                     $query->bindParam(':UserID', $_SESSION['UserID']);
@@ -53,17 +54,38 @@
                     echo $e->getMessage();
                     echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                 }
+
+                if (!isset($_SESSION["IsAuthenticated"])) {
+                    ?>  
+                    <div class="authValidation">
+                        <div class="authCheck">
+                            <div class="returnHome">
+                                <a href="index.php"><i class="fas fa-home"></i></a>
+                            </div>
+                            <h2>Debes acceder los términos de uso para poder acceder a esta página</h2>
+                            <form method="POST">
+                                <input type="checkbox" name="authCheck" id="authCheck" required >
+                                <label for="scales">Aceptar términos de uso</label>
+                                <input type="submit" value="Aceptar">
+                            </form>
+                        </div>
+                    </div>
+                    <?php
+                }
             ?>
-                
             </div>
             <div class="navDashboard">
                 <div class="dashboardItem">
-                    <a href="newPoll.php" id="createQuestion"><i class="fas fa-plus"></i><p>Crear encuesta</p></a>
+                    <a href="create_poll.php" id="createQuestion" class="<?php if (!isset($_SESSION["IsAuthenticated"])) { echo 'disabledA'; } ?>">
+                        <i class="fas fa-plus"></i><p>Crear encuesta</p>
+                    </a>
                 </div>
                 <div class="dashboardItem">
-                <a href="list_polls.php" id="createQuestion"><i class="fas fa-minus"></i><p>Listar encuestas</p></a>
+                    <a href="list_polls.php" id="createQuestion" class="<?php if (!isset($_SESSION["IsAuthenticated"])) { echo 'disabledA'; } ?>">
+                        <i class="fa-solid fa-list-ul"></i><p>Listar encuestas</p>
+                    </a>
                 </div>
-            </div>  
+            </div>
         </div>
     </section> 
     <?php include './components/footer.php'; ?>
@@ -77,9 +99,5 @@
 </body>
 </html>
 <?php
-if (isset($_SESSION['login']))  {
-    echo "<script>showNotification('success', 'Login Correcto');</script>";
-        unset($_SESSION["login"]);
-    }
-}
+    echo "<script>showNotification('success', 'Login Correcto');</script>";/*}*/
 ?>

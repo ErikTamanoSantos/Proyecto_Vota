@@ -45,8 +45,8 @@
         try {
             $hostname = "localhost";
             $dbname = "project_vota";
-            $username = $dbUser;
-            $pw = $dbPass;
+            $username = "user777";
+            $pw = "";
             $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
         } catch (PDOException $e) {
             echo "Failed to get DB handle: ". $e->getMessage();
@@ -222,6 +222,7 @@
             if ($row) {
                 $_SESSION["UserID"] = $row["ID"];
                 $_SESSION["Username"] = $row["Username"];
+                $_SESSION["IsAuthenticated"] = $row["IsAuthenticated"];
                 header("Location:./dashboard.php");
             }
         }
