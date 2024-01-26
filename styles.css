@@ -873,14 +873,17 @@ footer a {
 }
 
 .circleRegisterForm > form {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    /*
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 0px;
+    */
 }
 
-.circleRegisterForm > form > label {
+.circleRegisterForm > form label {
     grid-area: 1 / 1 / 2 / 2; 
     background: transparent;
     color: #fff;
@@ -890,7 +893,7 @@ footer a {
     font-weight: 700;
 }
 
-.circleRegisterForm > form > input {
+.circleRegisterForm > form input {
     grid-area: 1 / 2 / 2 / 3;
     background: transparent;
     border: 0;
@@ -899,7 +902,11 @@ footer a {
     margin: 5px;
     padding: 10px;
     color: #fff !important;
-    
+}
+
+.circleRegisterForm > form > .inputContainer {
+    display: flex;
+    justify-content: space-between;
 }
 
 .circleRegisterForm form input::placeholder {
