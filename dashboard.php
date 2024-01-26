@@ -1,8 +1,8 @@
 <?php
     session_start();
-    /*if (!isset($_SESSION['UserID'])) {
+    if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
-    } else {*/
+    } else {
 
 ?><!DOCTYPE html>
 <html lang="es">
@@ -92,5 +92,5 @@
 </body>
 </html>
 <?php
-    echo "<script>showNotification('success', 'Login Correcto');</script>";/*}*/
+    echo "<script>showNotification('success', 'Login Correcto');</script>";}
 ?>

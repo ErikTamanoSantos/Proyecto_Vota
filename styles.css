@@ -697,11 +697,12 @@ footer a {
 }
 
 .dashboardItem a:hover {
+    text-shadow: 2px 2px 20px #000;
+    scale: 1.05;
     cursor: pointer;
 }
 
 .dashboardItem > a:hover:not(.disabledA), .dashboardItem > p{
-    color: #fff;
     text-shadow: 2px 2px 20px #000;
 }
 
