@@ -39,7 +39,7 @@
                 $pwd = $_POST['pwd'];
                 $userEmail = $_POST['userEmail'];
                 $dsn = "mysql:host=localhost;dbname=project_vota";
-                $pdo = new PDO($dsn, 'user777', '');
+                $pdo = new PDO($dsn, $dbUser, $dbPass);
                 
                 $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ?");
                 $query->bindParam(1, $pwd);
@@ -48,7 +48,7 @@
                 
                 $row = $query->fetch();
                 $correct = false;
-                while ($row) {
+                if ($row) {
                     $_SESSION["login"] = "correcto";
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];

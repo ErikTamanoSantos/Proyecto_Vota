@@ -44,7 +44,7 @@
                 include('config.php');
                 try {
                     $dsn = "mysql:host=localhost;dbname=project_vota";
-                    $pdo = new PDO($dsn, 'user777', '');
+                    $pdo = new PDO($dsn, $dbUser, $dbPass);
                     
                     $query = $pdo->prepare('SELECT * FROM Users WHERE ID = :UserID');
                     $query->bindParam(':UserID', $_SESSION['UserID']);
