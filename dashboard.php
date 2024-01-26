@@ -77,7 +77,7 @@
             <div class="navDashboard">
                 <div class="dashboardItem">
                     <a href="create_poll.php" id="createQuestion" class="<?php if (!isset($_SESSION["IsAuthenticated"])) { echo 'disabledA'; } ?>">
-                        <i class="fas fa-plus"></i><p>Crear encuesta</p>
+                            <i class="fa-solid fa-plus"></i><p>Crear encuesta </p>
                     </a>
                 </div>
                 <div class="dashboardItem">
@@ -89,13 +89,6 @@
         </div>
     </section> 
     <?php include './components/footer.php'; ?>
-
-    <script>
-        document.getElementById("createQuestion").addEventListener("click", function() {
-            var createQuestionElement = '<div><h1>Crear pregunta</h1><form action="createQuestion.php" method="POST"><input type="text" name="question" placeholder="Pregunta"><input type="text" name="answer1" placeholder="Respuesta 1"><input type="text" name="answer2" placeholder="Respuesta 2"><input type="text" name="answer3" placeholder="Respuesta 3"><input type="text" name="answer4" placeholder="Respuesta 4"><input type="text" name="answer5" placeholder="Respuesta 5"><input type="text" name="answer6" placeholder="Respuesta 6"><input type="text" name="answer7" placeholder="Respuesta 7"><input type="text" name="answer8" placeholder="Respuesta 8"><input type="text" name="answer9" placeholder="Respuesta 9"><input type="text" name="answer10" placeholder="Respuesta 10"><input type="submit" value="Crear pregunta"></form></div>';
-            document.querySelector(".pageDashboard").innerHTML = createQuestionElement;
-        });
-    </script>
 </body>
 </html>
 <?php
