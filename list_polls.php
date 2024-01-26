@@ -1,69 +1,74 @@
-<?php
-    session_start();
-    if (!isset($_SESSION['UserID'])) {
-        include('./errors/error403.php');
-    } else {
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="./img/vota-si.png" />
-    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="functions.js"></script>
-    <title>Lista de Encuestas | Vota EJA</title>
+    <script src="log.php"></script>
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+    <title>Invitar a usuarios | Vota EJA</title>
 </head>
 <body>
-    <?php
-    include './components/header.php';
-    include 'log.php'; 
-    ?>
-    <div id="notificationContainer"></div>
-    <div class="listPollDiv">
-    <h1>Listado de tus encuestas creadas</h1>
+<?php
+session_start();
+include 'log.php'; 
 
-    <?php
-        try {
-            $dsn = "mysql:host=localhost;dbname=project_vota";
-            $pdo = new PDO($dsn, 'aleix', 'Caqjuueeemke64*');
-            
-            $query = $pdo->prepare("SELECT * FROM Polls");
-            $query->execute();
-            
-            $row = $query->fetch();
-            $correct = false;
-            $questions = 0;
-            echo "<ul>";
-            while ($row) {
-                $questions ++;
-                echo "<li><div class='pollItem'>";
-                $creationDate = new DateTime($row["CreationDate"]);
-                echo "<span class='datePollItem'>".$creationDate->format("d/m/Y")."</span>";
-                echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
-                if ($row["QuestionVisibility"] == "hidden") {
-                    echo "<span class='visibilityPollItem'>Oculto</span>";
-                }
-                echo "</div></li>";
-                $row = $query->fetch();
-                $correct = true;
-            }
-            echo "</ul>";
-            if (!$correct) {
-                echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
-            }
-        } catch (PDOException $e){
-            echo $e->getMessage();
-            echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
-            escribirEnLog("[LIST_POLLS] ".$e);
-        }
-    ?>
-        </div>
+try {
+    $dsn = "mysql:host=localhost;dbname=project_vota";
+    $pdo = new PDO($dsn, 'aleix', 'Caqjuueeemke64*');
 
-    <?php include './components/footer.php'; ?>
+    // Obtener el ID del usuario actual
+    $userID = $_SESSION['UserID'];
+   
+} catch (PDOException $e){
+    echo $e->getMessage();
+    escribirEnLog("[ENVIAR] ".$e);
+}
+?>
+
+<!-- Añadir el título -->
+<h1>Invitar a usuarios</h1>
+
+<script>
+    $(document).ready(function() {
+        // Crear el contenedor del formulario
+        var formContainer = $('<div></div>');
+
+        // Crear el formulario dinámicamente
+        var invitarForm = $('<form></form>', {
+            'id': 'invitarForm',
+            'action': 'guardar_invitaciones.php',
+            'method': 'post'
+        });
+
+        // Crear el textarea dinámicamente
+        var textarea = $('<textarea></textarea>', {
+            'id': 'emailTextarea',
+            'name': 'emails',
+            'placeholder': 'Introduce correos electrónicos separados por coma',
+            'rows': '4',
+            'cols': '50'
+        });
+
+        // Crear el botón de enviar dinámicamente
+        var enviarButton = $('<button></button>', {
+            'type': 'submit',
+            'text': 'Enviar'
+        });
+
+        // Agregar textarea y button al formulario
+        invitarForm.append(textarea);
+        invitarForm.append(enviarButton);
+
+        // Agregar el formulario al contenedor
+        formContainer.append(invitarForm);
+
+        // Agregar el contenedor al body
+        $('body').append(formContainer);
+    });
+</script>
+
 </body>
 </html>
-<?php
-    }
-?>

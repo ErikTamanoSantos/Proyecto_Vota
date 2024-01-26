@@ -1,5 +1,12 @@
 **************************************************
-2024-01-26 16:16:22 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'aleix'@'localhost' (using password: YES) in /home/aleix/Votaciones2/Proyecto_Vota/register.php:52
+2024-01-26 16:33:31 [ENVIAR] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'aleix'@'localhost' (using password: YES) in /home/aleix/Votaciones2/Proyecto_Vota/enviar.php:23
 Stack trace:
-#0 /home/aleix/Votaciones2/Proyecto_Vota/register.php(52): PDO->__construct()
+#0 /home/aleix/Votaciones2/Proyecto_Vota/enviar.php(23): PDO->__construct()
 #1 {main}
+**************************************************
+2024-01-26 16:57:29 [NEWPOLL] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'aleix'@'localhost' (using password: YES) in /home/aleix/Votaciones2/Proyecto_Vota/newPoll.php:70
+Stack trace:
+#0 /home/aleix/Votaciones2/Proyecto_Vota/newPoll.php(70): PDO->__construct()
+#1 {main}
+**************************************************
+2024-01-26 17:39:19 [LOGIN] Usuario incorrecto
