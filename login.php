@@ -48,7 +48,7 @@
                 
                 $row = $query->fetch();
                 $correct = false;
-                while ($row) {
+                if ($row) {
                     $_SESSION["login"] = "correcto";
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
