@@ -40,6 +40,11 @@
     <?php include("./components/footer.php")?>
 
     <?php 
+                
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    
+
     if (isset($_POST["username"])) {
         include("config.php");
         try {
@@ -205,6 +210,7 @@
         echo '</script>';
 
         if (!$errorShown) {
+
             $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?)");
             $query->bindParam(1, $username);
             $query->bindParam(2, $password);
@@ -219,12 +225,50 @@
             $query->bindParam(1, $email);
             $query -> execute();
             $row = $query->fetch();
-            if ($row) {
-                $_SESSION["UserID"] = $row["ID"];
-                $_SESSION["Username"] = $row["Username"];
-                $_SESSION["isAuthenticated"] = $row["isAuthenticated"];
-                header("Location:./dashboard.php");
+
+
+
+            require 'PHPMailer-master/src/Exception.php';
+            require 'PHPMailer-master/src/PHPMailer.php';
+            require 'PHPMailer-master/src/SMTP.php';
+
+            $destinatary = $email;
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $destinatario = $destinatary;
+                $title = "Bienvenido, " . $username . "!";
+                $content = "Bienvenido, " . $username . ". Valida tu cuenta accediendo a este enlace.";
+    
+                $mail = new PHPMailer();
+                $mail->IsSMTP();
+                $mail->Mailer = "smtp";
+    
+                $mail->SMTPDebug  = 2;
+                $mail->SMTPAuth   = TRUE;
+                $mail->SMTPSecure = "tls";
+                $mail->Port       = 587;
+                $mail->Host       = "smtp.gmail.com";
+                $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat";
+                $mail->Password   = "";
+    
+                $mail->IsHTML(true);
+                $mail->AddAddress($destinatario);
+                $mail->SetFrom("jbernabeucaballero.cf@iesesteveterradas.cat", "Vota EJA");
+    
+                $mail->Subject = $title;
+                $mail->MsgHTML($content);
+
+                if ($mail->Send()) {
+                    echo '<script>showNotification("success", "¡Registro completado!");</script>';
+                } else {
+                    echo '<script>showNotification("error", "Vaya, parece que no se ha enviado el correo. ' . $mail->ErrorInfo . '");</script>';
+                }
             }
+
+            if ($row) {
+                header("Location:./index.php");
+            }
+
         }
     }
     ?>

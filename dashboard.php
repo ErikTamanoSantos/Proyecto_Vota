@@ -1,9 +1,9 @@
 <?php
     session_start();
     if (!isset($_SESSION['UserID'])) {
-        include('./errors/error403.php');
+        include('./errors/error404.php');
     } else {
-        if (!isset($_SESSION["IsAuthenticated"])) {
+        if ($_SESSION["isAuthenticated"] != 1) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['authCheck'])) {
                 try {
                     $dsn = "mysql:host=localhost;dbname=project_vota";
@@ -12,7 +12,7 @@
                     $updateQuery = $pdo->prepare('UPDATE Users SET IsAuthenticated = 1 WHERE ID = :UserID');
                     $updateQuery->bindParam(':UserID', $_SESSION['UserID']);
                     $updateQuery->execute();
-                    $_SESSION["IsAuthenticated"] = 1;
+                    $_SESSION["isAuthenticated"] = 1;
 
                     echo "<script>showNotification('success', 'Términos de uso aceptados correctamente');</script>";
                 } catch (PDOException $e) {

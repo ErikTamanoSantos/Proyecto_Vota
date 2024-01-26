@@ -53,8 +53,10 @@
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
                     $_SESSION["isAuthenticated"] = $row["IsAuthenticated"];
-                    $correct = true;
-                    header("Location:./dashboard.php");
+                    if ($row["IsAuthenticated"] == 1) {
+                        $correct = true;
+                        header("Location:./dashboard.php");
+                    }
                 }
                 if (!$correct) {
                     echo "<script>showNotification('error', 'Credenciales incorrectos');</script>";
