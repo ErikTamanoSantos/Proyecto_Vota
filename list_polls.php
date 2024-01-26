@@ -16,7 +16,10 @@
     <title>Lista de Encuestas | Vota EJA</title>
 </head>
 <body>
-    <?php include './components/header.php'; ?>
+    <?php
+    include './components/header.php';
+    include 'log.php'; 
+    ?>
     <div id="notificationContainer"></div>
     <div class="listPollDiv">
     <h1>Listado de tus encuestas creadas</h1>
@@ -53,6 +56,7 @@
         } catch (PDOException $e){
             echo $e->getMessage();
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+            escribirEnLog("[LIST_POLLS] ".$e);
         }
     ?>
         </div>

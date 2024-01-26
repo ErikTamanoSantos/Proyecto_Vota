@@ -1,0 +1,5 @@
+**************************************************
+2024-01-26 16:16:22 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'aleix'@'localhost' (using password: YES) in /home/aleix/Votaciones2/Proyecto_Vota/register.php:52
+Stack trace:
+#0 /home/aleix/Votaciones2/Proyecto_Vota/register.php(52): PDO->__construct()
+#1 {main}

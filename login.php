@@ -78,6 +78,7 @@ include 'log.php';
 
             } catch (PDOException $e){
                 echo $e->getMessage();
+                escribirEnLog("[LOGIN] ".$e);
             }
         }
     ?>

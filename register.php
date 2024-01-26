@@ -37,7 +37,10 @@
         </div>
     </section>
 
-    <?php include("./components/footer.php")?>
+    <?php 
+    include './components/header.php';
+    include 'log.php'; 
+    ?>
 
     <?php 
     if (isset($_POST["username"])) {
@@ -49,6 +52,7 @@
             $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
         } catch (PDOException $e) {
             echo "Failed to get DB handle: ". $e->getMessage();
+            escribirEnLog("[REGISTER] ".$e);
             exit;
         }
         $errorShown = false;
@@ -61,10 +65,10 @@
         $city = $_POST["city"];
         $postalCode = $_POST["postalCode"];
         if (strlen($username) == 0) {
-            echo "showNotification('error', 'Inserte un nombre de usuario');\n";
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
+                escribirEnLog("[REGISTER] "."Error en el nombre de usuario");
             }
         } else if (str_contains($username,';') or str_contains($username,'--') or str_contains($username,'/*') or str_contains($username, "*/")) {
             echo "showNotification('error', 'El nombre de usuario contiene carácteres no permitidos');\n";

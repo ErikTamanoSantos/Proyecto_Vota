@@ -44,7 +44,11 @@
         </div>
     </div>
 
-    <?php include("./components/footer.php")?>
+    <?php 
+    include './components/footer.php';
+    include 'log.php'; 
+    ?>
+
     <?php 
         if (isset($_POST["question"])) {
             if (!isset($_POST["answers"][0]) || !isset($_POST["answers"][1]) || $_POST["answers"][0] == "" || $_POST["answers"][1] == "") {
@@ -62,9 +66,10 @@
                     $hostname = "localhost";
                     $dbname = "project_vota";
                     $username = "aleix";
-                    $pw = "Caqjuueeemke64*";
+                    $pw = "Caqjuueeemke64";
                     $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
                 } catch (PDOException $e) {
+                    escribirEnLog("[NEWPOLL] ".$e);
                     echo "Failed to get DB handle: ". $e->getMessage();
                     exit;
                 }

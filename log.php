@@ -23,6 +23,7 @@ function escribirEnLog($mensaje) {
 
     // Verifica si se pudo abrir el archivo
     if ($archivo) {
+        fwrite($archivo, str_repeat("*", 50) . "\n");
         // Formatea el mensaje con la fecha y hora, seguido del texto
         $mensajeFormateado = $fechaHoraActual . " " . $mensaje . "\n";
 
