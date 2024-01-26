@@ -222,7 +222,7 @@
             if ($row) {
                 $_SESSION["UserID"] = $row["ID"];
                 $_SESSION["Username"] = $row["Username"];
-                $_SESSION["IsAuthenticated"] = $row["IsAuthenticated"];
+                $_SESSION["isAuthenticated"] = $row["isAuthenticated"];
                 header("Location:./dashboard.php");
             }
         }

@@ -52,6 +52,7 @@
                     $_SESSION["login"] = "correcto";
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
+                    $_SESSION["isAuthenticated"] = $row["IsAuthenticated"];
                     $correct = true;
                     header("Location:./dashboard.php");
                 }
