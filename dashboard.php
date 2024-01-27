@@ -1,27 +1,4 @@
-<?php
-    session_start();
-    if (!isset($_SESSION['UserID'])) {
-        include('./errors/error404.php');
-    } else {
-        if ($_SESSION["isAuthenticated"] != 1) {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['authCheck'])) {
-                try {
-                    $dsn = "mysql:host=localhost;dbname=project_vota";
-                    $pdo = new PDO($dsn, 'user777', '');
-                    
-                    $updateQuery = $pdo->prepare('UPDATE Users SET IsAuthenticated = 1 WHERE ID = :UserID');
-                    $updateQuery->bindParam(':UserID', $_SESSION['UserID']);
-                    $updateQuery->execute();
-                    $_SESSION["isAuthenticated"] = 1;
-
-                    echo "<script>showNotification('success', 'Términos de uso aceptados correctamente');</script>";
-                } catch (PDOException $e) {
-                    echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal al actualizar la base de datos');</script>";
-                }
-            }
-        }
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -33,6 +10,78 @@
     <script src="functions.js"></script>
     <title>Dashboard | Vota EJA</title>
 </head>
+
+<?php
+    session_start();
+    if (!isset($_SESSION['UserID'])) {
+        if (isset($_GET['validToken'])) {
+            $receivedToken = $_GET['validToken'];
+
+            $dsn = "mysql:host=localhost;dbname=project_vota";
+            $pdo = new PDO($dsn, 'user777', '');
+
+            $validationQuery = $pdo->prepare('SELECT * FROM Users WHERE ValidationToken = :Token');
+
+            $validationQuery->bindParam(':Token', $receivedToken);
+            $validationQuery->execute();
+
+            $userRow = $validationQuery->fetch();
+
+            if ($userRow) {
+                $_SESSION["isAuthenticated"] = $userRow["IsAuthenticated"];
+
+                if ($_SESSION["isAuthenticated"] != 1) {
+
+                    ?>  
+                    <div class="authValidation">
+                        <div class="authCheck">
+                            <div class="returnHome">
+                                <a href="index.php"><i class="fas fa-home"></i></a>
+                            </div>
+                            <h2>Debes aceptar los términos de uso para acceder a esta página</h2>
+                            <form method="POST">
+                                <input type="checkbox" name="authCheck" id="authCheck" required >
+                                <label for="scales">Aceptar términos de uso</label>
+                                <input type="submit" value="Aceptar">
+                            </form>
+                        </div>
+                    </div>
+                    <?php
+
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['authCheck'])) {
+                        try {
+                            $dsn = "mysql:host=localhost;dbname=project_vota";
+                            $pdo = new PDO($dsn, 'user777', '');
+                            
+                            $updateQuery = $pdo->prepare('UPDATE Users SET IsAuthenticated = 1 WHERE ID = :UserID');
+                            $updateQuery->bindParam(':UserID', $userRow['ID']);
+                            $updateQuery->execute();
+        
+                            $_SESSION["UserID"] = $userRow['ID'];
+                            $_SESSION["Username"] = $userRow["Username"];
+                            
+                            header("Location:./dashboard.php");
+                            echo "<script>showNotification('success', 'Términos de uso aceptados correctamente');</script>";
+                        } catch (PDOException $e) {
+                            echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal al actualizar la base de datos');</script>";
+                        }
+                    }
+                } else {
+                    $_SESSION["UserID"] = $userRow['ID'];
+                    $_SESSION["Username"] = $userRow["Username"];
+                    header("Location:./dashboard.php");
+                }
+            } else {
+                echo "<script>showNotification('error', 'Token de validación inválido');</script>";
+            }
+        } else {
+            include('./errors/error403.php');
+        }
+    } else {
+
+
+?>
+
 <body>
     <?php include './components/header.php'; ?>
     
@@ -71,34 +120,16 @@
                     echo $e->getMessage();
                     echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                 }
-                if ($_SESSION["isAuthenticated"] != 1) {
-                    
-                    ?>  
-                    <div class="authValidation">
-                        <div class="authCheck">
-                            <div class="returnHome">
-                                <a href="index.php"><i class="fas fa-home"></i></a>
-                            </div>
-                            <h2>Debes aceptar los términos de uso para acceder a esta página</h2>
-                            <form method="POST">
-                                <input type="checkbox" name="authCheck" id="authCheck" required >
-                                <label for="scales">Aceptar términos de uso</label>
-                                <input type="submit" value="Aceptar">
-                            </form>
-                        </div>
-                    </div>
-                    <?php
-                }
             ?>
             </div>
             <div class="navDashboard">
                 <div class="dashboardItem">
-                    <a href="create_poll.php" id="createQuestion" class="<?php if ($_SESSION["isAuthenticated"] != 1) { echo 'disabledA'; } ?>">
+                    <a href="create_poll.php" id="createQuestion">
                             <i class="fa-solid fa-plus"></i><p>Crear encuesta </p>
                     </a>
                 </div>
                 <div class="dashboardItem">
-                    <a href="list_polls.php" id="createQuestion" class="<?php if ($_SESSION["isAuthenticated"] != 1) { echo 'disabledA'; } ?>">
+                    <a href="list_polls.php" id="createQuestion">
                         <i class="fa-solid fa-list-ul"></i><p>Listar encuestas</p>
                     </a>
                 </div>

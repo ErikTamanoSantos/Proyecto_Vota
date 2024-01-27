@@ -211,7 +211,15 @@
 
         if (!$errorShown) {
 
-            $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?)");
+            $tokenLength = 40;
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $token = '';
+            for ($i = 0; $i < $tokenLength; $i++) {
+                $randomIndex = rand(0, strlen($characters) - 1);
+                $token .= $characters[$randomIndex];
+            }
+
+            $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`, `ValidationToken`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?, ?)");
             $query->bindParam(1, $username);
             $query->bindParam(2, $password);
             $query->bindParam(3, $phone);
@@ -219,6 +227,8 @@
             $query->bindParam(5, $country);
             $query->bindParam(6, $city);
             $query->bindParam(7, $postalCode);
+            $query->bindParam(8, $token);
+            
             $query -> execute();
             session_start();
             $query = $pdo -> prepare("SELECT * FROM Users WHERE `Email` = ?");
@@ -237,7 +247,7 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $destinatario = $destinatary;
                 $title = "Bienvenido, " . $username . "!";
-                $content = "Bienvenido, " . $username . ". Valida tu cuenta accediendo a este enlace.";
+                $content = "Bienvenido, <strong>" . $username . "</strong>. Valida tu cuenta accediendo a este enlace.<br><a class='btn' href='http://localhost/proyecto_vota/dashboard.php?validToken=" . $token . "'>Validar cuenta</a>.<br><br>Atentamente, el equipo de Vota EJA.";
     
                 $mail = new PHPMailer();
                 $mail->IsSMTP();
@@ -249,7 +259,7 @@
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
                 $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat";
-                $mail->Password   = "";
+                $mail->Password   = "KekHut93";
     
                 $mail->IsHTML(true);
                 $mail->AddAddress($destinatario);
