@@ -258,8 +258,8 @@
                 $mail->SMTPSecure = "tls";
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
-                $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat";
-                $mail->Password   = "KekHut93";
+                $mail->Username   = "email_here"; // Email de la cuenta de correo desde la que se enviaran los correos
+                $mail->Password   = "password_here"; // Password de la cuenta de correo
     
                 $mail->IsHTML(true);
                 $mail->AddAddress($destinatario);
