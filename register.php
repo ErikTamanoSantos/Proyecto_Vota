@@ -43,20 +43,31 @@
                 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
+
+    include("config.php");
+    try {
+        $hostname = "localhost";
+        $dbname = "project_vota";
+        $username = $dbUser;
+        $pw = $dbPass;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
+    } catch (PDOException $e) {
+        echo "Failed to get DB handle: ". $e->getMessage();
+        exit;
+    }
+
+    $query =  $pdo ->prepare("SELECT * FROM Countries");
+    $query -> execute();
+    $row = $query -> fetch();
+    echo "<script>getCountryData([";
+    while ($row) {
+        echo "{'".$row["CountryName"]."':'".$row["PhoneCode"]."'},";
+        $row = $query -> fetch();
+    }
+    echo "]);</script>";
     
 
     if (isset($_POST["username"])) {
-        include("config.php");
-        try {
-            $hostname = "localhost";
-            $dbname = "project_vota";
-            $username = $dbUser;
-            $pw = $dbPass;
-            $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
-        } catch (PDOException $e) {
-            echo "Failed to get DB handle: ". $e->getMessage();
-            exit;
-        }
         $errorShown = false;
         echo "<script>";
         $username = $_POST["username"];

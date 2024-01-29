@@ -7,6 +7,8 @@ let city = "";
 let postalCode = "";
 let countries = "";
 
+let countryData = []
+
 $(function() {
     showStep();
 })
@@ -165,9 +167,18 @@ function showStep(step = 0, animate = true) {
             }).focus()
             break;
         case 6:
+            let stringForm = `
+            <div class="inputContainer">
+                <label for="city">Ciudad: </label>
+                <select>`
+            for (let i = 0; i < countryData.length; i++) {
+                
+            }
+
             $("form").append(`
                 <div class="inputContainer">
                     <label for="city">Ciudad: </label>
+                    <select>
                     <input type="text" id="city" name="city">
                 </div>
             `)
@@ -223,6 +234,11 @@ function showStep(step = 0, animate = true) {
             return false;
         }
     })
+}
+
+function getCountryData(dataFromPHP) {
+    countryData = dataFromPHP
+    console.log(dataFromPHP)
 }
 
 // Function to submit form since AJAX is not alllowed

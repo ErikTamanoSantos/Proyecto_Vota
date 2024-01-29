@@ -44,6 +44,10 @@
                         break;
                 }
                 echo "<h4>Estado: ".$state."</h4>";
+                echo "<h4>Visibilidad:";
+                echo "<select>";
+                echo "<option>Oculto</option>";
+                echo "<option>Visible</option>";
                 echo "</div>";
                 echo "
                 <div id='pollGraphs'>

@@ -13,12 +13,13 @@
 
 <?php
     session_start();
+    include("config.php");
     if (!isset($_SESSION['UserID'])) {
         if (isset($_GET['validToken'])) {
             $receivedToken = $_GET['validToken'];
 
             $dsn = "mysql:host=localhost;dbname=project_vota";
-            $pdo = new PDO($dsn, 'user777', '');
+            $pdo = new PDO($dsn, $dbUser, $dbPass);
 
             $validationQuery = $pdo->prepare('SELECT * FROM Users WHERE ValidationToken = :Token');
 
@@ -51,7 +52,7 @@
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['authCheck'])) {
                         try {
                             $dsn = "mysql:host=localhost;dbname=project_vota";
-                            $pdo = new PDO($dsn, 'user777', '');
+                            $pdo = new PDO($dsn, $dbUser, $dbPass);
                             
                             $updateQuery = $pdo->prepare('UPDATE Users SET IsAuthenticated = 1 WHERE ID = :UserID');
                             $updateQuery->bindParam(':UserID', $userRow['ID']);

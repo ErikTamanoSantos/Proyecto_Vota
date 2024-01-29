@@ -68,6 +68,11 @@
                 <script>
                     showNotification('error', 'Las fechas insertadas no son válidas');
                 </script>";
+            } elseif (new DateTime($_POST["dateStart"]) > new DateTime($_POST["dateFinish"])) {
+                echo "
+                <script>
+                    showNotification('error', 'La fecha de inicio no debe ser mayor que la fecha de fin');
+                </script>";
             } else {
                 include("config.php");
                 try {
