@@ -54,7 +54,7 @@
                     echo $e->getMessage();
                     echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                 }
-
+                /*
                 if (!isset($_SESSION["IsAuthenticated"])) {
                     ?>  
                     <div class="authValidation">
@@ -72,16 +72,17 @@
                     </div>
                     <?php
                 }
+                */
             ?>
             </div>
             <div class="navDashboard">
                 <div class="dashboardItem">
-                    <a href="create_poll.php" id="createQuestion" class="<?php if (!isset($_SESSION["IsAuthenticated"])) { echo 'disabledA'; } ?>">
+                    <a href="newPoll.php" id="createQuestion">
                         <i class="fas fa-plus"></i><p>Crear encuesta</p>
                     </a>
                 </div>
                 <div class="dashboardItem">
-                    <a href="list_polls.php" id="createQuestion" class="<?php if (!isset($_SESSION["IsAuthenticated"])) { echo 'disabledA'; } ?>">
+                    <a href="list_polls.php" id="createQuestion">
                         <i class="fa-solid fa-list-ul"></i><p>Listar encuestas</p>
                     </a>
                 </div>

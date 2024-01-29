@@ -4,19 +4,18 @@
         include('./errors/error403.php');
     } else {
 ?><!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="./img/vota-si.png" />
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="functions.js"></script>
-    <title>Lista de Encuestas | Vota EJA</title>
+    <script src="listVotes.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
 </head>
 <body>
-    <?php include './components/header.php'; ?>
+<?php include './components/header.php'; ?>
     <div id="notificationContainer"></div>
     <div class="listPollDiv">
     <h1>Listado de tus encuestas creadas</h1>
@@ -27,23 +26,18 @@
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
-            $query = $pdo->prepare("SELECT * FROM Polls");
+            $query = $pdo->prepare("SELECT a.Text, p.Question FROM User_Vote uv INNER JOIN Answers a ON a.ID = uv.AnswerID INNER JOIN Polls p ON a.PollID = p.ID WHERE uv.UserID = 1;");
             $query->execute();
             
             $row = $query->fetch();
             $correct = false;
             $questions = 0;
-            echo "<ul>";
+            echo "<ul id='votesList'>";
             while ($row) {
                 $questions ++;
                 echo "<li><div class='pollItem'>";
-                $creationDate = new DateTime($row["CreationDate"]);
-                echo "<span class='datePollItem'>".$creationDate->format("d/m/Y")."</span>";
-                echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
-                if ($row["QuestionVisibility"] == "hidden") {
-                    echo "<span class='visibilityPollItem'>Oculto</span>";
-                }
-                echo "<a href='pollDetails.php?id=".$row["ID"]."'>Detalles</a>";
+                echo "<span>Pregunta: ".$row["Question"]."</span>";
+                echo "<span class='nameQuestionPollItem'>Respuesta: <span class='showAnswer'><i class='fa-solid fa-eye' style='color: #ffffff;'></i></span><span class='answer' style='display: none'>".$row["Text"]."</span></span>";
                 echo "</div></li>";
                 $row = $query->fetch();
                 $correct = true;
@@ -63,5 +57,4 @@
 </body>
 </html>
 <?php
-    }
-?>
+}?>

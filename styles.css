@@ -1106,6 +1106,10 @@ footer a {
     box-shadow: 2px 2px 20px var(--azulOscuroMedio);
 }
 
+.createPollForm input[type="file"] {
+    display: none;
+}
+
 /* List polls */
 
 .listPollDiv {
@@ -1143,4 +1147,93 @@ footer a {
     font-size: 30px !important;
     color: var(--azulClaro);
     font-weight: 700;
+}
+
+/* Poll Details */
+
+.pollDetails {
+    display: flex;
+    padding-top: calc(40px + 2%);
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60vh;
+}
+
+.pollDetails > .pollTextDetails {
+    border: 1px solid var(--azulOscuroMedio);
+    border-radius: 16px;
+    background-color: var(--azulOscuro);
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+    min-height: 60vh;
+    margin: 50px;
+    padding: 40px;
+    width: 50%;
+}
+
+.pollDetails > .pollTextDetails > h2, .pollDetails > .pollTextDetails > h4 {
+    color: var(--azulClaro)
+}
+
+#pollGraphs {
+    border: 1px solid var(--azulOscuroMedio);
+    border-radius: 16px;
+    background-color: var(--azulOscuro);
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+    min-height: 60vh;
+    max-height: 60vh;
+    margin: 50px;
+    width: 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#pollGraphButtons {
+    width: calc(100% + 80px);
+    display: flex;
+    margin: -40px -40px 0 -40px;
+}
+
+#pollGraphButtons button {
+    width: 50%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--azulOscuroMedio);
+    color: var(--azulClaro)
+}
+
+#pollGraphButtons button:disabled {
+    background-color: rgba(0, 0, 0, 0.35);
+    color: #a6afb3;
+
+}
+
+
+#barChartButton {
+    border-radius: 10px 0 0 0 ;
+    border-right: 1px solid var(--azulOscuroMedio) !important;
+}
+
+#pieChartButton {
+    border-radius: 0 10px 0 0 ;
+    border-left: 1px solid var(--azulOscuroMedio) !important;
+}
+
+#pollGraphs #graphContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#pollGraphs canvas {
+    height: 500px !important;
+}
+
+#votesList .pollItem {
+    display: flex;
+    flex-direction: column;
+
 }
