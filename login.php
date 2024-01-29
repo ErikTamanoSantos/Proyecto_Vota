@@ -41,7 +41,7 @@
                 $dsn = "mysql:host=localhost;dbname=project_vota";
                 $pdo = new PDO($dsn, $dbUser, $dbPass);
                 
-                $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ?");
+                $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ? AND IsAuthenticated = 1");
                 $query->bindParam(1, $pwd);
                 $query->bindParam(2, $userEmail);
                 $query->execute();
@@ -52,8 +52,11 @@
                     $_SESSION["login"] = "correcto";
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
-                    $correct = true;
-                    header("Location:./dashboard.php");
+                    $_SESSION["isAuthenticated"] = $row["IsAuthenticated"];
+                    if ($row["IsAuthenticated"] == 1) {
+                        $correct = true;
+                        header("Location:./dashboard.php");
+                    }
                 }
                 if (!$correct) {
                     echo "<script>showNotification('error', 'Credenciales incorrectos');</script>";

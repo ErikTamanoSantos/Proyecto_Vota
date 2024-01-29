@@ -1,4 +1,4 @@
 <?php
-$dbUser = "root";
-$dbPass = "Thyr10N191103!--";
+$dbUser = "user777";
+$dbPass = "";
 ?>

@@ -665,11 +665,11 @@ footer a {
     font-size: 20px;
 }
 
-.dashboardItem button, .dashboardItem a {
+.dashboardItem button, .dashboardItem a, .dashboardItem p{
     text-decoration: none;
     color: var(--textoAzulNormal);
     font-weight: 700;
-    font-size: 40px;
+    font-size: 20px;
     padding: 0 5% 0 5%;
     text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
     border: none;    
@@ -680,27 +680,33 @@ footer a {
     width: 100%;
 }
 
+.dashboardItem > i {
+    font-size: 30px;
+    margin: 0 5% 0 5%;
+    color: var(--textoAzulNormal);
+}
 
-.dashboardItem > a i {
+.dashboardItem > a i, .dashboardItem i p {
     margin: 25px;
     text-align: center;
 }
 
-.dashboardItem > a p {
+.dashboardItem > a p, .dashboardItem p{
     width: 75%;
     text-align: center;
 }
 
-.dashboardItem a:hover, .dashboardItem a:hover {
+.dashboardItem a:hover {
+    text-shadow: 2px 2px 20px #000;
+    scale: 1.05;
     cursor: pointer;
 }
 
-.dashboardItem > a:hover:not(.disabledA) {
-    color: #fff;
+.dashboardItem > a:hover:not(.disabledA), .dashboardItem > p{
     text-shadow: 2px 2px 20px #000;
 }
 
-.dashboardItem > a.disabledA {
+.dashboardItem > a.disabledA, .dashboardItem > p {
     color: var(--textoAzulNormal);
     text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
     cursor: not-allowed;
