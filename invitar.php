@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="es">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
 
     try {
         $dsn = "mysql:host=localhost;dbname=project_vota";
-        $pdo = new PDO($dsn, 'aleix', 'Caqjuueeemke64*');
+        $pdo = new PDO($dsn, 'root', '');
 
         // Obtener el ID del usuario actual
         $userID = $_SESSION['UserID'];
@@ -77,22 +77,22 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailTextarea = $_POST["emails"];
-
-        // Dividir las direcciones de correo electrónico usando saltos de línea como separador
-        $arrayEmails = explode("\n", $emailTextarea);
-
+    
+        // Dividir las direcciones de correo electrónico usando comas y saltos de línea como separadores
+        $arrayEmails = preg_split("/[\s,]+/", $emailTextarea);
+    
         // Eliminar espacios en blanco alrededor de cada dirección de correo electrónico
         $arrayEmails = array_map('trim', $arrayEmails);
-
+    
         // Expresión regular para validar el formato de un correo electrónico
         $emailRegex = '/^[^\s@]+@[^\s@]+\.[^\s@]+$/';
-
+    
         // Almacenar los correos electrónicos incorrectos
         $correosIncorrectos = [];
-
+    
         // Almacenar los correos electrónicos correctos
         $correosCorrectos = [];
-
+    
         // Verificar cada elemento del array
         foreach ($arrayEmails as $email) {
             if (preg_match($emailRegex, $email)) {
@@ -102,24 +102,29 @@
             }
         }
 
-        // Enviar correos electrónicos
-        foreach ($correosCorrectos as $email) {
-            // Aquí puedes obtener el nombre de usuario asociado al correo si es necesario
-            // Puedes ajustar esta lógica según tus necesidades
-            if (enviarCorreo($email, "Nombre de Usuario")) {
-                echo "Correo enviado a: $email<br>";
-            } else {
-                echo "Error al enviar correo a: $email<br>";
+        
+        
+        // Enviar correos electrónicos solo si no hay correos electrónicos incorrectos
+        if (empty($correosIncorrectos)) {
+            foreach ($correosCorrectos as $email) {
+                // Obtener el nombre de usuario asociado al correo si es necesario
+                // Puedes ajustar esta lógica según tus necesidades
+                if (enviarCorreo($email, "Nombre de Usuario")) {
+                    echo "Correo enviado a: $email<br>";
+                } else {
+                    echo "Error al enviar correo a: $email<br>";
+                }
             }
-        }
-
-        // Mostrar notificación según la cantidad de correos electrónicos incorrectos
-        if (!empty($correosIncorrectos)) {
-            echo "Correos incorrectos: " . implode(', ', $correosIncorrectos);
+        } else {
+            // Mostrar notificación de correos incorrectos
+            if (count($correosIncorrectos) === 1) {
+                echo "Este correo no es correcto: " . $correosIncorrectos[0];
+            } else {
+                echo "Estos correos no son correctos: " . implode(', ', $correosIncorrectos);
+            }
         }
     }
     ?>
-
 
     <!-- Añadir el título -->
     <h1>Invitar a usuarios</h1>
@@ -152,11 +157,7 @@
         var enviarButton = $('<button></button>', {
             'id': 'enviarButton',
             'text': 'Enviar',
-            'style': 'display:none', // Inicialmente oculto
-            'click': function() {
-                almacenarEnArray();
-                validarEmails();
-            }
+            'style': 'display:none' // Inicialmente oculto
         });
 
         $('form').append(enviarButton);
@@ -173,69 +174,7 @@
         }
     }
 
-    function almacenarEnArray() {
-        // Obtener el contenido del textarea
-        var inputText = $('#emailTextarea').val();
-
-        // Dividir las líneas
-        var lines = inputText.split('\n');
-
-        // Array para almacenar todos los correos electrónicos
-        var allEmails = [];
-
-        // Recorrer cada línea
-        lines.forEach(function(line) {
-            // Dividir los elementos en la línea usando comas como separador
-            var elements = line.split(',');
-
-            // Eliminar espacios en blanco alrededor de cada elemento
-            elements = elements.map(function(element) {
-                return element.trim();
-            });
-
-            // Agregar los elementos al array de correos electrónicos
-            allEmails = allEmails.concat(elements);
-        });
-        console.log(allEmails);
-        // Eliminar espacios en blanco alrededor de cada dirección de correo electrónico
-        allEmails = allEmails.map(function(email) {
-            return email.trim();
-        });
-
-        // Mostrar el array en la consola
-        console.log(allEmails);
-
-    }
-
-    function validarEmails() {
-        var emails = $('#emailTextarea').val();
-        var arrayEmails = emails.split(/[,\n]+/);
-        arrayEmails = arrayEmails.map(function(email) {
-            return email.trim();
-        });
-
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var correosIncorrectos = [];
-        var correosCorrectos = [];
-
-        for (var i = 0; i < arrayEmails.length; i++) {
-            if (emailRegex.test(arrayEmails[i])) {
-                correosCorrectos.push(arrayEmails[i]);
-            } else {
-                correosIncorrectos.push(arrayEmails[i]);
-            }
-        }
-
-        if (correosIncorrectos.length === 1) {
-            showNotification('error', 'Este correo no es correcto: ' + correosIncorrectos[0]);
-        } else if (correosIncorrectos.length > 1) {
-            showNotification('error', 'Estos correos no son correctos: ' + correosIncorrectos.join(', '));
-        } else {
-            correosCorrectos.forEach(function(email) {
-                // Puedes realizar acciones adicionales aquí si es necesario
-            });
-        }
-    }
+    
 </script>
 
     </body>

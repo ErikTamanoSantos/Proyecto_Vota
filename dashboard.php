@@ -25,7 +25,7 @@
             <?php
                 try {
                     $dsn = "mysql:host=localhost;dbname=project_vota";
-                    $pdo = new PDO($dsn, 'aleix', 'Caqjuueeemke64*');
+                    $pdo = new PDO($dsn, 'root', '');
                     
                     $query = $pdo->prepare('SELECT * FROM Users WHERE ID = :UserID');
                     $query->bindParam(':UserID', $_SESSION['UserID']);

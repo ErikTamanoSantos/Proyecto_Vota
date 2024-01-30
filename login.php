@@ -42,7 +42,7 @@ include 'log.php';
                 $pwd = $_POST['pwd'];
                 $userEmail = $_POST['userEmail'];
                 $dsn = "mysql:host=localhost;dbname=project_vota";
-                $pdo = new PDO($dsn, 'aleix', 'Caqjuueeemke64*');
+                $pdo = new PDO($dsn, 'root', '');
                 
                 $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ?");
                 $query->bindParam(1, $pwd);
