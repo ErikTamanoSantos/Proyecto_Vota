@@ -23,9 +23,12 @@
         <div class="createPollForm">
             <h2>Crea una nueva encuesta</h2>
             <form method="POST" enctype="multipart/form-data">
-                <input type="text" id="question" name="question" placeholder="Pregunta">
-                <div id="questionImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
-                <input type="file" id="questionImage" name="questionImage" accept="image/png, image/gif, image/jpeg" >
+                <div class="nameQuestionh1">
+                    <input type="text" id="question" name="question" placeholder="Pregunta">
+                    <div id="questionImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
+                    <input type="file" id="questionImage" name="questionImage" accept="image/png, image/gif, image/jpeg" >
+                </div>
+
                 <div id="answerContainer">
                     <div>
                         <input type="text" placeholder="Respuesta 1" name="answers[]">
