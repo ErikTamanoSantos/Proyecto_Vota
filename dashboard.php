@@ -144,7 +144,7 @@
             </div>
             <div class="navDashboard">
                 <div class="dashboardItem">
-                    <a href="create_poll.php" id="createQuestion">
+                    <a href="newPoll.php" id="createQuestion">
                             <i class="fa-solid fa-plus"></i><p>Crear encuesta </p>
                     </a>
                 </div>

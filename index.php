@@ -14,10 +14,21 @@
 <body>
     <?php include './components/header.php'; ?>
     <div id="notificationContainer"></div>
+
+    <?php 
+        if (isset($_SESSION['justVoted'])) {
+            echo "<script>showNotification('success', '¡Tu voto ha sido registrado! Regístrate para ver tus votaciones y poder crearlas.')</script>";
+            unset($_SESSION['justVoted']);
+        } elseif (isset($_SESSION['alreadyVoted'])) {
+            echo "<script>showNotification('error', 'Link inválido.')</script>";
+            unset($_SESSION['alreadyVoted']);
+        }
+    ?>
+
     <section class="firstSec flex flex-col justify-center">
         <h1>VOTA EJA</h1>
         <h3>Portal de votaciones</h3>
-        <div class="firstSecFlex flex flex-row ">
+        <div class="firstSecFlex flex flex-row">
             <div class="firstSecText">
                 <p><strong>Vota EJA</strong> es un proyecto para lograr hacer un portal de votaciones que permita <strong>crear, distribuir y administrar</strong> votaciones en linea.
                 Para nosotros <strong>la seguridad es lo primero</strong>, por eso todas las votaciones pasan por un <strong>sistema de seguridad y encriptacion</strong> riguroso 
