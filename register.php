@@ -259,7 +259,7 @@
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
                 $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat";
-                $mail->Password   = "KekHut93";
+                $mail->Password   = "";
     
                 $mail->IsHTML(true);
                 $mail->AddAddress($destinatario);
