@@ -17,16 +17,27 @@
     <title>Nueva Encuesta | Vota EJA</title>
 </head>
 <body>
+    <?php include("log.php")?>
     <?php include("./components/header.php")?>
     <div id="notificationContainer"></div>
     <div class="createPollDiv">
         <div class="createPollForm">
             <h2>Crea una nueva encuesta</h2>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <input type="text" id="question" name="question" placeholder="Pregunta">
+                <div id="questionImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
+                <input type="file" id="questionImage" name="questionImage" accept="image/png, image/gif, image/jpeg" >
                 <div id="answerContainer">
-                    <input type="text" placeholder="Respuesta 1" name="answers[]">
-                    <input type="text" placeholder="Respuesta 2" name="answers[]">
+                    <div>
+                        <input type="text" placeholder="Respuesta 1" name="answers[]">
+                        <div id="answer1ImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
+                        <input type="file" id="answer1Image" name="answerImage1" accept="image/png, image/gif, image/jpeg" >
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Respuesta 2" name="answers[]">
+                        <div id="answer2ImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
+                        <input type="file" id="answer2Image" name="answerImage2" accept="image/png, image/gif, image/jpeg" >
+                    </div>
                 </div>
                 <div class="buttonsForm">
                     <button type="button" id="removeAnswer" disabled><i class="fa-solid fa-minus"></i></button>
@@ -44,12 +55,9 @@
         </div>
     </div>
 
+    <?php include("./components/footer.php")?>
     <?php 
-    include './components/footer.php';
-    include 'log.php'; 
-    ?>
-
-    <?php 
+        echo var_dump($_FILES);
         if (isset($_POST["question"])) {
             if (!isset($_POST["answers"][0]) || !isset($_POST["answers"][1]) || $_POST["answers"][0] == "" || $_POST["answers"][1] == "") {
                 echo "
@@ -61,22 +69,33 @@
                 <script>
                     showNotification('error', 'Las fechas insertadas no son válidas');
                 </script>";
+            } elseif (new DateTime($_POST["dateStart"]) > new DateTime($_POST["dateFinish"])) {
+                echo "
+                <script>
+                    showNotification('error', 'La fecha de inicio no debe ser mayor que la fecha de fin');
+                </script>";
             } else {
+                include("config.php");
                 try {
                     $hostname = "localhost";
                     $dbname = "project_vota";
-                    $username = "aleix";
-                    $pw = "Caqjuueeemke64*";
+                    $username = $dbUser;
+                    $pw = $dbPass;
                     $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
                 } catch (PDOException $e) {
-                    escribirEnLog("[NEWPOLL] ".$e);
                     echo "Failed to get DB handle: ". $e->getMessage();
+                    escribirEnLog("[newPoll] ".$e);
                     exit;
                 }
                 $date = new DateTime();
                 $state = "not_begun";
                 $visibility = "hidden";
-                $query = $pdo -> prepare("INSERT INTO Polls(Question, CreationDate, StartDate, EndDate, `State`, CreatorID, QuestionVisibility) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $questionImage = null;
+                if (isset($_FILES["questionImage"]) && $_FILES["questionImage"]["name"] != "") {
+                    $questionImage = "./img/formImages/".basename($_FILES["questionImage"]["name"]);   
+                    move_uploaded_file($_FILES['questionImage']['tmp_name'], $questionImage);
+                }
+                $query = $pdo -> prepare("INSERT INTO Polls(Question, CreationDate, StartDate, EndDate, `State`, CreatorID, QuestionVisibility, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 $query->bindParam(1, $_POST["question"]);
                 $query->bindParam(2, $date->format('Y-m-d H:i:s'));
                 $query->bindParam(3, $_POST["dateStart"]);
@@ -84,7 +103,9 @@
                 $query->bindParam(5, $state);
                 $query->bindParam(6, $_SESSION["UserID"]);
                 $query->bindParam(7, $visibility);
+                $query->bindParam(8, $questionImage);
                 $query->execute();
+                $index = 1;
                 foreach ($_POST['answers'] as $key => $value) {
                     $query = $pdo -> prepare("SELECT * FROM Polls ORDER BY ID DESC");
                     $query->execute();
@@ -93,14 +114,17 @@
                     if ($row) {
                         $pollID = $row["ID"];
                     }
-                    $query->bindParam(1, $_POST["question"]);
-                    $query->bindParam(2, $date->format('Y-m-d H:i:s'));
-                    $query->bindParam(3, $_POST["dateStart"]);
-                    $query->bindParam(4, $_POST["dateFinish"]);
-                    $query = $pdo -> prepare("INSERT INTO Answers(`Text`, PollID) VALUES (?, ?)");
+                    $answerImage = null;
+                    if (isset($_FILES["answerImage".$index]) && $_FILES["answerImage".$index]["name"] != "") {
+                        $answerImage = "./img/formImages/".basename($_FILES["answerImage".$index]["name"]);   
+                        move_uploaded_file($_FILES['questionImage']['tmp_name'], $answerImage);
+                    }
+                    $query = $pdo -> prepare("INSERT INTO Answers(`Text`, PollID, ImagePath) VALUES (?, ?, ?)");
                     $query->bindParam(1, $value);
                     $query->bindParam(2, $pollID);
+                    $query->bindParam(3, $answerImage);
                     $query->execute();
+                    $index++;
                 }
                 header("Location:./dashboard.php");
 

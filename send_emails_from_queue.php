@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'log.php';
+include("config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -8,6 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
+
 
 function generarToken($length = 40) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -66,7 +68,7 @@ try {
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
         // Conectar a la base de datos (reemplaza con tus credenciales)
-        $mysqli = new mysqli("localhost", "root", "", "project_vota");
+        $mysqli = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
 
         // Verificar la conexión
         if ($mysqli->connect_error) {
