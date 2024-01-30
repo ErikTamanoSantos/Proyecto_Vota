@@ -19,6 +19,15 @@ $(function() {
       Chart.getChart("graph").destroy()
       createGraph();
     })
+    $("#saveChanges").click(function() {
+      let questionVisibility = $("#questionVisibility").find(":selected").val()
+      let answerVisibility = $("#answerVisibility").find(":selected").val()
+
+      $("#hiddenForm").html(`
+        <input type="hidden" name="QuestionVisibility" value="${questionVisibility}">
+        <input type="hidden" name="AnswerVisibility" value="${answerVisibility}"> 
+      `).submit()
+    })
 })
 
 function getVotes(votesFromPost) {

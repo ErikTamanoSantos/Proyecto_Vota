@@ -21,6 +21,16 @@
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
+            if (isset($_POST["QuestionVisibility"])) {
+                $pdo->beginTransaction();
+                $query = $pdo->prepare("UPDATE Polls SET QuestionVisibility = ?, ResultsVisibility = ? WHERE ID = ?");
+                $query->bindParam(1, $_POST["QuestionVisibility"]);
+                $query->bindParam(2, $_POST["AnswerVisibility"]);
+                $query->bindParam(3, $_GET["id"]);
+                $query->execute();
+                $pdo->commit();
+            }
+            
             $query = $pdo->prepare("SELECT * FROM Polls WHERE ID = ?");
             $query->bindParam(1, $_GET["id"]);
             $query->execute();
@@ -44,10 +54,19 @@
                         break;
                 }
                 echo "<h4>Estado: ".$state."</h4>";
-                echo "<h4>Visibilidad:";
-                echo "<select>";
-                echo "<option>Oculto</option>";
-                echo "<option>Visible</option>";
+                echo "<h4>Visibilidad de la pregunta:";
+                echo "<select id='questionVisibility'>";
+                echo "<option value='hidden' ".($row["QuestionVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                echo "<option value='public' ".($row["QuestionVisibility"] == "public" ? "selected" : "").">Público</option>";
+                echo "<option value='private' ".($row["QuestionVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                echo "</select></h4>";
+                echo "<h4>Visibilidad de las respuestas:";
+                echo "<select id='answerVisibility'>";
+                echo "<option value='hidden' ".($row["QuestionVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                echo "<option value='public' ".($row["QuestionVisibility"] == "public" ? "selected" : "").">Público</option>";
+                echo "<option value='private' ".($row["QuestionVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                echo "</select></h4>";
+                echo "<button id='saveChanges'>Guardar cambios</button>";
                 echo "</div>";
                 echo "
                 <div id='pollGraphs'>
@@ -82,6 +101,8 @@
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
     ?>
+    <form id="hiddenForm" style="display: none" method="POST">
+    </form>
     </section>
     <?php include("./components/footer.php") ?>
 </body>

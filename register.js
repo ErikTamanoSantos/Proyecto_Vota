@@ -7,7 +7,7 @@ let city = "";
 let postalCode = "";
 let countries = "";
 
-let countryData = []
+let countryData = {}
 
 $(function() {
     showStep();
@@ -143,42 +143,32 @@ function showStep(step = 0, animate = true) {
             }).focus()
             break;
         case 5:
-            $("form").append(`
-                <div class="inputContainer">
-                    <label for="country">País: </label>
-                    <input type="text" id="country" name="country">
-                </div>
-            `)
+            let formString = `
+            <div class="inputContainer">
+                <label for="country">País: </label>
+                <select id="country" name="country">`;
+            let countryNames = Object.keys(countryData)
+            for (let i = 0; i < countryNames.length; i++) {
+                formString += `<option>${countryNames[i]}</option>`
+            }
+            $("form").append(formString)
             $("#country").on('input', function() {
+                country = $("#country").find(":selected").text();
                 $(`form > div:gt(${step})`).remove()
-                $(window).off("keydown.custom").on("keydown.custom", function(event){
-                    if(event.keyCode == 13 || event.keyCode == 9) {
-                        event.preventDefault();
-                        let country = $("#country").val()
-                        if (country == "") {
-                            showNotification("error", "Inserte un país") 
-                        } else if (country.includes(";") || country.includes("--") || country.includes("/*") || country.includes("*/")) {
-                            showNotification("error", "El país insertado contiene carácteres no permitidos")
-                        } else {
-                            showStep(step+1)
-                        }
-                    }
-                });
+                if (country == "") {
+                    showNotification("error", "Inserte un país") 
+                } else if (country.includes(";") || country.includes("--") || country.includes("/*") || country.includes("*/")) {
+                    showNotification("error", "El país insertado contiene carácteres no permitidos")
+                } else {
+                    showStep(step+1)
+                }
             }).focus()
             break;
         case 6:
-            let stringForm = `
-            <div class="inputContainer">
-                <label for="city">Ciudad: </label>
-                <select>`
-            for (let i = 0; i < countryData.length; i++) {
-                
-            }
 
             $("form").append(`
                 <div class="inputContainer">
                     <label for="city">Ciudad: </label>
-                    <select>
                     <input type="text" id="city" name="city">
                 </div>
             `)

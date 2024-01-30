@@ -59,12 +59,12 @@
     $query =  $pdo ->prepare("SELECT * FROM Countries");
     $query -> execute();
     $row = $query -> fetch();
-    echo "<script>getCountryData([";
+    echo "<script>getCountryData({";
     while ($row) {
-        echo "{'".$row["CountryName"]."':'".$row["PhoneCode"]."'},";
+        echo "'".$row["CountryName"]."':'".$row["PhoneCode"]."',";
         $row = $query -> fetch();
     }
-    echo "]);</script>";
+    echo "});</script>";
     
 
     if (isset($_POST["username"])) {
@@ -77,6 +77,7 @@
         $country = $_POST["country"];
         $city = $_POST["city"];
         $postalCode = $_POST["postalCode"];
+        $userIsGuest = false;
         if (strlen($username) == 0) {
             echo "showNotification('error', 'Inserte un nombre de usuario');\n";
             if (!$errorShown) {
@@ -146,10 +147,14 @@
             $query -> execute();
             $row = $query -> fetch();
             if ($row) {
-                echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
-                if (!$errorShown) {
-                    echo "showStep(0);\n";
-                    $errorShown = true;
+                if ($row["password"] == "") {
+                    $userIsGuest = true;
+                } else {
+                    echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
+                    if (!$errorShown) {
+                        echo "showStep(0);\n";
+                        $errorShown = true;
+                    }
                 }
             }
         }
