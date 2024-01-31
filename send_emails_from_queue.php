@@ -11,21 +11,27 @@ require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 
 
-function generarToken($length = 40) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $token = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomIndex = rand(0, strlen($characters) - 1);
-        $token .= $characters[$randomIndex];
+function getTokenFromEmail($pdo, $email) {
+    $stmt = $pdo->prepare("SELECT tokenQuestion FROM poll_invitedusers WHERE UserID IN (SELECT ID FROM users WHERE email = :email)");
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo $result['tokenQuestion'];
+    echo '<div>';
+    if ($result) {
+        return $result['tokenQuestion'];
+    } else {
+        return null; // Usuario no encontrado o sin token
     }
-    return $token;
 }
 
-function enviarCorreo($destinatario, $username) {
-    $token = generarToken();
+
+function enviarCorreo($pdo, $destinatario, $username) {
+    
+    $token = getTokenFromEmail($pdo, $destinatario);
 
     $title = "Bienvenido, " . $username . "!";
-    $content = "Bienvenido, <strong>" . $username . "</strong>. Valida tu cuenta accediendo a este enlace.<br><a class='btn' href='http://localhost/proyecto_vota/dashboard.php?validToken=" . $token . "'>Validar cuenta</a>.<br><br>Atentamente, el equipo de Vota EJA.";
+    $content = "$token";
 
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -69,16 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
        
         $mysqli = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
-
-        
+   
         if ($mysqli->connect_error) {
             die("Error de conexión a la base de datos: " . $mysqli->connect_error);
         }
-
-       
         $result = $mysqli->query("SELECT email FROM email_queue LIMIT 5");
-
-
        
         if ($result->num_rows > 0) {
           
@@ -95,13 +96,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
             while ($row = $result->fetch_assoc()) {
                 $email = $row['email'];
-
-                if (enviarCorreo($email, "Nombre de Usuario")) {
-                    echo "Correo enviado a: $email<br>";
+                $token = getTokenFromEmail($pdo, $email);
+                        
+                if ($token) {
+                    if (enviarCorreo($pdo, $email, "Nombre de Usuario")) {
+                        echo "Correo enviado a: $email<br>";
+                    } else {
+                        echo "Error al enviar correo a: $email<br>";
+                    }
                 } else {
-                    echo "Error al enviar correo a: $email<br>";
+                    echo "No se encontró token para el correo: $email<br>";
                 }
             }
+            
     
             $mysqli->query("DELETE FROM email_queue");
 
@@ -110,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo "No hay correos electrónicos en la cola.";
         }
     } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+        
         escribirEnLog("[ENVIAR]" . $e->getMessage());
     }
 }

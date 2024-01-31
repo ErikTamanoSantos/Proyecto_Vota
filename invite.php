@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['emails'])) {
         $emails = $_POST['emails'];
 
-        
+        // Validar los correos electrónicos antes de almacenarlos en la base de datos
         $arrayEmails = preg_split('/[,\n]+/', $emails);
         $arrayEmails = array_map('trim', $arrayEmails);
 
@@ -48,15 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!empty($correosCorrectos)) {
-           
+            // Conectar a tu base de datos para la tabla email_queue
             $mysqliEmailQueue = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
 
-            
+            // Verificar la conexión
             if ($mysqliEmailQueue->connect_error) {
                 die("Error de conexión a la base de datos email_queue: " . $mysqliEmailQueue->connect_error);
             }
 
-           
+            // Insertar en email_queue
             $stmtEmailQueue = $mysqliEmailQueue->prepare("INSERT INTO email_queue (email) VALUES (?)");
 
             if (!$stmtEmailQueue) {
@@ -71,19 +71,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-           
+            // Cerrar la conexión y liberar recursos
             $stmtEmailQueue->close();
             $mysqliEmailQueue->close();
 
-           
+            // Conectar a tu base de datos (reemplaza con tus credenciales)
             $mysqli = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
 
-           
+            // Verificar la conexión
             if ($mysqli->connect_error) {
                 die("Error de conexión a la base de datos: " . $mysqli->connect_error);
             }
 
-            
+            // Verificar si los correos ya existen en la tabla Users
             $stmtCheckEmails = $mysqli->prepare("SELECT COUNT(*) FROM Users WHERE Email = ?");
             $stmtCheckEmails->bind_param("s", $email);
 
@@ -99,12 +99,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-           
+            // Cerrar la conexión y liberar recursos
             $stmtCheckEmails->close();
 
             if (!empty($erroresDuplicados)) {
             } else {
-                
+                // Preparar la consulta para insertar correos electrónicos en la tabla Users
                 $stmt = $mysqli->prepare("INSERT INTO Users (Email) VALUES (?)");
 
                 if (!$stmt) {
@@ -119,31 +119,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
-               
+                // Obtener el ID del último usuario insertado
                 $ultimoID = $mysqli->insert_id;
 
-                
+                // Cerrar la conexión y liberar recursos
                 $stmt->close();
                 $mysqli->close();
 
-                
+                // Conectar a tu base de datos para la tabla Poll_InvitedUsers
                 $mysqliInvited = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
 
-               
+                // Verificar la conexión
                 if ($mysqliInvited->connect_error) {
                     die("Error de conexión a la base de datos: " . $mysqliInvited->connect_error);
                 }
 
-               
+                // Preparar la consulta para insertar en Poll_InvitedUsers
                 $stmtInvited = $mysqliInvited->prepare("INSERT INTO Poll_InvitedUsers (UserID, PollID, TokenQuestion) VALUES (?, ?, ?)");
 
                 if (!$stmtInvited) {
                     die("Error preparing statement: " . $mysqliInvited->error);
                 }
 
-                
+                // Sustituir 'OtroCampo' por el nombre real del otro campo que quieras insertar
                 $otroCampoValor = $_GET['pollID'];
-                $token = generarToken();
+                $token = generarToken(); // Generar un token utilizando la función generarToken
 
                 $stmtInvited->bind_param("iss", $ultimoID, $otroCampoValor, $token);
 
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     die("Error executing statement: " . $stmtInvited->error);
                 }
 
-               
+                // Cerrar la conexión y liberar recursos
                 $stmtInvited->close();
                 $mysqliInvited->close();
 
@@ -169,6 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 
+<!-- Añadir el título -->
 <h1>Invitar a usuarios</h1>
 
 
@@ -181,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $('body').append(form);
 
-       
+        // Crear el textarea dinámicamente
         var textarea = $('<textarea></textarea>', {
             'id': 'emailTextarea',
             'name': 'emails',
@@ -191,14 +192,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'oninput': 'checkEmails()'
         });
 
-        
+        // Adjuntar el textarea al body
         $('form').append(textarea);
 
-       
+        // Crear el botón de enviar dinámicamente
         var enviarButton = $('<button></button>', {
             'id': 'enviarButton',
             'text': 'Enviar',
-            'style': 'display:none', 
+            'style': 'display:none', // Inicialmente oculto
             'click': function() {
                 almacenarEnArray();
                 validarEmails();
