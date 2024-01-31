@@ -11,6 +11,7 @@
 </head>
 <body>
 <?php include './components/header.php'; ?>
+<?php include './components/log.php'; ?>
     <div id="notificationContainer"></div>
     <section class="loginSection">
 
@@ -34,32 +35,40 @@
     <?php include './components/footer.php'; ?>
     <?php
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
+            include("config.php");
             try {
                 $pwd = $_POST['pwd'];
                 $userEmail = $_POST['userEmail'];
                 $dsn = "mysql:host=localhost;dbname=project_vota";
-                $pdo = new PDO($dsn, 'root', 'Thyr10N191103!--');
+                $pdo = new PDO($dsn, $dbUser, $dbPass);
                 
-                $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ?");
+                $query = $pdo->prepare("SELECT * FROM Users WHERE password = SHA2(?, 512) AND Email = ? AND IsAuthenticated = 1");
                 $query->bindParam(1, $pwd);
                 $query->bindParam(2, $userEmail);
                 $query->execute();
                 
                 $row = $query->fetch();
                 $correct = false;
-                while ($row) {
+                if ($row) {
                     $_SESSION["login"] = "correcto";
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
-                    $correct = true;
+                    $_SESSION["isAuthenticated"] = $row["IsAuthenticated"];
                     header("Location:./dashboard.php");
+                    if ($row["IsAuthenticated"] == 1) {
+                        $correct = true;
+                        header("Location:./dashboard.php");
+                    }
                 }
                 if (!$correct) {
                     echo "<script>showNotification('error', 'Credenciales incorrectos');</script>";
+                    // log
+                    escribirEnLog("[LOGIN] Credenciales incorrectos");
                 }
 
             } catch (PDOException $e){
                 echo $e->getMessage();
+                escribirEnLog("[LOGIN] ".$e);
             }
         }
     ?>

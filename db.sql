@@ -26,10 +26,11 @@ CREATE TABLE `Answers` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Text` varchar(255) DEFAULT NULL,
   `PollID` int DEFAULT NULL,
+  `ImagePath` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Answers_Poll` (`PollID`),
   CONSTRAINT `Answers_Poll` FOREIGN KEY (`PollID`) REFERENCES `Polls` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +81,7 @@ CREATE TABLE `Poll_Admins` (
   KEY `Poll_Admins_Poll` (`PollID`),
   CONSTRAINT `Poll_Admins_Admin` FOREIGN KEY (`UserID`) REFERENCES `Users` (`ID`),
   CONSTRAINT `Poll_Admins_Poll` FOREIGN KEY (`PollID`) REFERENCES `Polls` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,11 +103,12 @@ DROP TABLE IF EXISTS `Poll_InvitedUsers`;
 CREATE TABLE `Poll_InvitedUsers` (
   `UserID` int DEFAULT NULL,
   `PollID` int DEFAULT NULL,
+  `tokenQuestion` varchar(255) DEFAULT NULL,
   UNIQUE KEY `Poll_InvitedUsers_unique` (`UserID`,`PollID`),
   KEY `Poll_InvitedUsers_Poll` (`PollID`),
   CONSTRAINT `Poll_InvitedUsers_Poll` FOREIGN KEY (`PollID`) REFERENCES `Polls` (`ID`),
   CONSTRAINT `Poll_InvitedUsers_User` FOREIGN KEY (`UserID`) REFERENCES `Users` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +142,7 @@ CREATE TABLE `Polls` (
   PRIMARY KEY (`ID`),
   KEY `FK_PollCreator` (`CreatorID`),
   CONSTRAINT `FK_PollCreator` FOREIGN KEY (`CreatorID`) REFERENCES `Users` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,11 +164,14 @@ DROP TABLE IF EXISTS `User_Vote`;
 CREATE TABLE `User_Vote` (
   `UserID` int DEFAULT NULL,
   `AnswerID` int DEFAULT NULL,
+  `PollID` int(11) DEFAULT NULL,
   UNIQUE KEY `User_Vote_unique` (`UserID`,`AnswerID`),
   KEY `User_Vote_Answer` (`AnswerID`),
+  KEY `PollID` (`PollID`),
   CONSTRAINT `User_Vote_Answer` FOREIGN KEY (`AnswerID`) REFERENCES `Answers` (`ID`),
-  CONSTRAINT `User_Vote_User` FOREIGN KEY (`UserID`) REFERENCES `Users` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `User_Vote_User` FOREIGN KEY (`UserID`) REFERENCES `Users` (`ID`),
+  CONSTRAINT `user_vote_ibfk_1` FOREIGN KEY (`PollID`) REFERENCES `polls` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,11 +200,20 @@ CREATE TABLE `Users` (
   `City` varchar(255) DEFAULT NULL,
   `PostalCode` int DEFAULT NULL,
   `IsAuthenticated` tinyint(1) DEFAULT NULL,
-  `ValidationToken` int DEFAULT NULL,
+  `ValidationToken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+-- Table structure for table `email_queue`
+--
+DROP TABLE IF EXISTS `email_queue`;
+
+CREATE TABLE `email_queue` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 --
 -- Dumping data for table `Users`
 --
