@@ -42,12 +42,12 @@ function enviarCorreo($pdo, $destinatario, $username) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat"; 
-    $mail->Password   = "KekHut93"; 
+    $mail->Username   = "EMAIL_HERE"; 
+    $mail->Password   = "PASSWORD_HERE"; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("", "Vota EJA");
+    $mail->SetFrom("EMAIL_HERE", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
@@ -90,8 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $mail->SMTPSecure = "tls";
             $mail->Port       = 587;
             $mail->Host       = "smtp.gmail.com";
-            $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
-            $mail->Password   = "KekHut93"; // Password de la cuenta de correo
+            $mail->Username   = "EMAIL_HERE"; // Email de la cuenta de correo desde la que se enviarán los correos
+            $mail->Password   = "PASSWORD_HERE"; // Password de la cuenta de correo
     
 
             while ($row = $result->fetch_assoc()) {
