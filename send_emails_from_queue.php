@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'log.php';
+include("config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -9,21 +10,28 @@ require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 
-function generarToken($length = 40) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $token = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomIndex = rand(0, strlen($characters) - 1);
-        $token .= $characters[$randomIndex];
+
+function getTokenFromEmail($pdo, $email) {
+    $stmt = $pdo->prepare("SELECT tokenQuestion FROM poll_invitedusers WHERE UserID IN (SELECT ID FROM users WHERE email = :email)");
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo $result['tokenQuestion'];
+    echo '<div>';
+    if ($result) {
+        return $result['tokenQuestion'];
+    } else {
+        return null; // Usuario no encontrado o sin token
     }
-    return $token;
 }
 
-function enviarCorreo($destinatario, $username) {
-    $token = generarToken();
+
+function enviarCorreo($pdo, $destinatario, $username) {
+    
+    $token = getTokenFromEmail($pdo, $destinatario);
 
     $title = "Bienvenido, " . $username . "!";
-    $content = "Bienvenido, <strong>" . $username . "</strong>. Valida tu cuenta accediendo a este enlace.<br><a class='btn' href='http://localhost/proyecto_vota/dashboard.php?validToken=" . $token . "'>Validar cuenta</a>.<br><br>Atentamente, el equipo de Vota EJA.";
+    $content = "$token";
 
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -34,28 +42,28 @@ function enviarCorreo($destinatario, $username) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
-    $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
+    $mail->Username   = ""; 
+    $mail->Password   = ""; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("anaviogarcia.cf@iesesteveterradas.cat", "Vota EJA");
+    $mail->SetFrom("", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
 
     if ($mail->Send()) {
-        return true; // Envío exitoso
+        return true; 
     } else {
-        return false; // Error en el envío
+        return false; 
     }
 }
 
 try {
     $dsn = "mysql:host=localhost;dbname=project_vota";
-    $pdo = new PDO($dsn, 'root', '');
+    $pdo = new PDO($dsn, $dbUser, $dbPass);
 
-    // Obtener el ID del usuario actual
+   
     $userID = $_SESSION['UserID'];
 
 } catch (PDOException $e) {
@@ -65,21 +73,16 @@ try {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
-        // Conectar a la base de datos (reemplaza con tus credenciales)
-        $mysqli = new mysqli("localhost", "root", "", "project_vota");
-
-        // Verificar la conexión
+       
+        $mysqli = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
+   
         if ($mysqli->connect_error) {
             die("Error de conexión a la base de datos: " . $mysqli->connect_error);
         }
-
-       // Obtener correos electrónicos de la tabla email_queue (limitado a 5)
         $result = $mysqli->query("SELECT email FROM email_queue LIMIT 5");
-
-
-        // Verificar si hay correos electrónicos en la cola
+       
         if ($result->num_rows > 0) {
-            // Configuración del servidor SMTP (reemplaza con tu configuración)
+          
             $mail = new PHPMailer();
             $mail->IsSMTP();
             $mail->Mailer = "smtp";
@@ -87,32 +90,35 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $mail->SMTPSecure = "tls";
             $mail->Port       = 587;
             $mail->Host       = "smtp.gmail.com";
-            $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
-            $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
+            $mail->Username   = ""; // Email de la cuenta de correo desde la que se enviarán los correos
+            $mail->Password   = ""; // Password de la cuenta de correo
     
 
-            // Iterar sobre los resultados y enviar correos electrónicos
             while ($row = $result->fetch_assoc()) {
                 $email = $row['email'];
-
-                // Puedes ajustar el nombre de usuario según tus necesidades
-                if (enviarCorreo($email, "Nombre de Usuario")) {
-                    echo "Correo enviado a: $email<br>";
+                $token = getTokenFromEmail($pdo, $email);
+                        
+                if ($token) {
+                    if (enviarCorreo($pdo, $email, "Nombre de Usuario")) {
+                        echo "Correo enviado a: $email<br>";
+                    } else {
+                        echo "Error al enviar correo a: $email<br>";
+                    }
                 } else {
-                    echo "Error al enviar correo a: $email<br>";
+                    echo "No se encontró token para el correo: $email<br>";
                 }
             }
-
-            // Eliminar todos los correos electrónicos de la tabla después de enviarlos
+            
+    
             $mysqli->query("DELETE FROM email_queue");
 
-            // Cerrar la conexión
             $mysqli->close();
         } else {
             echo "No hay correos electrónicos en la cola.";
         }
     } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+        
+        escribirEnLog("[ENVIAR]" . $e->getMessage());
     }
 }
 ?>

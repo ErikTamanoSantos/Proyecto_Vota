@@ -1,5 +1,5 @@
 <?php
-   
+    session_start();
     echo "
         <header>
             <span class='spanNavBar'>".(isset($_SESSION["username"]) ? $_SESSION["username"] : "")."<span>

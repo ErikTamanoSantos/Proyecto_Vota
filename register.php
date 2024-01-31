@@ -37,24 +37,39 @@
         </div>
     </section>
 
-    <?php 
-    include './components/header.php';
-    include 'log.php'; 
-    ?>
+    <?php include("./components/footer.php")?>
+    <?php include("./log.php")?>
 
     <?php 
+                
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    include("config.php");
+    try {
+        $hostname = "localhost";
+        $dbname = "project_vota";
+        $username = $dbUser;
+        $pw = $dbPass;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
+    } catch (PDOException $e) {
+        echo "Failed to get DB handle: ". $e->getMessage();
+        escribirEnLog("[REGISTER] ".$e);
+        exit;
+    }
+
+    $query =  $pdo ->prepare("SELECT * FROM Countries");
+    $query -> execute();
+    $row = $query -> fetch();
+    echo "<script>getCountryData({";
+    while ($row) {
+        echo "'".$row["CountryName"]."':'".$row["PhoneCode"]."',";
+        $row = $query -> fetch();
+    }
+    echo "});</script>";
+    
+
     if (isset($_POST["username"])) {
-        try {
-            $hostname = "localhost";
-            $dbname = "project_vota";
-            $username = "root";
-            $pw = "";
-            $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
-        } catch (PDOException $e) {
-            echo "Failed to get DB handle: ". $e->getMessage();
-            escribirEnLog("[REGISTER] ".$e);
-            exit;
-        }
         $errorShown = false;
         echo "<script>";
         $username = $_POST["username"];
@@ -64,11 +79,12 @@
         $country = $_POST["country"];
         $city = $_POST["city"];
         $postalCode = $_POST["postalCode"];
+        $userIsGuest = false;
         if (strlen($username) == 0) {
+            echo "showNotification('error', 'Inserte un nombre de usuario');\n";
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
-                escribirEnLog("[REGISTER] "."Error en el nombre de usuario");
             }
         } else if (str_contains($username,';') or str_contains($username,'--') or str_contains($username,'/*') or str_contains($username, "*/")) {
             echo "showNotification('error', 'El nombre de usuario contiene carácteres no permitidos');\n";
@@ -133,10 +149,14 @@
             $query -> execute();
             $row = $query -> fetch();
             if ($row) {
-                echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
-                if (!$errorShown) {
-                    echo "showStep(0);\n";
-                    $errorShown = true;
+                if ($row["password"] == "") {
+                    $userIsGuest = true;
+                } else {
+                    echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
+                    if (!$errorShown) {
+                        echo "showStep(0);\n";
+                        $errorShown = true;
+                    }
                 }
             }
         }
@@ -208,7 +228,16 @@
         echo '</script>';
 
         if (!$errorShown) {
-            $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?)");
+
+            $tokenLength = 40;
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $token = '';
+            for ($i = 0; $i < $tokenLength; $i++) {
+                $randomIndex = rand(0, strlen($characters) - 1);
+                $token .= $characters[$randomIndex];
+            }
+
+            $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`, `ValidationToken`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?, ?)");
             $query->bindParam(1, $username);
             $query->bindParam(2, $password);
             $query->bindParam(3, $phone);
@@ -216,17 +245,58 @@
             $query->bindParam(5, $country);
             $query->bindParam(6, $city);
             $query->bindParam(7, $postalCode);
+            $query->bindParam(8, $token);
+            
             $query -> execute();
             session_start();
             $query = $pdo -> prepare("SELECT * FROM Users WHERE `Email` = ?");
             $query->bindParam(1, $email);
             $query -> execute();
             $row = $query->fetch();
-            if ($row) {
-                $_SESSION["UserID"] = $row["ID"];
-                $_SESSION["Username"] = $row["Username"];
-                header("Location:./dashboard.php");
+
+
+
+            require 'PHPMailer-master/src/Exception.php';
+            require 'PHPMailer-master/src/PHPMailer.php';
+            require 'PHPMailer-master/src/SMTP.php';
+
+            $destinatary = $email;
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $destinatario = $destinatary;
+                $title = "Bienvenido, " . $username . "!";
+                $content = "Bienvenido, <strong>" . $username . "</strong>. Valida tu cuenta accediendo a este enlace.<br><a class='btn' href='http://localhost/proyecto_vota/dashboard.php?validToken=" . $token . "'>Validar cuenta</a>.<br><br>Atentamente, el equipo de Vota EJA.";
+    
+                $mail = new PHPMailer();
+                $mail->IsSMTP();
+                $mail->Mailer = "smtp";
+    
+                $mail->SMTPDebug  = 2;
+                $mail->SMTPAuth   = TRUE;
+                $mail->SMTPSecure = "tls";
+                $mail->Port       = 587;
+                $mail->Host       = "smtp.gmail.com";
+                $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
+                $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
+    
+                $mail->IsHTML(true);
+                $mail->AddAddress($destinatario);
+                $mail->SetFrom("anaviogarcia.cf@iesesteveterradas.cat", "Vota EJA");
+    
+                $mail->Subject = $title;
+                $mail->MsgHTML($content);
+
+                if ($mail->Send()) {
+                    echo '<script>showNotification("success", "¡Registro completado!");</script>';
+                } else {
+                    echo '<script>showNotification("error", "Vaya, parece que no se ha enviado el correo. ' . $mail->ErrorInfo . '");</script>';
+                }
             }
+
+            if ($row) {
+                header("Location:./index.php");
+            }
+
         }
     }
     ?>
