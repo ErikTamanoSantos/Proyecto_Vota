@@ -14,7 +14,7 @@
 <?php
     session_start();
     include("config.php");
-    include 'log.php';
+    include './components/log.php';
     if (!isset($_SESSION['UserID'])) {
         if (isset($_GET['validToken'])) {
             $receivedToken = $_GET['validToken'];
@@ -124,25 +124,7 @@
                     echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                     escribirEnLog("[DASHBOARD] ".$e);
                 }
-                /*
-                if (!isset($_SESSION["IsAuthenticated"])) {
-                    ?>  
-                    <div class="authValidation">
-                        <div class="authCheck">
-                            <div class="returnHome">
-                                <a href="index.php"><i class="fas fa-home"></i></a>
-                            </div>
-                            <h2>Debes acceder los términos de uso para poder acceder a esta página</h2>
-                            <form method="POST">
-                                <input type="checkbox" name="authCheck" id="authCheck" required >
-                                <label for="scales">Aceptar términos de uso</label>
-                                <input type="submit" value="Aceptar">
-                            </form>
-                        </div>
-                    </div>
-                    <?php
-                }
-                */
+                
             ?>
             </div>
             <div class="navDashboard">

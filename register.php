@@ -38,7 +38,7 @@
     </section>
 
     <?php include("./components/footer.php")?>
-    <?php include("./log.php")?>
+    <?php include("./components/log.php")?>
 
     <?php 
                 

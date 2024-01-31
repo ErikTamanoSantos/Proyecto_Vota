@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'log.php';
+include './components/log.php';
 include("config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;

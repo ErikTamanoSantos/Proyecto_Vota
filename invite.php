@@ -7,6 +7,7 @@
     <script src="functions.js"></script>
     <script src="log.php"></script>
     <link rel="icon" href="./img/vota-si.png" />
+    <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <title>Invitar a usuarios | Vota EJA</title>
 </head>
@@ -14,7 +15,8 @@
 <div id="notificationContainer"></div>
 <?php
 session_start();
-include 'log.php';
+include './components/log.php';
+include './components/header.php';
 include("config.php");
 
 function generarToken($length = 40) {
@@ -212,7 +214,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mysqliInvited = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
 
                 // Preparar la consulta para insertar en Poll_InvitedUsers
-                $stmtInvited = $mysqliInvited->prepare("INSERT INTO Poll_InvitedUsers (UserID, PollID, TokenQuestion) VALUES (?, ?, ?)");
+                $stmtInvited = $mysqliInvited->prepare("INSERT INTO poll_invitedusers (UserID, PollID, tokenQuestion) VALUES (?, ?, ?)");
+
 
                 if (!$stmtInvited) {
                     die("Error preparing statement: " . $mysqliInvited->error);
@@ -249,9 +252,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <!-- Añadir el título -->
-<h1>Invitar a usuarios</h1>
+<div class="paddingHeader"></div>
+<div class="formInviteUsers" id="formInviteUsers">
+    <h1>Invitar a usuarios</h1>
 
-
+</div>
 <script>
     $(document).ready(function() {
         var form = $('<form></form>', {
@@ -259,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'action': '',
         });
 
-        $('body').append(form);
+        $('#formInviteUsers').append(form);
 
         // Crear el textarea dinámicamente
         var textarea = $('<textarea></textarea>', {
@@ -300,6 +305,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 </script>
 
+<?php 
+include './components/footer.php';
+?>
 
 </body>
+
 </html>

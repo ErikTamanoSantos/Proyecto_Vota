@@ -74,7 +74,7 @@
 
     <?php
         include("config.php");
-        include 'log.php';
+        include './components/log.php';
         
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";

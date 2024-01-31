@@ -17,7 +17,7 @@
     <section class="pollDetails">
     <?php 
         include("config.php");
-        include 'log.php'; 
+        include './components/log.php'; 
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
