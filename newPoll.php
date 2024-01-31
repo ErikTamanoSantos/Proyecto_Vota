@@ -67,16 +67,22 @@
                 <script>
                     showNotification('error', 'El cuestionario debe contener al menos 2 respuestas');
                 </script>";
+                // log
+                escribirEnLog("[newPoll] El cuestionario debe contener al menos 2 respuestas");
             } elseif (!isset($_POST["dateStart"]) || !isset($_POST["dateFinish"]) || !(bool)strtotime($_POST["dateStart"]) || !(bool)strtotime($_POST["dateFinish"])) {
                 echo "
                 <script>
                     showNotification('error', 'Las fechas insertadas no son válidas');
                 </script>";
+                // log
+                escribirEnLog("[newPoll] Las fechas insertadas no son válidas");
             } elseif (new DateTime($_POST["dateStart"]) > new DateTime($_POST["dateFinish"])) {
                 echo "
                 <script>
                     showNotification('error', 'La fecha de inicio no debe ser mayor que la fecha de fin');
                 </script>";
+                // log
+                escribirEnLog("[newPoll] La fecha de inicio no debe ser mayor que la fecha de fin");
             } else {
                 include("config.php");
                 try {

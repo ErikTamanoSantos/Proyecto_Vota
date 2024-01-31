@@ -76,6 +76,7 @@
                 }
             } else {
                 echo "<script>showNotification('error', 'Token de validación inválido');</script>";
+                escribirEnLog("[DASHBOARD] Token de validación inválido");
             }
         } else {
             include('./errors/error403.php');

@@ -11,6 +11,7 @@
 </head>
 <body>
 <?php include './components/header.php'; ?>
+<?php include './components/log.php'; ?>
     <div id="notificationContainer"></div>
     <section class="loginSection">
 
@@ -61,6 +62,8 @@
                 }
                 if (!$correct) {
                     echo "<script>showNotification('error', 'Credenciales incorrectos');</script>";
+                    // log
+                    escribirEnLog("[LOGIN] Credenciales incorrectos");
                 }
 
             } catch (PDOException $e){

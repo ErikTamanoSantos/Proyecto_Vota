@@ -1,0 +1,4 @@
+**************************************************
+2024-01-31 20:14:26 [LOGIN] Credenciales incorrectos
+**************************************************
+2024-01-31 20:19:03 [newPoll] El cuestionario debe contener al menos 2 respuestas
