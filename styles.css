@@ -507,7 +507,7 @@ footer a {
     grid-row-gap: 0px;
     flex-direction: row;
     width: 100%;
-    background-color: rgb(200, 200, 200);
+    background-color: var(--azulOscuroMedio);
 }
 
 .authValidation {
@@ -662,6 +662,7 @@ footer a {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: var(--azulOscuro);
     height: 70px;
     margin: 20px;
     border: 1px solid var(--azulOscuroMedio);
@@ -677,13 +678,12 @@ footer a {
 
 .dashboardItem button, .dashboardItem a, .dashboardItem p{
     text-decoration: none;
-    color: var(--textoAzulNormal);
+    color: var(--textoAzulOscuro);
     font-weight: 700;
     font-size: 20px;
     padding: 0 5% 0 5%;
     text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
     border: none;    
-    background: transparent;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -1234,6 +1234,10 @@ footer a {
     color: var(--azulClaro);
     font-weight: 700;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .pollItem a:hover{
@@ -1475,4 +1479,82 @@ footer a {
     display: flex;
     flex-direction: column;
 
+}
+ 
+/* Invitar emails */
+
+.paddingHeader {
+    padding-top: calc(40px + 2%);
+
+}
+
+.formInviteUsers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5% 20% 5% 20%;
+    border: 1px solid var(--azulOscuro);
+    padding: 5%;
+    background-color: var(--azulOscuro);
+    border-radius: 16px;
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.formInviteUsers form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.formInviteUsers > h1 {
+    color: var(--azulClaro);
+    text-align: center;
+    font-size: 50px;
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+.formInviteUsers form textarea {
+    height: 20vh;
+    margin: 5%;
+    width: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    background-color: var(--textoAzulClaro);
+    color: var(--azulClaro);
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.formInviteUsers form button {
+    padding: 5%;
+    background-color: var(--textoAzulClaroMedio);
+    border: 1px solid var(--azulOscuro);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 10px var(--textoAzulClaroMedio);
+}
+
+.formInviteUsers form button:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}
+
+.formInviteUsers form textarea:focus {
+    outline: none;
+}
+
+.formInviteUsers form textarea::placeholder {
+    color: var(--azulClaro);
 }
