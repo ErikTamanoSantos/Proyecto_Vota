@@ -906,6 +906,17 @@ footer a {
     color: #fff !important;
 }
 
+.circleRegisterForm > form select {
+    grid-area: 1 / 2 / 2 / 3;
+    background: transparent;
+    border: 0;
+    border-radius: 10px;
+    border-bottom: 1px solid var(--azulClaro);
+    margin: 5px;
+    padding: 10px;
+    color: #fff !important;
+}
+
 .circleRegisterForm > form > .inputContainer {
     display: flex;
     justify-content: space-between;

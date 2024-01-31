@@ -8,6 +8,7 @@
     <link rel="icon" href="./img/vota-si.png" />
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="selectScript.js"></script>
     <script src="functions.js"></script>
     <script src="register.js"></script>
     <title>Registro | Vota EJA</title>
@@ -234,6 +235,18 @@
                 $randomIndex = rand(0, strlen($characters) - 1);
                 $token .= $characters[$randomIndex];
             }
+
+           if ($userIsGuest) {
+            $query = $pdo -> prepare("UPDATE Users SET `Username` = ?, `Password` = ?, `Phone` = ?, `Country` = ?, `City` = ?, `PostalCode` = ?, `ValidationToken` = ?) WHERE email = ?");
+            $query->bindParam(1, $username);
+            $query->bindParam(2, $password);
+            $query->bindParam(3, $phone);
+            $query->bindParam(4, $country);
+            $query->bindParam(5, $city);
+            $query->bindParam(6, $postalCode);
+            $query->bindParam(7, $token);
+            $query->bindParam(8, $email);
+           } 
 
             $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`, `ValidationToken`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?, ?)");
             $query->bindParam(1, $username);

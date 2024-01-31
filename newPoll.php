@@ -90,7 +90,7 @@
                 $visibility = "hidden";
                 $questionImage = null;
                 if (isset($_FILES["questionImage"]) && $_FILES["questionImage"]["name"] != "") {
-                    $questionImage = "./img/formImages/".basename($_FILES["questionImage"]["name"]);   
+                    $questionImage = "./uploads/".basename($_FILES["questionImage"]["name"]);   
                     move_uploaded_file($_FILES['questionImage']['tmp_name'], $questionImage);
                 }
                 $query = $pdo -> prepare("INSERT INTO Polls(Question, CreationDate, StartDate, EndDate, `State`, CreatorID, QuestionVisibility, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
