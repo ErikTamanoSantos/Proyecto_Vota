@@ -17,6 +17,7 @@
     <title>Nueva Encuesta | Vota EJA</title>
 </head>
 <body>
+    <?php include("log.php")?>
     <?php include("./components/header.php")?>
     <div id="notificationContainer"></div>
     <div class="createPollDiv">
@@ -86,6 +87,7 @@
                     $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
                 } catch (PDOException $e) {
                     echo "Failed to get DB handle: ". $e->getMessage();
+                    escribirEnLog("[newPoll] ".$e);
                     exit;
                 }
                 $date = new DateTime();

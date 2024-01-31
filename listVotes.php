@@ -22,6 +22,7 @@
 
     <?php
         include("config.php");
+        
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
@@ -49,6 +50,7 @@
         } catch (PDOException $e){
             echo $e->getMessage();
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+            escribirEnLog("[listVotes] ".$e);
         }
     ?>
         </div>

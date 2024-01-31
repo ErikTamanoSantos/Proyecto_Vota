@@ -36,6 +36,7 @@
                 }
             } catch (PDOException $e){
                 echo $e->getMessage();
+                escribirEnLog("[votePoll] ".$e);
                 echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
             }
 
@@ -73,9 +74,10 @@
 
     <?php
         include("config.php");
+        include 'log.php';
         
         try {
-            $dsn = "mysql:host=localhost;dbname=project_vota";
+            $dsn = "mysql:host=localhost;dbname=test2";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
             $query = $pdo->prepare("SELECT UserID, AnswerID FROM user_vote WHERE UserID = :UserID");
@@ -146,6 +148,7 @@
                             header("Location:./index.php");
                         } catch (PDOException $e) {
                             echo $e->getMessage();
+                            escribirEnLog("[votePoll] ".$e);
                             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                         }
                     } else {
@@ -157,6 +160,7 @@
 
         } catch (PDOException $e){
             echo $e->getMessage();
+            escribirEnLog("[votePoll] ".$e);
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
     ?>

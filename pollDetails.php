@@ -17,6 +17,7 @@
     <section class="pollDetails">
     <?php 
         include("config.php");
+        include 'log.php'; 
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
@@ -99,6 +100,7 @@
         } catch (PDOException $e){
             echo $e->getMessage();
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+            escribirEnLog("[pollDetails] ".$e);
         }
     ?>
     <form id="hiddenForm" style="display: none" method="POST">

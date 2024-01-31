@@ -13,6 +13,7 @@
 
 <body>
     <?php include './components/header.php'; ?>
+    <?php include("./components/log.php")?>
     <div id="notificationContainer"></div>
 
     <?php 

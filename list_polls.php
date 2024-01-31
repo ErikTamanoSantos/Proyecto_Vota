@@ -44,8 +44,8 @@
                 if ($row["QuestionVisibility"] == "hidden") {
                     echo "<span class='visibilityPollItem'>Oculto</span>";
                 }
-                echo "<a class='detailPollItem' href='pollDetails.php?id=".$row["ID"]."'>Detalles</a>";
-                echo "<a class='invitePollItem' href='pollDetails.php?id=".$row["ID"]."'>InViTaR</a>";
+                echo "<a href='pollDetails.php?id=".$row["ID"]."'>Detalles</a>";
+                echo "<a href='invite.php?pollID={$row['ID']}' class='inviteButton'>Invitar</a>";
                 echo "</div></li>";
                 $row = $query->fetch();
                 $correct = true;
@@ -57,6 +57,7 @@
         } catch (PDOException $e){
             echo $e->getMessage();
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+            escribirEnLog("[list_pulls] ".$e);
         }
     ?>
         </div>
