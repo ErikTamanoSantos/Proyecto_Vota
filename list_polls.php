@@ -27,9 +27,10 @@
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
-            $query = $pdo->prepare("SELECT * FROM Polls");
+            $query = $pdo->prepare("SELECT * FROM Polls WHERE CreatorID = ?");
+            $query->bindParam(1, $_SESSION["UserID"]);
             $query->execute();
-            
+                        
             $row = $query->fetch();
             $correct = false;
             $questions = 0;
@@ -44,6 +45,7 @@
                     echo "<span class='visibilityPollItem'>Oculto</span>";
                 }
                 echo "<a href='pollDetails.php?id=".$row["ID"]."'>Detalles</a>";
+                echo "<a href='invite.php?pollID={$row['ID']}' class='inviteButton'>Invitar</a>";
                 echo "</div></li>";
                 $row = $query->fetch();
                 $correct = true;
@@ -55,6 +57,7 @@
         } catch (PDOException $e){
             echo $e->getMessage();
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+            escribirEnLog("[list_pulls] ".$e);
         }
     ?>
         </div>

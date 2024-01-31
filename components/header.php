@@ -6,6 +6,9 @@
             <div id='nav_menu' class='flex flex-row space-between items-center navbar'>
                 <div class='logo'> 
                     <a href='index.php'><i class='fas fa-home'></i></a>
+                    "; if (isset($_SESSION["UserID"])) {
+                        echo "<h2>Hola, ".$_SESSION["Username"].".</h2>";
+                    };echo "
                 </div>
                 <div class='userInterface'>
                 ";

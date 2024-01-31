@@ -14,6 +14,7 @@
 <?php
     session_start();
     include("config.php");
+    include 'log.php';
     if (!isset($_SESSION['UserID'])) {
         if (isset($_GET['validToken'])) {
             $receivedToken = $_GET['validToken'];
@@ -65,6 +66,7 @@
                             echo "<script>showNotification('success', 'Términos de uso aceptados correctamente');</script>";
                         } catch (PDOException $e) {
                             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal al actualizar la base de datos');</script>";
+                            escribirEnLog("[DASHBOARD] ".$e);
                         }
                     }
                 } else {
@@ -120,6 +122,7 @@
                 } catch (PDOException $e){
                     echo $e->getMessage();
                     echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+                    escribirEnLog("[DASHBOARD] ".$e);
                 }
                 /*
                 if (!isset($_SESSION["IsAuthenticated"])) {

@@ -38,6 +38,7 @@
     </section>
 
     <?php include("./components/footer.php")?>
+    <?php include("./log.php")?>
 
     <?php 
                 
@@ -53,6 +54,7 @@
         $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
     } catch (PDOException $e) {
         echo "Failed to get DB handle: ". $e->getMessage();
+        escribirEnLog("[REGISTER] ".$e);
         exit;
     }
     

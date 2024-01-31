@@ -65,6 +65,7 @@
 
             } catch (PDOException $e){
                 echo $e->getMessage();
+                escribirEnLog("[LOGIN] ".$e);
             }
         }
     ?>
