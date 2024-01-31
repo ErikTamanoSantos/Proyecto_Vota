@@ -14,7 +14,7 @@
 <div id="notificationContainer"></div>
 <?php
 session_start();
-include 'log.php';
+include './components/log.php';
 include("config.php");
 
 function generarToken($length = 40) {
@@ -135,7 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 // Preparar la consulta para insertar en Poll_InvitedUsers
-                $stmtInvited = $mysqliInvited->prepare("INSERT INTO Poll_InvitedUsers (UserID, PollID, TokenQuestion) VALUES (?, ?, ?)");
+                $stmtInvited = $mysqliInvited->prepare("INSERT INTO poll_invitedusers (UserID, PollID, tokenQuestion) VALUES (?, ?, ?)");
+
 
                 if (!$stmtInvited) {
                     die("Error preparing statement: " . $mysqliInvited->error);

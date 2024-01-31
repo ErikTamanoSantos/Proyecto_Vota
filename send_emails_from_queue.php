@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'log.php';
+include './components/log.php';
 include("config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -42,8 +42,8 @@ function enviarCorreo($pdo, $destinatario, $username) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = ""; 
-    $mail->Password   = ""; 
+    $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat"; 
+    $mail->Password   = "KekHut93"; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
@@ -90,8 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $mail->SMTPSecure = "tls";
             $mail->Port       = 587;
             $mail->Host       = "smtp.gmail.com";
-            $mail->Username   = ""; // Email de la cuenta de correo desde la que se enviarán los correos
-            $mail->Password   = ""; // Password de la cuenta de correo
+            $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
+            $mail->Password   = "KekHut93"; // Password de la cuenta de correo
     
 
             while ($row = $result->fetch_assoc()) {

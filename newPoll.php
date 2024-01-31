@@ -17,7 +17,7 @@
     <title>Nueva Encuesta | Vota EJA</title>
 </head>
 <body>
-    <?php include("log.php")?>
+    <?php include("./components/log.php")?>
     <?php include("./components/header.php")?>
     <div id="notificationContainer"></div>
     <div class="createPollDiv">

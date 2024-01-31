@@ -239,7 +239,6 @@ footer a {
     color: var(--azulOscuro);
     font-size: 75px;
     margin: 325px 0 0 0;
-    mix-blend-mode: difference;
 }
 
 .firstSec > h3 {
