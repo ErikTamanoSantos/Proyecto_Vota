@@ -156,6 +156,11 @@
                         <i class="fa-solid fa-list-ul"></i><p>Listar encuestas</p>
                     </a>
                 </div>
+                <div class="dashboardItem">
+                    <a href="listVotes.php" id="createQuestion">
+                        <i class="fa-solid fa-list-ul"></i><p>Listar Votos</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section> 

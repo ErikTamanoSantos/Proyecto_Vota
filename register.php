@@ -291,26 +291,25 @@
                     echo '<script>showNotification("success", "¡Registro completado!");</script>';
                 } else {
                     echo '<script>showNotification("error", "Vaya, parece que no se ha enviado el correo. ' . $mail->ErrorInfo . '");</script>';
-
+                    escribirEnLog("[REGISTER] ".$mail->ErrorInfo);
                 }
             }
 
             if ($row) {
-                header("Location:index.php");
+                header("Location:./index.php");
             }
 
         }
-    } else {
-        $query =  $pdo ->prepare("SELECT * FROM Countries");
-        $query -> execute();
-        $row = $query -> fetch();
-        echo "<script>getCountryData({";
-        while ($row) {
-            echo "'".$row["CountryName"]."':'".$row["PhoneCode"]."',";
-            $row = $query -> fetch();
-        }
-        echo "});</script>";
     }
+    $query =  $pdo ->prepare("SELECT * FROM Countries");
+    $query -> execute();
+    $row = $query -> fetch();
+    echo "<script>getCountryData({";
+    while ($row) {
+        echo "'".$row["CountryName"]."':'".$row["PhoneCode"]."',";
+        $row = $query -> fetch();
+    }
+    echo "});</script>";
     ?>
 </body>
 </html>
