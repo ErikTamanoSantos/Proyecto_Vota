@@ -8,7 +8,6 @@
     <link rel="icon" href="./img/vota-si.png" />
     <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="selectScript.js"></script>
     <script src="functions.js"></script>
     <script src="register.js"></script>
     <title>Registro | Vota EJA</title>
@@ -56,16 +55,6 @@
         echo "Failed to get DB handle: ". $e->getMessage();
         exit;
     }
-
-    $query =  $pdo ->prepare("SELECT * FROM Countries");
-    $query -> execute();
-    $row = $query -> fetch();
-    echo "<script>getCountryData({";
-    while ($row) {
-        echo "'".$row["CountryName"]."':'".$row["PhoneCode"]."',";
-        $row = $query -> fetch();
-    }
-    echo "});</script>";
     
 
     if (isset($_POST["username"])) {
@@ -148,12 +137,11 @@
             $query -> execute();
             $row = $query -> fetch();
             if ($row) {
-                if ($row["password"] == "") {
+                if ($row["Password"] == "") {
                     $userIsGuest = true;
                 } else {
                     echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
                     if (!$errorShown) {
-                        echo "showStep(0);\n";
                         $errorShown = true;
                     }
                 }
@@ -237,7 +225,7 @@
             }
 
            if ($userIsGuest) {
-            $query = $pdo -> prepare("UPDATE Users SET `Username` = ?, `Password` = ?, `Phone` = ?, `Country` = ?, `City` = ?, `PostalCode` = ?, `ValidationToken` = ?) WHERE email = ?");
+            $query = $pdo -> prepare("UPDATE Users SET `Username` = ?, `Password` = SHA2(?, 512), `Phone` = ?, `Country` = ?, `City` = ?, `PostalCode` = ?, `ValidationToken` = ? WHERE email = ?");
             $query->bindParam(1, $username);
             $query->bindParam(2, $password);
             $query->bindParam(3, $phone);
@@ -246,8 +234,7 @@
             $query->bindParam(6, $postalCode);
             $query->bindParam(7, $token);
             $query->bindParam(8, $email);
-           } 
-
+           } else {
             $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`, `ValidationToken`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?, ?)");
             $query->bindParam(1, $username);
             $query->bindParam(2, $password);
@@ -257,6 +244,7 @@
             $query->bindParam(6, $city);
             $query->bindParam(7, $postalCode);
             $query->bindParam(8, $token);
+           }
             
             $query -> execute();
             session_start();
@@ -287,8 +275,8 @@
                 $mail->SMTPSecure = "tls";
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
-                $mail->Username   = "email_here"; // Email de la cuenta de correo desde la que se enviaran los correos
-                $mail->Password   = "password_here"; // Password de la cuenta de correo
+                $mail->Username   = "etamanosantos.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviaran los correos
+                $mail->Password   = "Dennis12Erik19!"; // Password de la cuenta de correo
     
                 $mail->IsHTML(true);
                 $mail->AddAddress($destinatario);
@@ -301,14 +289,25 @@
                     echo '<script>showNotification("success", "¡Registro completado!");</script>';
                 } else {
                     echo '<script>showNotification("error", "Vaya, parece que no se ha enviado el correo. ' . $mail->ErrorInfo . '");</script>';
+
                 }
             }
 
             if ($row) {
-                header("Location:./index.php");
+                header("Location:index.php");
             }
 
         }
+    } else {
+        $query =  $pdo ->prepare("SELECT * FROM Countries");
+        $query -> execute();
+        $row = $query -> fetch();
+        echo "<script>getCountryData({";
+        while ($row) {
+            echo "'".$row["CountryName"]."':'".$row["PhoneCode"]."',";
+            $row = $query -> fetch();
+        }
+        echo "});</script>";
     }
     ?>
 </body>
