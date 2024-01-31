@@ -15,6 +15,7 @@
 <body>
     <div id="notificationContainer"></div>
 
+    <?php include("./components/log.php")?>
     <?php include './components/header.php'; ?>
 
     <section class="loginSection regSection">
@@ -38,7 +39,6 @@
     </section>
 
     <?php include("./components/footer.php")?>
-    <?php include("./components/log.php")?>
 
     <?php 
                 
@@ -72,12 +72,16 @@
         $userIsGuest = false;
         if (strlen($username) == 0) {
             echo "showNotification('error', 'Inserte un nombre de usuario');\n";
+            //log
+            escribirEnLog("[REGISTER] Nombre de usuario inválido");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($username,';') or str_contains($username,'--') or str_contains($username,'/*') or str_contains($username, "*/")) {
             echo "showNotification('error', 'El nombre de usuario contiene carácteres no permitidos');\n";
+            //log
+            escribirEnLog("[REGISTER] Nombre de usuario inválido (caracteres no permitidos)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -85,36 +89,48 @@
         }
         if (strlen($password) < 8) {
             echo "showNotification('error', 'La contraseña debe tener un mínimo de 8 carácteres');\n";
+            //log
+            escribirEnLog("[REGISTER] Contraseña inválida (menos de 8 caracteres)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($password,';') or str_contains($password,'--') or str_contains($password,'/*') or str_contains($password, "*/")) {
             echo "showNotification('error', 'La contraseña contiene carácteres no permitidos');\n";
+            //log
+            escribirEnLog("[REGISTER] Contraseña inválida (caracteres no permitidos)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/\d/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos un carácter numérico');\n";
+            //log
+            escribirEnLog("[REGISTER] Contraseña inválida (sin carácter numérico)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[A-Z]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos una mayúscula');\n";
+            //log
+            escribirEnLog("[REGISTER] Contraseña inválida (sin mayúscula)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[a-z]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos una minúscula');\n";
+            //log
+            escribirEnLog("[REGISTER] Contraseña inválida (sin minúscula)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (!preg_match('/[ `!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?~]/', $password)) {
             echo "showNotification('error', 'La contraseña debe contener al menos un carácter especial');\n";
+            //log
+            escribirEnLog("[REGISTER] Contraseña inválida (sin carácter especial)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -123,12 +139,16 @@
 
         if (!preg_match('/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
             echo "showNotification('error', 'La dirección de correo electrónico no es válida');\n";
+            //log
+            escribirEnLog("[REGISTER] Email inválido");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($email,';') or str_contains($email,'--') or str_contains($email,'/*') or str_contains($email, "*/")) {
             echo "showNotification('error', 'La dirección de correo electrónico contiene carácteres no permitidos');\n";
+            //log
+            escribirEnLog("[REGISTER] Email inválido (caracteres no permitidos)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -143,6 +163,8 @@
                     $userIsGuest = true;
                 } else {
                     echo "showNotification('error', 'La dirección de correo electrónico ya está enlazada a una cuenta');\n";
+                    //log
+                    escribirEnLog("[REGISTER] Email inválido (ya enlazado a una cuenta)");
                     if (!$errorShown) {
                         $errorShown = true;
                     }
@@ -152,6 +174,8 @@
 
         if (!preg_match("/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im", $phone)) {
             echo "showNotification('error', 'Su número de teléfono debe de tener 9 dígitos y un prefijo');\n";
+            //log
+            escribirEnLog("[REGISTER] Número de teléfono inválido");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -166,6 +190,8 @@
             $row = $query -> fetch();
             if (!$row) {
                 echo "showNotification('error', 'El prefijo del número de teléfono insertado no es válido');\n";
+                //log
+                escribirEnLog("[REGISTER] Prefijo de número de teléfono inválido");
                 if (!$errorShown) {
                     echo "showStep(0);\n";
                     $errorShown = true;
@@ -175,12 +201,16 @@
 
         if (strlen($country) == 0) {
             echo "showNotification('error', 'Inserte un país');\n";
+            //log
+            escribirEnLog("[REGISTER] País inválido");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
             }
         } else if (str_contains($country,';') or str_contains($country,'--') or str_contains($country,'/*') or str_contains($country, "*/")) {
             echo "showNotification('error', 'El país insertado contiene carácteres no permitidos');\n";
+            //log
+            escribirEnLog("[REGISTER] País inválido (caracteres no permitidos)");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -192,6 +222,8 @@
             $row = $query -> fetch();
             if (!$row) {
                 echo "showNotification('error', 'El país insertado no existe');\n";
+                //log
+                escribirEnLog("[REGISTER] País inválido (no existe)");
                 if (!$errorShown) {
                     echo "showStep(0);\n";
                     $errorShown = true;
@@ -201,6 +233,8 @@
 
         if (strlen($city) == 0) {
             echo "showNotification('error', 'Inserte una ciudad');\n";
+            //log
+            escribirEnLog("[REGISTER] Ciudad inválida");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -209,6 +243,8 @@
 
         if (strlen($postalCode) == 0) {
             echo "showNotification('error', 'Inserte un código postal');\n"; 
+            //log
+            escribirEnLog("[REGISTER] Código postal inválido");
             if (!$errorShown) {
                 echo "showStep(0);\n";
                 $errorShown = true;
@@ -282,7 +318,7 @@
     
                 $mail->IsHTML(true);
                 $mail->AddAddress($destinatario);
-                $mail->SetFrom("jbernabeucaballero.cf@iesesteveterradas.cat", "Vota EJA");
+                $mail->SetFrom("EMAIL_HERE", "Vota EJA");
     
                 $mail->Subject = $title;
                 $mail->MsgHTML($content);
@@ -291,7 +327,8 @@
                     echo '<script>showNotification("success", "¡Registro completado!");</script>';
                 } else {
                     echo '<script>showNotification("error", "Vaya, parece que no se ha enviado el correo. ' . $mail->ErrorInfo . '");</script>';
-                    escribirEnLog("[REGISTER] ".$mail->ErrorInfo);
+                    //log
+                    escribirEnLog("[REGISTER] Error al enviar el correo de validación: " . $mail->ErrorInfo);
                 }
             }
 

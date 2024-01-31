@@ -1,4 +1,8 @@
 **************************************************
+2024-01-31 20:14:26 [LOGIN] Credenciales incorrectos
+**************************************************
+2024-01-31 20:19:03 [newPoll] El cuestionario debe contener al menos 2 respuestas
+**************************************************
 2024-01-31 19:59:53 [ENVIAR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'project_vota.poll_invitedusers' doesn't exist
 **************************************************
 2024-01-31 19:59:53 [ENVIAR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'project_vota.poll_invitedusers' doesn't exist

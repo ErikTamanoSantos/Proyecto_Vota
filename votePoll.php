@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include './components/log.php';
     if (isset($_SESSION['UserID']) || isset($_SESSION['tokenQuestion']) || isset($_GET['tokenQuestion'])) {
         if (isset($_GET["tokenQuestion"])) {
             
@@ -33,6 +34,8 @@
                 echo "</ul>";
                 if (!$correct) {
                     echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
+                    // log
+                    escribirEnLog("[DASHBOARD] Vaya, parece que no tienes encuestas");
                 }
             } catch (PDOException $e){
                 echo $e->getMessage();
@@ -51,6 +54,7 @@
                 header("Location:./votePoll.php"); 
             } else {
                 echo "<script>showNotification('error', 'Token de validación inválido');</script>";
+                escribirEnLog("[DASHBOARD] Token de validación inválido");
             }
         } else {
 ?><!DOCTYPE html>
@@ -153,6 +157,8 @@
                         }
                     } else {
                         echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+                        // log
+                        escribirEnLog("[votePoll] Vaya, parece que algo ha salido mal");
                     }
                 }
             }
