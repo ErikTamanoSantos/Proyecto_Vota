@@ -1428,6 +1428,16 @@ footer a {
     color: var(--azulClaro)
 }
 
+.pollDetails select, .pollDetails button {
+    padding: 1%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    font-size: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+    color: #fff;
+}
+
 #pollGraphs {
     border: 1px solid var(--azulOscuroMedio);
     border-radius: 16px;

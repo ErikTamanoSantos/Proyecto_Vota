@@ -49,11 +49,6 @@
                 $endDate = new DateTime($row["EndDate"]);
                 echo "<h4>Fecha de fin: ".$endDate->format("d/m/Y h:i")."</h4>";
                 $state = "";
-                switch ($row["State"]) {
-                    case "not_begun":
-                        $state = "No iniciada";
-                        break;
-                }
                 echo "<h4>Estado: ".$state."</h4>";
                 echo "<h4>Visibilidad de la pregunta:";
                 echo "<select id='questionVisibility'>";
@@ -63,9 +58,9 @@
                 echo "</select></h4>";
                 echo "<h4>Visibilidad de las respuestas:";
                 echo "<select id='answerVisibility'>";
-                echo "<option value='hidden' ".($row["QuestionVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
-                echo "<option value='public' ".($row["QuestionVisibility"] == "public" ? "selected" : "").">Público</option>";
-                echo "<option value='private' ".($row["QuestionVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                echo "<option value='hidden' ".($row["ResultsVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                echo "<option value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "").">Público</option>";
+                echo "<option value='private' ".($row["ResultsVisibility"] == "private" ? "selected" : "").">Privado</option>";
                 echo "</select></h4>";
                 echo "<button id='saveChanges'>Guardar cambios</button>";
                 echo "</div>";

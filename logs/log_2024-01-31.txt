@@ -69,3 +69,59 @@ Stack trace:
 Stack trace:
 #0 /home/super/Escriptori/proyecto2/register.php(54): PDO->__construct()
 #1 {main}
+**************************************************
+2024-01-31 21:57:31 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 21:58:08 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 21:59:46 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 21:59:48 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 22:01:54 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 22:07:42 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 22:07:43 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+**************************************************
+2024-01-31 22:22:38 [DASHBOARD] Token de validación inválido
+**************************************************
+2024-01-31 22:23:19 [DASHBOARD] Token de validación inválido
+**************************************************
+2024-01-31 22:24:22 [DASHBOARD] Token de validación inválido
+**************************************************
+2024-01-31 22:31:00 [votePoll] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ans.ImagePath' in 'field list' in C:\xampp\htdocs\Proyecto_Vota\votePoll.php:97
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\votePoll.php(97): PDOStatement->execute()
+#1 {main}
+**************************************************
+2024-01-31 22:34:45 [DASHBOARD] Token de validación inválido
+**************************************************
+2024-01-31 22:38:21 [DASHBOARD] Token de validación inválido
+**************************************************
+2024-01-31 22:48:23 [newPoll] El cuestionario debe contener al menos 2 respuestas
+**************************************************
+2024-01-31 22:50:09 [newPoll] La fecha de inicio no debe ser mayor que la fecha de fin
+**************************************************
+2024-01-31 23:25:29 [LOGIN] Credenciales incorrectos

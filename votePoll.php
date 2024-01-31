@@ -3,8 +3,13 @@
     include './components/log.php';
     if (isset($_SESSION['UserID']) || isset($_SESSION['tokenQuestion']) || isset($_GET['tokenQuestion'])) {
         if (isset($_GET["tokenQuestion"])) {
-            
-            $tokenQuestion = $_GET["tokenQuestion"];
+            $tokenQuestion = "";
+            if (isset($_SESSION["tokenQuestion"])) {
+                $tokenQuestion = $_SESSION["tokenQuestion"];
+            } else {
+                $tokenQuestion = $_GET["tokenQuestion"];
+            }
+            echo $tokenQuestion;
 
             include("config.php"); # codigo repetido ... sobra
             try {
@@ -78,7 +83,6 @@
 
     <?php
         include("config.php");
-        include './components/log.php';
         
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
@@ -93,7 +97,8 @@
             $question = $row['Question'];
             echo "<h1>".$question."</h1>";
             echo '<div class="answers">';
-            $query = $pdo->prepare("SELECT ans.ID, ans.Text, ans.PollID, ans.ImagePath, piu.UserID FROM Answers AS ans JOIN Poll_InvitedUsers AS piu ON ans.PollID = piu.PollID JOIN Polls AS p ON piu.PollID = p.ID where piu.tokenQuestion = :Token");
+            $query = $pdo->prepare("SELECT UserID, PollID from Poll_InvitedUsers WHERE tokenQuestion = :Token");
+            //$query = $pdo->prepare("SELECT ans.ID, ans.Text, ans.PollID, ans.ImagePath, piu.UserID FROM Answers AS ans JOIN Poll_InvitedUsers AS piu ON ans.PollID = piu.PollID JOIN Polls AS p ON piu.PollID = p.ID where piu.tokenQuestion = :Token");
             $query->bindParam(':Token', $_SESSION['tokenQuestion']);
             $query->execute();
             $row = $query->fetch();
@@ -109,6 +114,10 @@
                 header("Location:./index.php");
                 $_SESSION['alreadyVoted'] = true;
             } else {
+                $query = $pdo->prepare("SELECT * FROM Answers WHERE PollID = ?");
+                $query->bindParam(1, $pollID);
+                $query->execute();
+                $row = $query->fetch();
                 $correct = false;
                 $answers = 0;
                 if ($row) {
