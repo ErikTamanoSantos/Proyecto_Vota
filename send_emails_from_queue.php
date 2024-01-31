@@ -36,28 +36,28 @@ function enviarCorreo($destinatario, $username) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
-    $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
+    $mail->Username   = ""; 
+    $mail->Password   = ""; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("anaviogarcia.cf@iesesteveterradas.cat", "Vota EJA");
+    $mail->SetFrom("", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
 
     if ($mail->Send()) {
-        return true; // Envío exitoso
+        return true; 
     } else {
-        return false; // Error en el envío
+        return false; 
     }
 }
 
 try {
     $dsn = "mysql:host=localhost;dbname=project_vota";
-    $pdo = new PDO($dsn, 'root', '');
+    $pdo = new PDO($dsn, $dbUser, $dbPass);
 
-    // Obtener el ID del usuario actual
+   
     $userID = $_SESSION['UserID'];
 
 } catch (PDOException $e) {
@@ -67,21 +67,21 @@ try {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
-        // Conectar a la base de datos (reemplaza con tus credenciales)
+       
         $mysqli = new mysqli("localhost", $dbUser, $dbPass, "project_vota");
 
-        // Verificar la conexión
+        
         if ($mysqli->connect_error) {
             die("Error de conexión a la base de datos: " . $mysqli->connect_error);
         }
 
-       // Obtener correos electrónicos de la tabla email_queue (limitado a 5)
+       
         $result = $mysqli->query("SELECT email FROM email_queue LIMIT 5");
 
 
-        // Verificar si hay correos electrónicos en la cola
+       
         if ($result->num_rows > 0) {
-            // Configuración del servidor SMTP (reemplaza con tu configuración)
+          
             $mail = new PHPMailer();
             $mail->IsSMTP();
             $mail->Mailer = "smtp";
@@ -89,32 +89,29 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $mail->SMTPSecure = "tls";
             $mail->Port       = 587;
             $mail->Host       = "smtp.gmail.com";
-            $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
-            $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
+            $mail->Username   = ""; // Email de la cuenta de correo desde la que se enviarán los correos
+            $mail->Password   = ""; // Password de la cuenta de correo
     
 
-            // Iterar sobre los resultados y enviar correos electrónicos
             while ($row = $result->fetch_assoc()) {
                 $email = $row['email'];
 
-                // Puedes ajustar el nombre de usuario según tus necesidades
                 if (enviarCorreo($email, "Nombre de Usuario")) {
                     echo "Correo enviado a: $email<br>";
                 } else {
                     echo "Error al enviar correo a: $email<br>";
                 }
             }
-
-            // Eliminar todos los correos electrónicos de la tabla después de enviarlos
+    
             $mysqli->query("DELETE FROM email_queue");
 
-            // Cerrar la conexión
             $mysqli->close();
         } else {
             echo "No hay correos electrónicos en la cola.";
         }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
+        escribirEnLog("[ENVIAR]" . $e->getMessage());
     }
 }
 ?>
