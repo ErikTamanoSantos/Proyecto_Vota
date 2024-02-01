@@ -236,14 +236,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }*/
 
                 echo '<script>showNotification("success", "¡Correos electrónicos almacenados con éxito!");</script>';
+                //log
+                escribirEnLog("[invite] Correos electrónicos almacenados con éxito");
             
         }
 
         if (!empty($correosIncorrectos)) {
             echo "<script>showNotification('info', 'Los siguientes correos electrónicos no son válidos: " . implode(', ', $correosIncorrectos)."');</script>";
+            //log
+            escribirEnLog("[invite] Los siguientes correos electrónicos no son válidos: " . implode(', ', $correosIncorrectos));
         }
     } else {
         echo "<script>showNotification('error', 'No se proporcionaron correos electrónicos.');";
+        //log
+        escribirEnLog("[invite] No se proporcionaron correos electrónicos.");
     }
 }
 ?>

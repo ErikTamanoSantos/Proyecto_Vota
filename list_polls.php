@@ -57,6 +57,8 @@
             echo "</ul>";
             if (!$correct) {
                 echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
+                // log
+                escribirEnLog("[DASHBOARD] El user ".$_SESSION["Username"]." no tiene encuestas");
             }
         } catch (PDOException $e){
             echo $e->getMessage();

@@ -32,6 +32,8 @@
                 $query->execute();
                 $pdo->commit();
 		echo "<script>showNotification('success', 'Cambios guardados');</script>";
+        //log
+        escribirEnLog("[pollDetails] Cambios guardados del usuario ".$_SESSION["UserID"]." en la encuesta ".$_GET["id"]);
             }
             
             $query = $pdo->prepare("SELECT * FROM Polls WHERE ID = ?");

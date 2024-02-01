@@ -57,6 +57,7 @@
                     header("Location:./dashboard.php");
                     if ($row["IsAuthenticated"] == 1) {
                         $correct = true;
+                        $_SESSION["login"] = "correcto";
                         header("Location:./dashboard.php");
                     }
                 }

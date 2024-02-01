@@ -229,8 +229,9 @@ footer a {
     color: #000;
     font-weight: 400;
     line-height: 1.4;
-    height:750px;
+    height:calc(100vh + 100px);
     padding-bottom: 200px;
+    clip-path: polygon(50% 100%, 100% 85%, 100% 0, 0 0, 0 85%);
 }
 
 .firstSec > h1 {
@@ -905,7 +906,7 @@ footer a {
     font-weight: 700;
 }
 
-.circleRegisterForm > form input {
+.circleRegisterForm > form input:not([type="submit"]) {
     grid-area: 1 / 2 / 2 / 3;
     background: transparent;
     border: 0;
@@ -1438,6 +1439,28 @@ footer a {
     color: #fff;
 }
 
+#saveChanges {
+    background-color: var(--textoAzulClaroMedio);
+    color: var(--azulClaro);
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 40%;
+    padding: 10px;
+    height: 40px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px var(--textoAzulClaroMedio);
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+#saveChanges:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}
+
 #pollGraphs {
     border: 1px solid var(--azulOscuroMedio);
     border-radius: 16px;
@@ -1578,4 +1601,64 @@ footer a {
 
 .formInviteUsers form textarea::placeholder {
     color: var(--azulClaro);
+}
+
+
+
+.bannerSection {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bannerSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(./img/background.webp);
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.banner {
+    z-index: 10000;
+    filter: blur(0);
+    max-width: 970px;
+    max-height: 250px;
+}
+
+.banner img {
+    border-radius: 20px;
+    box-shadow: 2px 2px 20px var(--azulOscuro);
+}
+
+#index {
+    background-color: rgba(149, 149, 149, 0.28);
+}
+
+.btn2 {
+    background-color: var(--textoAzulClaroMedio);
+    border: 1px solid var(--azulOscuro);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 10px var(--textoAzulClaroMedio);
+    padding: 10px;
+    margin: 2%;
+}
+
+.btn2:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
 }
