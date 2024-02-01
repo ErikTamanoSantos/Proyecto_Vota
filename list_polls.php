@@ -43,7 +43,11 @@
                 echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
                 if ($row["QuestionVisibility"] == "hidden") {
                     echo "<span class='visibilityPollItem'>Oculto</span>";
-                }
+                } else if ($row["QuestionVisibility"] == "public") {
+		    echo "<span class='visibilityPollItem'>Público</span>";
+		} else {
+		    echo "<span class='visibilityPollItem'>Privado</span>";
+		}
                 echo "<a href='pollDetails.php?id=".$row["ID"]."'>Detalles</a>";
                 echo "<a href='invite.php?pollID={$row['ID']}' class='inviteButton'>Invitar</a>";
                 echo "</div></li>";

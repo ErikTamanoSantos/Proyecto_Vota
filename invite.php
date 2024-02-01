@@ -74,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $pdo->commit();
                     }
                     $emailID = "";
-                    echo $email;
 
                     $query = $pdo -> prepare("SELECT ID FROM Users WHERE Email = ?");
                     $query->bindParam(1, $email);
@@ -83,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($row) {
                         $emailID = $row["ID"];
                     } 
-                    echo "<p>$emailID</p>";
                     $token = generarToken();
                     $pdo->beginTransaction();
                     $query = $pdo -> prepare("INSERT INTO Poll_InvitedUsers(UserID, PollID, tokenQuestion) VALUES (?, ?, ?)");
@@ -242,10 +240,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!empty($correosIncorrectos)) {
-            echo "Los siguientes correos electrónicos no son válidos: " . implode(', ', $correosIncorrectos);
+            echo "<script>showNotification('info', 'Los siguientes correos electrónicos no son válidos: " . implode(', ', $correosIncorrectos)."');</script>";
         }
     } else {
-        echo "No se proporcionaron correos electrónicos.";
+        echo "<script>showNotification('error', 'No se proporcionaron correos electrónicos.');";
     }
 }
 ?>

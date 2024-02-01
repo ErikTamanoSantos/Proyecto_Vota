@@ -125,7 +125,7 @@
                     }
                     $answerImage = null;
                     if (isset($_FILES["answerImage".$index]) && $_FILES["answerImage".$index]["name"] != "") {
-                        $answerImage = "./img/formImages/".basename($_FILES["answerImage".$index]["name"]);   
+                        $answerImage = "./uploads/".basename($_FILES["answerImage".$index]["name"]);   
                         move_uploaded_file($_FILES['questionImage']['tmp_name'], $answerImage);
                     }
                     $query = $pdo -> prepare("INSERT INTO Answers(`Text`, PollID, ImagePath) VALUES (?, ?, ?)");

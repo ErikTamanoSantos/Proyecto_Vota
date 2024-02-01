@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './components/log.php';
+include '/var/www/html/Proyecto_Vota/components/log.php';
 include("config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -43,7 +43,7 @@ function enviarCorreo($pdo, $destinatario, $username) {
     $token = getTokenFromEmail($destinatario);
 
     $title = "Has sido invitado para votar, " . $username . "!";
-    $content = "Puedes votar en el siguiente enlace: http://localhost:8080/votePoll.php?tokenQuestion=$token";
+    $content = "Puedes votar en el siguiente enlace: https://aws25.ieti.site/Proyecto_Vota/votePoll.php?tokenQuestion=$token";
 
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -59,7 +59,7 @@ function enviarCorreo($pdo, $destinatario, $username) {
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("eja@email.com", "Vota EJA");
+    $mail->SetFrom("etamanosantos.cf@iesesteveterradas.cat", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
@@ -122,7 +122,7 @@ try {
         }
         
 
-        $mysqli->query("DELETE FROM email_queue");
+        $mysqli->query("DELETE FROM email_queue LIMIT 5");
 
         $mysqli->close();
     } else {

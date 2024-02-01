@@ -302,7 +302,7 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $destinatario = $destinatary;
                 $title = "Bienvenido, " . $username . "!";
-                $content = "Bienvenido, <strong>" . $username . "</strong>. Valida tu cuenta accediendo a este enlace.<br><a class='btn' href='http://localhost/proyecto_vota/dashboard.php?validToken=" . $token . "'>Validar cuenta</a>.<br><br>Atentamente, el equipo de Vota EJA.";
+                $content = "Bienvenido, <strong>" . $username . "</strong>. Valida tu cuenta accediendo a este enlace.<br><a class='btn' href='https://aws25.ieti.site/Proyecto_Vota/dashboard.php?validToken=" . $token . "'>Validar cuenta</a>.<br><br>Atentamente, el equipo de Vota EJA.";
     
                 $mail = new PHPMailer();
                 $mail->IsSMTP();

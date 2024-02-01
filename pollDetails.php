@@ -13,6 +13,7 @@
     <title>Detalles de Encuesta | EJA</title>
 </head>
 <body>
+     <div id="notificationContainer"></div>
     <?php include("./components/header.php") ?>
     <section class="pollDetails">
     <?php 
@@ -30,6 +31,7 @@
                 $query->bindParam(3, $_GET["id"]);
                 $query->execute();
                 $pdo->commit();
+		echo "<script>showNotification('success', 'Cambios guardados');</script>";
             }
             
             $query = $pdo->prepare("SELECT * FROM Polls WHERE ID = ?");
