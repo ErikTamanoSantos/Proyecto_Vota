@@ -14,7 +14,7 @@
 <?php
     session_start();
     include("config.php");
-    include 'log.php';
+    include './components/log.php';
     if (!isset($_SESSION['UserID'])) {
         if (isset($_GET['validToken'])) {
             $receivedToken = $_GET['validToken'];
@@ -76,6 +76,7 @@
                 }
             } else {
                 echo "<script>showNotification('error', 'Token de validación inválido');</script>";
+                escribirEnLog("[DASHBOARD] Token de validación inválido");
             }
         } else {
             include('./errors/error403.php');
@@ -124,25 +125,7 @@
                     echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                     escribirEnLog("[DASHBOARD] ".$e);
                 }
-                /*
-                if (!isset($_SESSION["IsAuthenticated"])) {
-                    ?>  
-                    <div class="authValidation">
-                        <div class="authCheck">
-                            <div class="returnHome">
-                                <a href="index.php"><i class="fas fa-home"></i></a>
-                            </div>
-                            <h2>Debes acceder los términos de uso para poder acceder a esta página</h2>
-                            <form method="POST">
-                                <input type="checkbox" name="authCheck" id="authCheck" required >
-                                <label for="scales">Aceptar términos de uso</label>
-                                <input type="submit" value="Aceptar">
-                            </form>
-                        </div>
-                    </div>
-                    <?php
-                }
-                */
+                
             ?>
             </div>
             <div class="navDashboard">
@@ -154,6 +137,11 @@
                 <div class="dashboardItem">
                     <a href="list_polls.php" id="createQuestion">
                         <i class="fa-solid fa-list-ul"></i><p>Listar encuestas</p>
+                    </a>
+                </div>
+                <div class="dashboardItem">
+                    <a href="listVotes.php" id="createQuestion">
+                        <i class="fa-solid fa-list-ul"></i><p>Listar Votos</p>
                     </a>
                 </div>
             </div>

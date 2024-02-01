@@ -1,9 +1,15 @@
 <?php
     session_start();
+    include './components/log.php';
     if (isset($_SESSION['UserID']) || isset($_SESSION['tokenQuestion']) || isset($_GET['tokenQuestion'])) {
         if (isset($_GET["tokenQuestion"])) {
-            
-            $tokenQuestion = $_GET["tokenQuestion"];
+            $tokenQuestion = "";
+            if (isset($_SESSION["tokenQuestion"])) {
+                $tokenQuestion = $_SESSION["tokenQuestion"];
+            } else {
+                $tokenQuestion = $_GET["tokenQuestion"];
+            }
+            echo $tokenQuestion;
 
             include("config.php"); # codigo repetido ... sobra
             try {
@@ -33,6 +39,8 @@
                 echo "</ul>";
                 if (!$correct) {
                     echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
+                    // log
+                    escribirEnLog("[DASHBOARD] Vaya, parece que no tienes encuestas");
                 }
             } catch (PDOException $e){
                 echo $e->getMessage();
@@ -40,7 +48,7 @@
                 echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
             }
 
-            $validationQuery = $pdo->prepare('SELECT * FROM poll_invitedusers WHERE tokenQuestion = :Token');
+            $validationQuery = $pdo->prepare('SELECT * FROM Poll_InvitedUsers WHERE tokenQuestion = :Token');
 
             $validationQuery->bindParam(':Token', $tokenQuestion);
             $validationQuery->execute();
@@ -51,6 +59,7 @@
                 header("Location:./votePoll.php"); 
             } else {
                 echo "<script>showNotification('error', 'Token de validación inválido');</script>";
+                escribirEnLog("[DASHBOARD] Token de validación inválido");
             }
         } else {
 ?><!DOCTYPE html>
@@ -74,29 +83,29 @@
 
     <?php
         include("config.php");
-        include 'log.php';
         
         try {
-            $dsn = "mysql:host=localhost;dbname=test2";
+            $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
-            $query = $pdo->prepare("SELECT UserID, AnswerID FROM user_vote WHERE UserID = :UserID");
+            $query = $pdo->prepare("SELECT UserID, AnswerID FROM User_Vote WHERE UserID = :UserID");
 
-            $query = $pdo->prepare("SELECT * FROM poll_invitedusers piu JOIN polls p ON piu.PollID = p.ID WHERE tokenQuestion = :Token");
+            $query = $pdo->prepare("SELECT * FROM Poll_InvitedUsers piu JOIN Polls p ON piu.PollID = p.ID WHERE tokenQuestion = :Token");
             $query->bindParam(':Token', $_SESSION['tokenQuestion']);
             $query->execute();
             $row = $query->fetch();
             $question = $row['Question'];
             echo "<h1>".$question."</h1>";
             echo '<div class="answers">';
-            $query = $pdo->prepare("SELECT ans.ID, ans.Text, ans.PollID, ans.ImagePath, piu.UserID FROM answers AS ans JOIN poll_invitedusers AS piu ON ans.PollID = piu.PollID JOIN polls AS p ON piu.PollID = p.ID where piu.tokenQuestion = :Token");
+            $query = $pdo->prepare("SELECT UserID, PollID from Poll_InvitedUsers WHERE tokenQuestion = :Token");
+            //$query = $pdo->prepare("SELECT ans.ID, ans.Text, ans.PollID, ans.ImagePath, piu.UserID FROM Answers AS ans JOIN Poll_InvitedUsers AS piu ON ans.PollID = piu.PollID JOIN Polls AS p ON piu.PollID = p.ID where piu.tokenQuestion = :Token");
             $query->bindParam(':Token', $_SESSION['tokenQuestion']);
             $query->execute();
             $row = $query->fetch();
             $userID = $row['UserID'];
             $pollID = $row['PollID'];
 
-            $query2 = $pdo->prepare("SELECT * FROM user_vote WHERE UserID = :UserID and PollID = :PollID");
+            $query2 = $pdo->prepare("SELECT * FROM User_Vote WHERE UserID = :UserID and PollID = :PollID");
             $query2->bindParam(':UserID', $userID);
             $query2->bindParam(':PollID', $pollID);
             $query2->execute();
@@ -105,6 +114,10 @@
                 header("Location:./index.php");
                 $_SESSION['alreadyVoted'] = true;
             } else {
+                $query = $pdo->prepare("SELECT * FROM Answers WHERE PollID = ?");
+                $query->bindParam(1, $pollID);
+                $query->execute();
+                $row = $query->fetch();
                 $correct = false;
                 $answers = 0;
                 if ($row) {
@@ -137,7 +150,7 @@
                         $selectedAnswerId = $_POST['answer'];
 
                         try {
-                            $updateQuery = $pdo->prepare("INSERT INTO `user_vote`(`UserID`, `AnswerID`, `PollID`) VALUES (?,?, ?)");
+                            $updateQuery = $pdo->prepare("INSERT INTO `User_Vote`(`UserID`, `AnswerID`, `PollID`) VALUES (?,?, ?)");
                             $updateQuery->bindParam(1, $userID);
                             $updateQuery->bindParam(2, $selectedAnswerId);
                             $updateQuery->bindParam(3, $pollID);
@@ -153,6 +166,8 @@
                         }
                     } else {
                         echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+                        // log
+                        escribirEnLog("[votePoll] Vaya, parece que algo ha salido mal");
                     }
                 }
             }

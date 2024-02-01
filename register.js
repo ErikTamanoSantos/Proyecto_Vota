@@ -146,11 +146,13 @@ function showStep(step = 0, animate = true) {
             let formString = `
             <div class="inputContainer">
                 <label for="country">País: </label>
+                <div class="sel sel--black-panther">
                 <select id="country" name="country">`;
             let countryNames = Object.keys(countryData)
             for (let i = 0; i < countryNames.length; i++) {
                 formString += `<option>${countryNames[i]}</option>`
             }
+            formString += "</select></div></div>"
             $("form").append(formString)
             $("#country").on('input', function() {
                 country = $("#country").find(":selected").text();

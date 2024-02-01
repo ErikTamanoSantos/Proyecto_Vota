@@ -22,6 +22,8 @@
             unset($_SESSION['justVoted']);
         } elseif (isset($_SESSION['alreadyVoted'])) {
             echo "<script>showNotification('error', 'Link inválido.')</script>";
+            //log 
+            escribirEnLog("[VOTE] Link inválido");
             unset($_SESSION['alreadyVoted']);
         }
     ?>

@@ -12,13 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="listVotes.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Encuestas Votadas | Vota EJA</title>
 </head>
 <body>
 <?php include './components/header.php'; ?>
     <div id="notificationContainer"></div>
     <div class="listPollDiv">
-    <h1>Listado de tus encuestas creadas</h1>
+    <h1>Listado de tus votos</h1>
 
     <?php
         include("config.php");
@@ -27,7 +27,8 @@
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
-            $query = $pdo->prepare("SELECT a.Text, p.Question FROM User_Vote uv INNER JOIN Answers a ON a.ID = uv.AnswerID INNER JOIN Polls p ON a.PollID = p.ID WHERE uv.UserID = 1;");
+            $query = $pdo->prepare("SELECT a.Text, p.Question FROM User_Vote uv INNER JOIN Answers a ON a.ID = uv.AnswerID INNER JOIN Polls p ON a.PollID = p.ID WHERE uv.UserID = ?;");
+            $query->bindParam(1, $_SESSION["UserID"]);
             $query->execute();
             
             $row = $query->fetch();

@@ -27,9 +27,10 @@
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
             
-            $query = $pdo->prepare("SELECT * FROM Polls");
+            $query = $pdo->prepare("SELECT * FROM Polls WHERE CreatorID = ?");
+            $query->bindParam(1, $_SESSION["UserID"]);
             $query->execute();
-            
+                        
             $row = $query->fetch();
             $correct = false;
             $questions = 0;
@@ -42,7 +43,11 @@
                 echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
                 if ($row["QuestionVisibility"] == "hidden") {
                     echo "<span class='visibilityPollItem'>Oculto</span>";
-                }
+                } else if ($row["QuestionVisibility"] == "public") {
+		    echo "<span class='visibilityPollItem'>Público</span>";
+		} else {
+		    echo "<span class='visibilityPollItem'>Privado</span>";
+		}
                 echo "<a href='pollDetails.php?id=".$row["ID"]."'>Detalles</a>";
                 echo "<a href='invite.php?pollID={$row['ID']}' class='inviteButton'>Invitar</a>";
                 echo "</div></li>";

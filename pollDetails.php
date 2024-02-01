@@ -13,11 +13,12 @@
     <title>Detalles de Encuesta | EJA</title>
 </head>
 <body>
+     <div id="notificationContainer"></div>
     <?php include("./components/header.php") ?>
     <section class="pollDetails">
     <?php 
         include("config.php");
-        include 'log.php'; 
+        include './components/log.php'; 
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
@@ -30,6 +31,7 @@
                 $query->bindParam(3, $_GET["id"]);
                 $query->execute();
                 $pdo->commit();
+		echo "<script>showNotification('success', 'Cambios guardados');</script>";
             }
             
             $query = $pdo->prepare("SELECT * FROM Polls WHERE ID = ?");
@@ -49,11 +51,6 @@
                 $endDate = new DateTime($row["EndDate"]);
                 echo "<h4>Fecha de fin: ".$endDate->format("d/m/Y h:i")."</h4>";
                 $state = "";
-                switch ($row["State"]) {
-                    case "not_begun":
-                        $state = "No iniciada";
-                        break;
-                }
                 echo "<h4>Estado: ".$state."</h4>";
                 echo "<h4>Visibilidad de la pregunta:";
                 echo "<select id='questionVisibility'>";
@@ -63,9 +60,9 @@
                 echo "</select></h4>";
                 echo "<h4>Visibilidad de las respuestas:";
                 echo "<select id='answerVisibility'>";
-                echo "<option value='hidden' ".($row["QuestionVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
-                echo "<option value='public' ".($row["QuestionVisibility"] == "public" ? "selected" : "").">Público</option>";
-                echo "<option value='private' ".($row["QuestionVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                echo "<option value='hidden' ".($row["ResultsVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                echo "<option value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "").">Público</option>";
+                echo "<option value='private' ".($row["ResultsVisibility"] == "private" ? "selected" : "").">Privado</option>";
                 echo "</select></h4>";
                 echo "<button id='saveChanges'>Guardar cambios</button>";
                 echo "</div>";

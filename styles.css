@@ -62,6 +62,7 @@ body {
     position: absolute;
     display: flex;
     width: fit-content;
+
     height: 40px;
     padding: 1%;
     width: 100%;
@@ -69,6 +70,15 @@ body {
     backdrop-filter: blur(10px);
     z-index: 100;
     border-bottom: 1px solid var(--azulOscuroMedio);
+}
+
+.navbar h2 {
+    display: flex;
+    align-items: center;
+    color: var(--azulOscuro);
+    font-weight: 700;
+    margin-left: 3%;
+    
 }
 
 .navbar div {
@@ -95,7 +105,7 @@ body {
     text-decoration: none;
     text-align: center;
     align-items: center;
-    color: var(--textoAzulNormal);
+    color: var(--azulOscuro);
     font-weight: 700;
     font-size: 20px;
     margin: 2%;
@@ -103,14 +113,14 @@ body {
 }
 
 .navbar a:hover {
-    color: var(--textoAzulClaroMedio);
-    border-bottom: 3px solid var(--textoAzulClaroMedio);
-    border-right : 3px solid var(--textoAzulClaroMedio);
+    color: var(--azulOscuro);
+    border-bottom: 3px solid var(--azulOscuro);
+    border-right : 3px solid var(--azulOscuro);
     border-radius: 10px;
 }
 
 .navbar a:nth-child(2) {
-    border: 3px solid var(--textoAzulClaroMedio);
+    border: 3px solid var(--azulOscuro);
     border-radius: 10px;
 }
 
@@ -497,7 +507,7 @@ footer a {
     grid-row-gap: 0px;
     flex-direction: row;
     width: 100%;
-    background-color: rgb(200, 200, 200);
+    background-color: var(--azulOscuroMedio);
 }
 
 .authValidation {
@@ -652,6 +662,7 @@ footer a {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: var(--azulOscuro);
     height: 70px;
     margin: 20px;
     border: 1px solid var(--azulOscuroMedio);
@@ -667,13 +678,12 @@ footer a {
 
 .dashboardItem button, .dashboardItem a, .dashboardItem p{
     text-decoration: none;
-    color: var(--textoAzulNormal);
+    color: var(--textoAzulOscuro);
     font-weight: 700;
     font-size: 20px;
     padding: 0 5% 0 5%;
     text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
     border: none;    
-    background: transparent;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -906,6 +916,17 @@ footer a {
     color: #fff !important;
 }
 
+.circleRegisterForm > form select {
+    grid-area: 1 / 2 / 2 / 3;
+    background: transparent;
+    border: 0;
+    border-radius: 10px;
+    border-bottom: 1px solid var(--azulClaro);
+    margin: 5px;
+    padding: 10px;
+    color: #fff !important;
+}
+
 .circleRegisterForm > form > .inputContainer {
     display: flex;
     justify-content: space-between;
@@ -1037,10 +1058,42 @@ footer a {
     flex-wrap: wrap;
 }
 
-#answerContainer > input {
+.nameQuestionh1 {
+    display: flex;
+    align-items: center;
+}
+
+#question {
+    width: 85%;
+}
+
+.nameQuestionh1 i {
+    width: 15%;
+    font-size: 30px;
+    margin: 0 5px 0 5px;
+}
+
+#answerContainer > div {
+    display: flex;
+    align-items: center;
     width: calc(50% - 10px); /* 50% del ancho menos el espacio entre los elementos */
     margin: 5px;
     box-sizing: border-box;
+}
+
+#answerContainer > div > input {
+    width: 75%;
+}
+
+#answerContainer > div > div {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+#answerContainer > div i {
+    font-size: 30px;
+    margin: 0 5px 0 5px;    
 }
 
 .createPollForm input:focus {
@@ -1117,7 +1170,7 @@ footer a {
     display: none;
 }
 
-/* List polls */
+/*   polls */
 
 .listPollDiv {
     padding-top: calc(40px + 2%);
@@ -1129,13 +1182,16 @@ footer a {
     font-size: 50px;
     font-weight: 700;
     margin: 20px;
-    color: var(--azulClaro)
+    color: var(--azulClaro);
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
 }
 
 .pollItem {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     margin: 50px;
     padding:40px;
     border: 1px solid var(--azulOscuroMedio);
@@ -1149,11 +1205,55 @@ footer a {
     list-style: none;
 }
 
+.pollItem .datePollItem {
+    grid-area: 1 / 1 / 2 / 2; 
+    padding: 10px;
+}
+
+.pollItem .nameQuestionPollItem {
+    grid-area: 1 / 2 / 2 / 5;
+    padding: 10px;
+
+}
+
+.pollItem .visibilityPollItem {
+    grid-area: 1 / 5 / 2 / 6;
+    padding: 10px;
+
+}
+
+.pollItem .detailPollItem {
+    grid-area: 1 / 6 / 2 / 7;
+    padding: 10px;
+
+}
+
+.pollItem .invitePollItem {
+    grid-area: 1 / 7 / 2 / 8;
+    padding: 10px;
+
+}
 
 .pollItem span{
     font-size: 30px !important;
     color: var(--azulClaro);
     font-weight: 700;
+}
+
+.pollItem a{
+    font-size: 30px !important;
+    color: var(--azulClaro);
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.pollItem a:hover{
+    color: var(--azulClaroMedio);
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
 }
 
 /* Poll */
@@ -1328,6 +1428,16 @@ footer a {
     color: var(--azulClaro)
 }
 
+.pollDetails select, .pollDetails button {
+    padding: 1%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    font-size: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+    color: #fff;
+}
+
 #pollGraphs {
     border: 1px solid var(--azulOscuroMedio);
     border-radius: 16px;
@@ -1390,4 +1500,82 @@ footer a {
     display: flex;
     flex-direction: column;
 
+}
+ 
+/* Invitar emails */
+
+.paddingHeader {
+    padding-top: calc(40px + 2%);
+
+}
+
+.formInviteUsers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5% 20% 5% 20%;
+    border: 1px solid var(--azulOscuro);
+    padding: 5%;
+    background-color: var(--azulOscuro);
+    border-radius: 16px;
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.formInviteUsers form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.formInviteUsers > h1 {
+    color: var(--azulClaro);
+    text-align: center;
+    font-size: 50px;
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+.formInviteUsers form textarea {
+    height: 20vh;
+    margin: 5%;
+    width: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    background-color: var(--textoAzulClaro);
+    color: var(--azulClaro);
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.formInviteUsers form button {
+    padding: 5%;
+    background-color: var(--textoAzulClaroMedio);
+    border: 1px solid var(--azulOscuro);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 10px var(--textoAzulClaroMedio);
+}
+
+.formInviteUsers form button:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}
+
+.formInviteUsers form textarea:focus {
+    outline: none;
+}
+
+.formInviteUsers form textarea::placeholder {
+    color: var(--azulClaro);
 }

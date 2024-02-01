@@ -17,16 +17,19 @@
     <title>Nueva Encuesta | Vota EJA</title>
 </head>
 <body>
-    <?php include("log.php")?>
+    <?php include("./components/log.php")?>
     <?php include("./components/header.php")?>
     <div id="notificationContainer"></div>
     <div class="createPollDiv">
         <div class="createPollForm">
             <h2>Crea una nueva encuesta</h2>
             <form method="POST" enctype="multipart/form-data">
-                <input type="text" id="question" name="question" placeholder="Pregunta">
-                <div id="questionImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
-                <input type="file" id="questionImage" name="questionImage" accept="image/png, image/gif, image/jpeg" >
+                <div class="nameQuestionh1">
+                    <input type="text" id="question" name="question" placeholder="Pregunta">
+                    <div id="questionImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
+                    <input type="file" id="questionImage" name="questionImage" accept="image/png, image/gif, image/jpeg" >
+                </div>
+
                 <div id="answerContainer">
                     <div>
                         <input type="text" placeholder="Respuesta 1" name="answers[]">
@@ -64,16 +67,22 @@
                 <script>
                     showNotification('error', 'El cuestionario debe contener al menos 2 respuestas');
                 </script>";
+                // log
+                escribirEnLog("[newPoll] El cuestionario debe contener al menos 2 respuestas");
             } elseif (!isset($_POST["dateStart"]) || !isset($_POST["dateFinish"]) || !(bool)strtotime($_POST["dateStart"]) || !(bool)strtotime($_POST["dateFinish"])) {
                 echo "
                 <script>
                     showNotification('error', 'Las fechas insertadas no son válidas');
                 </script>";
+                // log
+                escribirEnLog("[newPoll] Las fechas insertadas no son válidas");
             } elseif (new DateTime($_POST["dateStart"]) > new DateTime($_POST["dateFinish"])) {
                 echo "
                 <script>
                     showNotification('error', 'La fecha de inicio no debe ser mayor que la fecha de fin');
                 </script>";
+                // log
+                escribirEnLog("[newPoll] La fecha de inicio no debe ser mayor que la fecha de fin");
             } else {
                 include("config.php");
                 try {
@@ -92,7 +101,7 @@
                 $visibility = "hidden";
                 $questionImage = null;
                 if (isset($_FILES["questionImage"]) && $_FILES["questionImage"]["name"] != "") {
-                    $questionImage = "./img/formImages/".basename($_FILES["questionImage"]["name"]);   
+                    $questionImage = "./uploads/".basename($_FILES["questionImage"]["name"]);   
                     move_uploaded_file($_FILES['questionImage']['tmp_name'], $questionImage);
                 }
                 $query = $pdo -> prepare("INSERT INTO Polls(Question, CreationDate, StartDate, EndDate, `State`, CreatorID, QuestionVisibility, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -116,7 +125,7 @@
                     }
                     $answerImage = null;
                     if (isset($_FILES["answerImage".$index]) && $_FILES["answerImage".$index]["name"] != "") {
-                        $answerImage = "./img/formImages/".basename($_FILES["answerImage".$index]["name"]);   
+                        $answerImage = "./uploads/".basename($_FILES["answerImage".$index]["name"]);   
                         move_uploaded_file($_FILES['questionImage']['tmp_name'], $answerImage);
                     }
                     $query = $pdo -> prepare("INSERT INTO Answers(`Text`, PollID, ImagePath) VALUES (?, ?, ?)");
