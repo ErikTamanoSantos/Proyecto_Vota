@@ -28,6 +28,7 @@ $(function() {
         <input type="hidden" name="AnswerVisibility" value="${answerVisibility}"> 
       `).submit()
     })
+    $("#questionVisibility").on("change", changeAnswerVisibilityOptions)
 })
 
 function getVotes(votesFromPost) {
@@ -56,4 +57,27 @@ function createGraph() {
           }
         }
       );
+}
+
+function changeAnswerVisibilityOptions() {
+  let questionVisibility = $("#questionVisibility").find(":selected").val()
+  console.log(questionVisibility)
+  switch (questionVisibility) {
+    case "hidden":
+      $("#AnswerVisibilityPrivateOption").prop("selected", false).prop("disabled", true)
+      $("#AnswerVisibilityPublicOption").prop("selected", false).prop("disabled", true)
+      $("#AnswerVisibilityHiddenOption").prop("selected", true)
+      break;
+    case "private":
+      if ($("#AnswerVisibilityPublicOption").is(":selected")) {
+        $("#AnswerVisibilityPrivateOption").prop("selected", true);
+      }
+      $("#AnswerVisibilityPublicOption").prop("selected", false).prop("disabled", true)
+      $("#AnswerVisibilityPrivateOption").prop("disabled", false)
+      break;
+    case "public":
+      $("#AnswerVisibilityPrivateOption").prop("disabled", false)
+      $("#AnswerVisibilityPublicOption").prop("disabled", false)
+      break;
+  }
 }

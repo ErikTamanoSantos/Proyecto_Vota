@@ -57,7 +57,16 @@
                     header("Location:./dashboard.php");
                     if ($row["IsAuthenticated"] == 1) {
                         $correct = true;
-                        header("Location:./dashboard.php");
+                        if (isset($_SESSION["redirectTo"])) {
+                            $_SESSION["userPassword"] = $pwd;
+                            if ($_SESSION["redirectTo"] == "login") {
+                                header("Location:./votePoll.php");
+                            } else if ($_SESSION["redirectTo"] == "listVotes") {
+                                header("Location:./listVotes.php");
+                            }
+                        } else {
+                            header("Location:./dashboard.php");
+                        }
                     }
                 }
                 if (!$correct) {

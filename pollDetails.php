@@ -53,14 +53,24 @@
                 echo "<h4>Visibilidad de la pregunta:";
                 echo "<select id='questionVisibility'>";
                 echo "<option value='hidden' ".($row["QuestionVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
-                echo "<option value='public' ".($row["QuestionVisibility"] == "public" ? "selected" : "").">Público</option>";
                 echo "<option value='private' ".($row["QuestionVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                echo "<option value='public' ".($row["QuestionVisibility"] == "public" ? "selected" : "").">Público</option>";
                 echo "</select></h4>";
                 echo "<h4>Visibilidad de las respuestas:";
                 echo "<select id='answerVisibility'>";
-                echo "<option value='hidden' ".($row["ResultsVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
-                echo "<option value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "").">Público</option>";
-                echo "<option value='private' ".($row["ResultsVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                if ($row["QuestionVisibility"] == "hidden") {
+                    echo "<option id='AnswerVisibilityHiddenOption' value='hidden' ".($row["ResultsVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                    echo "<option id='AnswerVisibilityPrivateOption' value='private' ".($row["ResultsVisibility"] == "private" ? "selected" : "")." disabled>Privado</option>";
+                    echo "<option id='AnswerVisibilityPublicOption' value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "")." disabled>Público</option>";
+                } else if ($row["QuestionVisibility"] == "private") {
+                    echo "<option id='AnswerVisibilityHiddenOption' value='hidden' ".($row["ResultsVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                    echo "<option id='AnswerVisibilityPrivateOption' value='private' ".($row["ResultsVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                    echo "<option id='AnswerVisibilityPublicOption' value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "")." disabled>Público</option>";
+                } else {
+                    echo "<option id='AnswerVisibilityHiddenOption' value='hidden' ".($row["ResultsVisibility"] == "hidden" ? "selected" : "").">Oculto</option>";
+                    echo "<option id='AnswerVisibilityPrivateOption' value='private' ".($row["ResultsVisibility"] == "private" ? "selected" : "").">Privado</option>";
+                    echo "<option id='AnswerVisibilityPublicOption' value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "").">Público</option>";
+                }
                 echo "</select></h4>";
                 echo "<button id='saveChanges'>Guardar cambios</button>";
                 echo "</div>";

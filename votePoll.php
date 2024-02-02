@@ -1,6 +1,7 @@
 <?php
     session_start();
     include './components/log.php';
+    include("config.php");
     if (isset($_SESSION['UserID']) || isset($_SESSION['tokenQuestion']) || isset($_GET['tokenQuestion'])) {
         if (isset($_GET["tokenQuestion"])) {
             $tokenQuestion = "";
@@ -9,9 +10,7 @@
             } else {
                 $tokenQuestion = $_GET["tokenQuestion"];
             }
-            echo $tokenQuestion;
-
-            include("config.php"); # codigo repetido ... sobra
+            echo $tokenQuestion; # codigo repetido ... sobra
             try {
                 $dsn = "mysql:host=localhost;dbname=project_vota";
                 $pdo = new PDO($dsn, $dbUser, $dbPass);
@@ -56,7 +55,16 @@
 
             if ($userRow) {
                 $_SESSION["tokenQuestion"] = $userRow["tokenQuestion"];
-                header("Location:./votePoll.php"); 
+                $query = $pdo->prepare("SELECT * FROM Users WHERE ID = ?");
+                $query->bindParam(1, $userRow["UserID"]);
+                $query->execute();
+                $row = $query->fetch();
+                if ($row) {
+                    $_SESSION["redirectTo"] = "login";
+                    header("Location:./login.php");
+                } else {
+                    header("Location:./votePoll.php"); 
+                }
             } else {
                 echo "<script>showNotification('error', 'Token de validación inválido');</script>";
                 escribirEnLog("[DASHBOARD] Token de validación inválido");
@@ -83,6 +91,15 @@
 
     <?php
         include("config.php");
+        function getRandomString($length = 40) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $token = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomIndex = rand(0, strlen($characters) - 1);
+                $token .= $characters[$randomIndex];
+            }
+            return $token;
+        }
         
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
@@ -150,13 +167,30 @@
                         $selectedAnswerId = $_POST['answer'];
 
                         try {
-                            $updateQuery = $pdo->prepare("INSERT INTO `User_Vote`(`UserID`, `AnswerID`, `PollID`) VALUES (?,?, ?)");
+                            $pdo->beginTransaction();
+                            $randomString = getRandomString();
+                            $updateQuery = $pdo->prepare("INSERT INTO `User_Vote`(`UserID`, `Vote`, `PollID`) VALUES (?,?, ?)");
                             $updateQuery->bindParam(1, $userID);
-                            $updateQuery->bindParam(2, $selectedAnswerId);
+                            $updateQuery->bindParam(2, $randomString);
                             $updateQuery->bindParam(3, $pollID);
                             $updateQuery->execute();
 
+                            $updateQuery = $pdo->prepare("INSERT INTO Votes(VoteHash, AnswerID) VALUES (?, ?)");
+                            // TODO : Encrypt hash
+                            $password = "Password1234!";
+                            if (isset($_SESSION["userPassword"])) {
+                                $password = $_SESSION["userPassword"];
+                            }
+                            $hash = openssl_encrypt($randomString, 'AES-128-CBC', $password);
+                            $updateQuery->bindParam(1, $hash);
+                            $updateQuery->bindParam(2, $selectedAnswerId);
+                            $updateQuery->execute();
+                            $pdo->commit();
+
                             $_SESSION['justVoted'] = true;
+                            if (isset($_SESSION["userPassword"])) {
+                                unset( $_SESSION["userPassword"] );
+                            }
                             unset($_SESSION['tokenQuestion']);
                             header("Location:./index.php");
                         } catch (PDOException $e) {
