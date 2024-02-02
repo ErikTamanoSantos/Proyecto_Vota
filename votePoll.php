@@ -157,7 +157,6 @@
                             $updateQuery->execute();
 
                             $_SESSION['justVoted'] = true;
-                            unset($_SESSION['tokenQuestion']);
                             header("Location:./index.php");
                         } catch (PDOException $e) {
                             echo $e->getMessage();
@@ -171,7 +170,8 @@
                     }
                 }
             }
-            
+            unset($_SESSION['tokenQuestion']);
+
 
         } catch (PDOException $e){
             echo $e->getMessage();
