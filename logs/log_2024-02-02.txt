@@ -1,0 +1,15 @@
+2024-02-02 15:51:19 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-02 16:10:31 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-02 16:11:00 [LOGIN] Credenciales incorrectos
+2024-02-02 16:11:07 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-02 16:18:44 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 63 no es correcta
+2024-02-02 16:18:56 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 63 no es correcta
+2024-02-02 16:19:07 [LOGIN] Credenciales incorrectos
+2024-02-02 16:19:12 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-02 16:21:06 [PASSWORDCHANGE] El usuario 63 ha cambiado su contraseña
+2024-02-02 16:21:17 [LOGIN] Credenciales incorrectos
+2024-02-02 16:21:21 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-02 16:43:24 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, las nuevas contraseñas del usuario 63 no coinciden
+2024-02-02 16:44:12 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 63 no es correcta
+2024-02-02 16:44:16 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 63 no es correcta
+2024-02-02 16:44:27 [PASSWORDCHANGE] El usuario 63 ha cambiado su contraseña

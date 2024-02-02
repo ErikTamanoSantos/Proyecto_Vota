@@ -646,8 +646,26 @@ footer a {
 
 }
 
-.userInfo > h2, .userInfo > h4  {
+.userInfo > h2, .userInfo > h4, .userInfo > a {
     color:  var(--azulClaro);
+}
+
+.userInfo > a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
+    color: var(--azulClaro);
+    border-radius: 25px;
+    padding: 15px;
+    background-color: var(--azulOscuroMedio);
+    box-shadow: 2px 2px 20px var(--textoAzulNormal);
+}
+
+.userInfo > a:hover {
+    color: var(--textoAzulOscuro);
+    text-shadow: 5px 5px 20px #000;
+    transform: scale(1.2);
 }
 
 .navDashboard {
@@ -1661,4 +1679,81 @@ footer a {
     cursor: pointer;
     background-color: var(--textoAzulClaroMedio);
     transform: scale(1.05);
+}
+
+/* Change password */
+
+.changePassword {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: calc(40px + 2%);
+    min-height: 60vh;
+}
+
+.changePasswordForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border: 1px solid var(--azulOscuro);
+    padding: 5%;
+    margin:5%;
+    background-color: var(--azulOscuro);
+    border-radius: 16px;
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.changePassword form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border: 1px solid var(--azulOscuro);
+    padding: 5%;
+    background-color: var(--azulOscuro);
+    border-radius: 16px;
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.changePassword form input {
+    margin: 5%;
+    padding: 3%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    font-size: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+    color: #fff;
+}
+
+.changePassword form input::placeholder {
+    color: #fff;
+}
+
+
+.changePasswordInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 5%;
+    border-radius: 16px;
+    color: var(--azulClaro);
+}
+
+.changePasswordInfo > p {
+    font-size: 20px;
+    text-align: center;
+    color: var(--azulClaro);
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
+}
+
+.changePasswordInfo img {
+    width: 30%;
+    height: 30%;
+    filter: drop-shadow(2px 1px 5px #000000);
 }

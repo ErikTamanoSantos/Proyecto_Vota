@@ -113,6 +113,7 @@
                         echo "<h4> Telefono: ".$row["Phone"]."</h4>";
                         echo "<h4> Pais: ".$row["Country"]."</h4>";
                         echo "<h4> Ciudad: ".$row["City"]."</h4>";
+                        echo "<br><br><a href='changePassword.php' id='changePassword'>Cambiar contraseña</a>";
                         //echo "<h4>".$row["Username"]."</h4>"; futuro es validated
 
                         $row = $query->fetch();
