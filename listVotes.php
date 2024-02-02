@@ -45,8 +45,12 @@
                 $query2->execute();
                 $row2 = $query2->fetch();
                 if ($row2) {
+                    $pollQuery = $pdo->prepare("SELECT * FROM Polls WHERE ID = ?");
+                    $pollQuery->bindParam(1, $row2["PollID"]);
+                    $pollQuery->execute();
+                    $pollRow = $pollQuery->fetch();
                     echo "<li><div class='pollItem'>";
-                    echo "<span>Pregunta: ".$row2["Question"]."</span>";
+                    echo "<span>Pregunta: ".$pollRow["Question"]."</span>";
                     echo "<span class='nameQuestionPollItem'>Respuesta: <span class='showAnswer'><i class='fa-solid fa-eye' style='color: #ffffff;'></i></span><span class='answer' style='display: none'>".$row2["Text"]."</span></span>";
                     echo "</div></li>";
                     $row = $query->fetch();
@@ -57,6 +61,9 @@
             echo "</ul>";
             if (!$correct) {
                 echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
+            }
+            if (isset($_SESSION["userPassword"])) {
+                unset($_SESSION["userPassword"]);
             }
             /*
             echo var_dump(openssl_decrypt($row["VoteHash"], "AES-128-CBC", $_SESSION["userPassword"]));

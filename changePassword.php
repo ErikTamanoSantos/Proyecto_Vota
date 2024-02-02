@@ -40,6 +40,7 @@
     </div>
     <?php include './components/footer.php' ?>
         <?php 
+        echo var_dump($_SESSION["UserID"]);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['currentPassword']) && isset($_POST['newPassword']) && isset($_POST['confirmNewPassword'])) {
                 $dsn = "mysql:host=localhost;dbname=project_vota";
@@ -52,10 +53,25 @@
                 echo $currentPassword;
                 if (hash('sha512', $_POST['currentPassword']) == $currentPassword) {
                     if ($_POST['newPassword'] == $_POST['confirmNewPassword']) {
+                        $pdo->beginTransaction();
                         $updateQuery = $pdo->prepare('UPDATE Users SET Password = ? WHERE ID = ?');
                         $updateQuery->bindParam(1, hash('sha512', $_POST['newPassword']));
                         $updateQuery->bindParam(2, $_SESSION['UserID']);
                         $updateQuery->execute();
+                        $UserVoteQuery = $pdo->prepare('SELECT * FROM User_Vote WHERE UserID = ?');
+                        $UserVoteQuery->bindParam(1, $_SESSION['UserID']);
+                        $UserVoteQuery->execute();
+                        $UserVoteRow = $UserVoteQuery->fetch();
+                        while ($UserVoteRow) {
+                            $currentHash = openssl_encrypt($UserVoteRow["Vote"], 'AES-128-CBC', $_POST['currentPassword']);
+                            $newHash = openssl_encrypt($UserVoteRow["Vote"], 'AES-128-CBC', $_POST['newPassword']);
+                            $updateVotesQuery = $pdo->prepare("UPDATE Votes SET VoteHash = ? WHERE VoteHash = ?");
+                            $updateVotesQuery->bindParam(2, $currentHash);
+                            $updateVotesQuery->bindParam(1, $newHash);
+                            $updateVotesQuery->execute();
+                            $UserVoteRow = $UserVoteQuery->fetch();
+                        }
+                        $pdo->commit();
                         ?>
                         <script>
                             showNotification('success', 'Tu contraseña ha sido cambiada con éxito');

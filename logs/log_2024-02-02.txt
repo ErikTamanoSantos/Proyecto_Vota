@@ -19,3 +19,48 @@
 2024-02-02 16:44:12 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 63 no es correcta
 2024-02-02 16:44:16 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 63 no es correcta
 2024-02-02 16:44:27 [PASSWORDCHANGE] El usuario 63 ha cambiado su contraseña
+2024-02-02 17:03:22 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 17:03:55 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 17:36:13 [REGISTER] Registro completado correctamente del user Erik con email eriktamano@gmail.com
+2024-02-02 17:39:46 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-02 17:42:30 [invite] Correos electrónicos almacenados con éxito
+2024-02-02 17:43:32 [LOGIN] Credenciales incorrectos
+2024-02-02 17:43:40 [LOGIN] Credenciales incorrectos
+2024-02-02 17:44:36 [VOTE] Voto registrado
+2024-02-02 17:44:46 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 17:49:58 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 17:50:21 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 17:51:06 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 17:51:09 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 1 no es correcta
+2024-02-02 17:51:55 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 17:59:50 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 1 no es correcta
+2024-02-02 18:00:05 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 18:00:14 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 1 no es correcta
+2024-02-02 18:03:04 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 18:03:11 [PASSWORDCHANGE] Intento de cambio de contraseña fallido, la contraseña actual del usuario 1 no es correcta
+2024-02-02 18:15:19 [REGISTER] Registro completado correctamente del user Erik con email eriktamano@gmail.com
+2024-02-02 18:15:49 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-02 18:16:08 [newPoll] La fecha de inicio no debe ser mayor que la fecha de fin
+2024-02-02 18:18:37 [invite] Correos electrónicos almacenados con éxito
+2024-02-02 18:19:53 [VOTE] Voto registrado
+2024-02-02 18:19:55 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 18:19:58 [pollDetails] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uv.AnswerID' in 'field list' in /home/super/Escriptori/proyecto2/pollDetails.php:98
+Stack trace:
+#0 /home/super/Escriptori/proyecto2/pollDetails.php(98): PDOStatement->execute()
+#1 {main}
+2024-02-02 18:20:37 [LOGIN] Credenciales incorrectos
+2024-02-02 18:20:54 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 18:27:35 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 18:29:18 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 18:30:12 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 18:31:04 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 18:31:16 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 18:32:14 [REGISTER] Registro completado correctamente del user Erik con email eriktamano@gmail.com
+2024-02-02 18:32:56 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-02 18:35:08 [invite] Correos electrónicos almacenados con éxito
+2024-02-02 18:37:02 [VOTE] Voto registrado
+2024-02-02 18:37:04 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 18:38:25 [VOTE] Voto registrado
+2024-02-02 18:38:48 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-02 18:39:01 [PASSWORDCHANGE] El usuario 1 ha cambiado su contraseña
+2024-02-02 18:45:23 [DASHBOARD] Login correcto del user1 con username Erik

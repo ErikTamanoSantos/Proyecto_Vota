@@ -59,7 +59,7 @@
                 $query->bindParam(1, $userRow["UserID"]);
                 $query->execute();
                 $row = $query->fetch();
-                if ($row) {
+                if ($row["password"] != "") {
                     $_SESSION["redirectTo"] = "login";
                     header("Location:./login.php");
                 } else {
@@ -178,7 +178,6 @@
                             $updateQuery->execute();
 
                             $updateQuery = $pdo->prepare("INSERT INTO Votes(VoteHash, AnswerID) VALUES (?, ?)");
-                            // TODO : Encrypt hash
                             $password = "Password1234!";
                             if (isset($_SESSION["userPassword"])) {
                                 $password = $_SESSION["userPassword"];
