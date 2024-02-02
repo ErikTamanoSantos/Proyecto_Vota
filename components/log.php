@@ -16,7 +16,6 @@ function escribirEnLog($mensaje) {
     $archivo = fopen($rutaArchivo, 'a');
     
     if ($archivo) {
-        fwrite($archivo, str_repeat("*", 50) . "\n");
         $mensajeFormateado = $fechaHoraActual . " " . $mensaje . "\n";
         fwrite($archivo, $mensajeFormateado);
         fclose($archivo);

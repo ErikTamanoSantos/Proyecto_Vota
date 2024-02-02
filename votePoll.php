@@ -160,6 +160,8 @@
                 echo "</div>";
                 if (!$correct) {
                     echo "<script>showNotification('info', 'Vaya, parece que no tienes respuestas')</script>";
+                    // log
+                    escribirEnLog("[DASHBOARD] Vaya, parece que no tienes respuestas, user: ".$_SESSION["Username"]);
                 }
 
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -197,11 +199,12 @@
                             echo $e->getMessage();
                             escribirEnLog("[votePoll] ".$e);
                             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
+
                         }
                     } else {
                         echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
                         // log
-                        escribirEnLog("[votePoll] Vaya, parece que algo ha salido mal");
+                        escribirEnLog("[votePoll] Vaya, parece que algo ha salido mal, user: ".$_SESSION["Username"]);
                     }
                 }
             }

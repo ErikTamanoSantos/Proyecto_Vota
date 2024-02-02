@@ -57,6 +57,7 @@
                     header("Location:./dashboard.php");
                     if ($row["IsAuthenticated"] == 1) {
                         $correct = true;
+                        $_SESSION["login"] = "correcto";
                         if (isset($_SESSION["redirectTo"])) {
                             $_SESSION["userPassword"] = $pwd;
                             if ($_SESSION["redirectTo"] == "login") {

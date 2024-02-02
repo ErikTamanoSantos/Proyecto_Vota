@@ -11,7 +11,7 @@
     <title>Vota EJA | 2024</title>
 </head>
 
-<body>
+<body id="index">
     <?php include './components/header.php'; ?>
     <?php include("./components/log.php")?>
     <div id="notificationContainer"></div>
@@ -19,6 +19,8 @@
     <?php 
         if (isset($_SESSION['justVoted'])) {
             echo "<script>showNotification('success', '¡Tu voto ha sido registrado! Regístrate para ver tus votaciones y poder crearlas.')</script>";
+            //log
+            escribirEnLog("[VOTE] Voto registrado");
             unset($_SESSION['justVoted']);
         } elseif (isset($_SESSION['alreadyVoted'])) {
             echo "<script>showNotification('error', 'Link inválido.')</script>";
@@ -42,6 +44,7 @@
             </div>
         </div>
     </section>
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 

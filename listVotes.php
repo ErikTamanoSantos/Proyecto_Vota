@@ -25,7 +25,7 @@
 
     <?php
         include("config.php");
-        
+        include './components/log.php';
         try {
             $dsn = "mysql:host=localhost;dbname=project_vota";
             $pdo = new PDO($dsn, $dbUser, $dbPass);
@@ -75,6 +75,8 @@
             echo "</ul>";
             if (!$correct) {
                 echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
+                // log
+                escribirEnLog("[DASHBOARD] El user ".$_SESSION["Username"]." no tiene encuestas");
             }
             */
         } catch (PDOException $e){
