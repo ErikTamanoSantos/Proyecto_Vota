@@ -25,8 +25,10 @@
                     <input type="password" name="pwd" placeholder="Contrasenya">
                     <button type="submit" class="btnForm">Entrar</button>
                 </form>
+                <p class="forgotPassword"><a href="forgot_password.php">¿Olvidaste tu contraseña?</a></p>
             </div>
         </div>
+
 
         <div class="loginImg">
             <img src="./img/login.svg">

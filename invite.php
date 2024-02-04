@@ -88,12 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $row = $query->fetch();
                         if ($row && $row["counter"] > 0) {
 
-                            $pdo->beginTransaction();
-                            $insertQuery = $pdo -> prepare("INSERT INTO Users(`email`) VALUES (?)");
-                            $insertQuery ->bindParam(1, $email);
-                            $insertQuery ->execute();
-                            $pdo->commit();
-    
                             $emailID = "";
     
                             $query = $pdo -> prepare("SELECT ID FROM Users WHERE Email = ?");
@@ -117,11 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $pdo->commit();
                             $correosCorrectos[] = $email;
                         }else{
-                            $pdo->beginTransaction();
-                            $insertQuery = $pdo -> prepare("INSERT INTO Users(`email`) VALUES (?)");
-                            $insertQuery ->bindParam(1, $email);
-                            $insertQuery ->execute();
-                            $pdo->commit();
 
                             $pdo->beginTransaction();
                             $insertQuery = $pdo -> prepare("INSERT INTO Users(`email`) VALUES (?)");
@@ -152,9 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $pdo->commit();
                             $correosCorrectos[] = $email;
                         }
-
                     }
-                  
                 }
             } else {
                 $correosIncorrectos[] = $email;
