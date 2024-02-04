@@ -61,12 +61,12 @@ function enviarCorreo($pdo, $destinatario, $username, $pollID) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; 
-    $mail->Password   = "Caqjuueeemke64"; 
+    $mail->Username   = ""; 
+    $mail->Password   = ""; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("anaviogarcia.cf@iesesteveterradas.cat", "Vota EJA");
+    $mail->SetFrom("", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
@@ -107,8 +107,8 @@ try {
         $mail->SMTPSecure = "tls";
         $mail->Port       = 587;
         $mail->Host       = "smtp.gmail.com";
-        $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat";
-        $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
+        $mail->Username   = "";
+        $mail->Password   = ""; // Password de la cuenta de correo
 
         while ($row = $result->fetch_assoc()) {
             $email = $row['email'];
