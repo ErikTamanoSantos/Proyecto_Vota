@@ -51,7 +51,7 @@ function enviarCorreo($pdo, $destinatario, $username, $pollID) {
 
 
     $title = "Has sido invitado para votar, " . $username . "!";
-    $content = "Puedes votar en el siguiente enlace: https://aws25.ieti.site/Proyecto_Vota/votePoll.php?tokenQuestion=$token";
+    $content = "";
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->Mailer = "smtp";
@@ -61,12 +61,12 @@ function enviarCorreo($pdo, $destinatario, $username, $pollID) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = ""; 
-    $mail->Password   = ""; 
+    $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat"; 
+    $mail->Password   = "Caqjuueeemke64"; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("", "Vota EJA");
+    $mail->SetFrom("anaviogarcia.cf@iesesteveterradas.cat", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
@@ -107,8 +107,8 @@ try {
         $mail->SMTPSecure = "tls";
         $mail->Port       = 587;
         $mail->Host       = "smtp.gmail.com";
-        $mail->Username   = "";
-        $mail->Password   = ""; // Password de la cuenta de correo
+        $mail->Username   = "anaviogarcia.cf@iesesteveterradas.cat";
+        $mail->Password   = "Caqjuueeemke64"; // Password de la cuenta de correo
 
         while ($row = $result->fetch_assoc()) {
             $email = $row['email'];

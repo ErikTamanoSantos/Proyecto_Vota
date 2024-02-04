@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $query->execute();
                         $row = $query->fetch();
                         if ($row && $row["counter"] > 0) {
-
+    
                             $emailID = "";
     
                             $query = $pdo -> prepare("SELECT ID FROM Users WHERE Email = ?");
