@@ -1172,13 +1172,13 @@ footer a {
     transform: scale(1.05);
 }
 
-.createPollForm form > input:last-child {
+.createPollForm form > input[type='submit'] {
     border-radius: 10px;
     background-color: var(--azulOscuroMedio);
     font-weight: 700;
 }
 
-.createPollForm form > input:last-child:hover {
+.createPollForm form > input[tyoe='submit'] {
     border-radius: 10px;
     scale: 1.05;
     font-weight: 700;

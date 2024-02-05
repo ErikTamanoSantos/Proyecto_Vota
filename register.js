@@ -221,7 +221,6 @@ function showStep(step = 0, animate = true) {
     }
     $(window).off("keydown.custom").on("keydown.custom", function(event) {
         if(event.keyCode == 13 || event.keyCode == 9) {
-            console.log(event.keyCode)
             event.preventDefault();
             return false;
         }

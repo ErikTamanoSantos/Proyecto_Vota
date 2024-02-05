@@ -92,7 +92,7 @@
                 ";
             }
 
-            $query = $pdo->prepare("SELECT a.ID, a.Text, count(uv.AnswerID) as counter FROM Answers a INNER JOIN Polls p on a.PollID = p.ID LEFT JOIN User_Vote uv ON uv.AnswerID = a.ID WHERE p.ID = ? GROUP BY a.ID;");
+            $query = $pdo->prepare("SELECT a.ID, a.Text, count(v.AnswerID) as counter FROM Answers a INNER JOIN Polls p on a.PollID = p.ID LEFT JOIN Votes v ON v.AnswerID = a.ID WHERE p.ID = ? GROUP BY a.ID;");
             $query->bindParam(1, $_GET["id"]);
 
             $query -> execute();

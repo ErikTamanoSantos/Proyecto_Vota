@@ -24,33 +24,6 @@
         <div class="createPollForm">
             <h2>Crea una nueva encuesta</h2>
             <form method="POST" enctype="multipart/form-data">
-                <div class="nameQuestionh1">
-                    <input type="text" id="question" name="question" placeholder="Pregunta">
-                    <div id="questionImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
-                    <input type="file" id="questionImage" name="questionImage" accept="image/png, image/gif, image/jpeg, image/webp" >
-                </div>
-
-                <div id="answerContainer">
-                    <div>
-                        <input type="text" placeholder="Respuesta 1" name="answers[]">
-                        <div id="answer1ImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
-                        <input type="file" id="answer1Image" name="answerImage1" accept="image/png, image/gif, image/jpeg, image/webp" >
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Respuesta 2" name="answers[]">
-                        <div id="answer2ImageButton"><i class="fa-regular fa-image" style="color: #ffffff;"></i></div>
-                        <input type="file" id="answer2Image" name="answerImage2" accept="image/png, image/gif, image/jpeg, image/webp" >
-                    </div>
-                </div>
-                <div class="buttonsForm">
-                    <button type="button" id="removeAnswer" disabled><i class="fa-solid fa-minus"></i></button>
-                    <button type="button" id="addAnswer"><i class="fa-solid fa-plus"></i></button>
-                </div>
-                <label for="dateStart">Inicio Encuesta:</label>
-                <input type="datetime-local" id="dateStart" name="dateStart">
-                <label for="dateFinish">Final Encuesta:</label>
-                <input type="datetime-local" id="dateFinish" name="dateFinish">
-                <input type="submit" value="Validar encuesta">
             </form>
         </div>
         <div class="createPollImg">

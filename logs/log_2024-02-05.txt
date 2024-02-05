@@ -1,0 +1,30 @@
+2024-02-05 15:30:06 [REGISTER] Registro completado correctamente del user Eriktamano con email etamanosantos.cf@iesesteveterradas.cat
+2024-02-05 15:31:33 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-05 15:37:56 [REGISTER] Registro completado correctamente del user Erik con email etamanosantos.cf@iesesteveterradas.cat
+2024-02-05 15:38:56 [DASHBOARD] El user2 no deberia estar aqui
+2024-02-05 15:38:56 [DASHBOARD] Login correcto del user2 con username Eriktamano
+2024-02-05 15:39:04 [DASHBOARD] El user2 no deberia estar aqui
+2024-02-05 15:39:08 [DASHBOARD] El user2 no deberia estar aqui
+2024-02-05 15:39:11 [DASHBOARD] El user2 no deberia estar aqui
+2024-02-05 15:39:49 [DASHBOARD] El user2 no deberia estar aqui
+2024-02-05 15:42:34 [REGISTER] Registro completado correctamente del user Erik con email etamanosantos.cf@iesesteveterradas.cat
+2024-02-05 15:43:08 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-05 16:17:31 [pollDetails] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uv.AnswerID' in 'field list' in /home/super/Escriptori/proyecto2/pollDetails.php:98
+Stack trace:
+#0 /home/super/Escriptori/proyecto2/pollDetails.php(98): PDOStatement->execute()
+#1 {main}
+2024-02-05 16:20:57 [invite] Correos electrónicos almacenados con éxito
+2024-02-05 16:23:19 [VOTE] Voto registrado
+2024-02-05 16:25:30 [REGISTER] Registro completado correctamente del user eriktamano con email eriktamano@gmail.com
+2024-02-05 16:32:07 [REGISTER] Registro completado correctamente del user admin con email etamanosantos.cf@iesesteveterradas.cat
+2024-02-05 16:32:33 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-05 16:33:26 [invite] Correos electrónicos almacenados con éxito
+2024-02-05 16:34:14 [VOTE] Voto registrado
+2024-02-05 16:34:48 [REGISTER] Registro completado correctamente del user Erik con email eriktamano@gmail.com
+2024-02-05 16:36:09 [REGISTER] Registro completado correctamente del user admin con email etamanosantos.cf@iesesteveterradas.cat
+2024-02-05 16:36:54 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-05 16:37:36 [invite] Correos electrónicos almacenados con éxito
+2024-02-05 16:38:39 [VOTE] Voto registrado
+2024-02-05 16:39:23 [REGISTER] Registro completado correctamente del user Erik con email eriktamano@gmail.com
+2024-02-05 16:41:33 [DASHBOARD] Términos de uso aceptados correctamente
+2024-02-05 16:41:44 [LOGIN] Credenciales incorrectos

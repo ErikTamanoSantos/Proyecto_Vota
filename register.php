@@ -261,18 +261,38 @@
                 $randomIndex = rand(0, strlen($characters) - 1);
                 $token .= $characters[$randomIndex];
             }
-
-           if ($userIsGuest) {
-            $query = $pdo -> prepare("UPDATE Users SET `Username` = ?, `Password` = SHA2(?, 512), `Phone` = ?, `Country` = ?, `City` = ?, `PostalCode` = ?, `ValidationToken` = ? WHERE email = ?");
-            $query->bindParam(1, $username);
-            $query->bindParam(2, $password);
-            $query->bindParam(3, $phone);
-            $query->bindParam(4, $country);
-            $query->bindParam(5, $city);
-            $query->bindParam(6, $postalCode);
-            $query->bindParam(7, $token);
-            $query->bindParam(8, $email);
-           } else {
+            
+            $pdo->beginTransaction();
+            if ($userIsGuest) {
+                $query = $pdo -> prepare("UPDATE Users SET `Username` = ?, `Password` = SHA2(?, 512), `Phone` = ?, `Country` = ?, `City` = ?, `PostalCode` = ?, `ValidationToken` = ? WHERE email = ?");
+                $query->bindParam(1, $username);
+                $query->bindParam(2, $password);
+                $query->bindParam(3, $phone);
+                $query->bindParam(4, $country);
+                $query->bindParam(5, $city);
+                $query->bindParam(6, $postalCode);
+                $query->bindParam(7, $token);
+                $query->bindParam(8, $email);
+                $userIDQuery = $pdo->prepare('SELECT * FROM Users WHERE email = ?');
+                $userIDQuery->bindParam(1, $email);
+                $userIDQuery->execute();
+                $userIDrow = $userIDQuery->fetch();
+                if ($userIDrow) {
+                    $userVoteQuery = $pdo->prepare('SELECT * FROM User_Vote WHERE UserID = ?');
+                    $userVoteQuery->bindParam(1, $userIDrow['ID']);
+                    $userVoteQuery->execute();
+                    $userVoteRow = $userVoteQuery->fetch();
+                    while ($userVoteRow) {
+                        $currentHash = openssl_encrypt($userVoteRow["Vote"], 'AES-128-CBC', "Password1234!");
+                        $newHash = openssl_encrypt($userVoteRow["Vote"], 'AES-128-CBC', $password);
+                        $updateVotesQuery = $pdo->prepare("UPDATE Votes SET VoteHash = ? WHERE VoteHash = ?");
+                        $updateVotesQuery->bindParam(2, $currentHash);
+                        $updateVotesQuery->bindParam(1, $newHash);
+                        $updateVotesQuery->execute();
+                        $userVoteRow = $userVoteQuery->fetch();
+                    }
+                }
+            } else {
             $query = $pdo -> prepare("INSERT INTO Users(`Username`, `Password`, `Phone`, `Email`, `Country`, `City`, `PostalCode`, `ValidationToken`) VALUES (?, SHA2(?, 512), ?, ?, ?, ?, ?, ?)");
             $query->bindParam(1, $username);
             $query->bindParam(2, $password);
@@ -290,6 +310,8 @@
             $query->bindParam(1, $email);
             $query -> execute();
             $row = $query->fetch();
+
+            $pdo->commit();
 
 
 
