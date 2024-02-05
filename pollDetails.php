@@ -14,32 +14,64 @@
 </head>
 <body>
      <div id="notificationContainer"></div>
-    <?php include("./components/header.php") ?>
+    <?php 
+    include("config.php");
+    include './components/log.php'; 
+
+    session_start();
+    $dsn = "mysql:host=localhost;dbname=project_vota";
+    $pdo = new PDO($dsn, $dbUser, $dbPass); 
+    if (!isset($_SESSION['UserID'])) {
+        include("./errors/error403.php");
+    } else {
+        if (isset($_GET["id"])) {
+            $validationPollFromCreator = $pdo->prepare("SELECT * FROM Polls WHERE ID = ? AND CreatorID = ?");
+            $validationPollFromCreator->bindParam(1, $_GET["id"]);
+            $validationPollFromCreator->bindParam(2, $_SESSION["UserID"]);
+            $validationPollFromCreator->execute();
+            $row = $validationPollFromCreator->fetch();
+
+            if (!$row) {
+                include("./errors/error403.php");
+            }
+
+
+    ?>
     <section class="pollDetails">
     <?php 
-        include("config.php");
-        include './components/log.php'; 
-        try {
-            $dsn = "mysql:host=localhost;dbname=project_vota";
-            $pdo = new PDO($dsn, $dbUser, $dbPass);
-            
+        try {  
             if (isset($_POST["QuestionVisibility"])) {
+                
+                $queryState = $pdo->prepare("SELECT State FROM Polls WHERE ID = ?");
+                $queryState->bindParam(1, $_GET["id"]);
+                $queryState->execute();
+                $row = $queryState->fetch();
+                $currentState = $row["State"];
+                $newState = ($currentState == "blocked") ? "not_begun" : "blocked";
+
+
                 $pdo->beginTransaction();
-                $query = $pdo->prepare("UPDATE Polls SET QuestionVisibility = ?, ResultsVisibility = ? WHERE ID = ?");
+                $query = $pdo->prepare("UPDATE Polls SET QuestionVisibility = ?, ResultsVisibility = ?, State = ? WHERE ID = ?");
                 $query->bindParam(1, $_POST["QuestionVisibility"]);
                 $query->bindParam(2, $_POST["AnswerVisibility"]);
-                $query->bindParam(3, $_GET["id"]);
+
+                $query->bindParam(3, $newState);
+
+                $query->bindParam(4, $_GET["id"]);
                 $query->execute();
                 $pdo->commit();
+
 		echo "<script>showNotification('success', 'Cambios guardados');</script>";
         //log
         escribirEnLog("[pollDetails] Cambios guardados del usuario ".$_SESSION["UserID"]." en la encuesta ".$_GET["id"]);
             }
+
+            
             
             $query = $pdo->prepare("SELECT * FROM Polls WHERE ID = ?");
             $query->bindParam(1, $_GET["id"]);
             $query->execute();
-            
+
             $row = $query->fetch();
             $correct = false;
             $questions = 0;
@@ -76,6 +108,11 @@
                     echo "<option id='AnswerVisibilityPublicOption' value='public' ".($row["ResultsVisibility"] == "public" ? "selected" : "").">Público</option>";
                 }
                 echo "</select></h4>";
+                echo '<div class="switch-button">';
+                echo '<label for="switch-label">Bloquear encuesta</label>';
+                echo '<input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox "'.($row["State"] == "blocked" ? " checked " : "").'>';
+                echo '<label for="switch-label" class="switch-button__label"></label>';
+                echo '</div>';
                 echo "<button id='saveChanges'>Guardar cambios</button>";
                 echo "</div>";
                 echo "
@@ -115,6 +152,9 @@
     <form id="hiddenForm" style="display: none" method="POST">
     </form>
     </section>
-    <?php include("./components/footer.php") ?>
+    <?php include './components/banner.php'; ?>
+    <?php include("./components/footer.php");
+            } else {
+            include("./errors/error403.php");}}?>
 </body>
 </html>

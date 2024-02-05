@@ -152,6 +152,7 @@
             </div>
         </div>
     </section> 
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 </html>

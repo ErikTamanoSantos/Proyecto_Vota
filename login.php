@@ -25,13 +25,16 @@
                     <input type="password" name="pwd" placeholder="Contrasenya">
                     <button type="submit" class="btnForm">Entrar</button>
                 </form>
+                <p class="forgotPassword"><a href="forgot_password.php">¿Olvidaste tu contraseña?</a></p>
             </div>
         </div>
+
 
         <div class="loginImg">
             <img src="./img/login.svg">
         </div>
     </section>
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
     <?php
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
@@ -54,7 +57,7 @@
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
                     $_SESSION["isAuthenticated"] = $row["IsAuthenticated"];
-                    header("Location:./dashboard.php");
+                    header("Location:dashboard.php");
                     if ($row["IsAuthenticated"] == 1) {
                         $correct = true;
                         $_SESSION["login"] = "correcto";

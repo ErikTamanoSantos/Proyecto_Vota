@@ -37,7 +37,7 @@
             <img src="./img/register.svg">
         </div>
     </section>
-
+    <?php include './components/banner.php'; ?>
     <?php include("./components/footer.php")?>
 
     <?php 
@@ -335,8 +335,8 @@
                 $mail->SMTPSecure = "tls";
                 $mail->Port       = 587;
                 $mail->Host       = "smtp.gmail.com";
-                $mail->Username   = "etamanosantos.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviaran los correos
-                $mail->Password   = "Dennis12Erik19!"; // Password de la cuenta de correo
+                $mail->Username   = ""; // Email de la cuenta de correo desde la que se enviaran los correos
+                $mail->Password   = ""; // Password de la cuenta de correo
     
                 $mail->IsHTML(true);
                 $mail->AddAddress($destinatario);

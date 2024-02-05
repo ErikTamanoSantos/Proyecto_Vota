@@ -38,6 +38,7 @@
             <img src="./img/changePassword.svg" alt="">
         </div>
     </div>
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php' ?>
         <?php 
         echo var_dump($_SESSION["UserID"]);

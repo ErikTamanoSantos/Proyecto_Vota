@@ -10,7 +10,7 @@
             } else {
                 $tokenQuestion = $_GET["tokenQuestion"];
             }
-            echo $tokenQuestion; # codigo repetido ... sobra
+
             try {
                 $dsn = "mysql:host=localhost;dbname=project_vota";
                 $pdo = new PDO($dsn, $dbUser, $dbPass);
@@ -18,7 +18,10 @@
                 $query = $pdo->prepare("SELECT * FROM Polls");
                 $query->execute();
                 
-                $row = $query->fetch();
+                $row = $query->fetch(); 
+                
+                $statePoll = $row["State"];
+                echo $statePoll;
                 $correct = false;
                 $questions = 0;
                 echo "<ul>";
@@ -207,17 +210,18 @@
                     }
                 }
             }
-            
+            unset($_SESSION['tokenQuestion']);
 
         } catch (PDOException $e){
             echo $e->getMessage();
             escribirEnLog("[votePoll] ".$e);
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
+
     ?>
         </div>
     </div>
-
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 </html>
