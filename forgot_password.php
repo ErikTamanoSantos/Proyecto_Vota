@@ -69,12 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_GET['validToken'])) {
         $mail->SMTPSecure = "tls";
         $mail->Port       = 587;
         $mail->Host       = "smtp.gmail.com";
-        $mail->Username   = ""; // Email de la cuenta de correo desde la que se enviarán los correos
-        $mail->Password   = ""; // Password de la cuenta de correo
+        $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat"; // Email de la cuenta de correo desde la que se enviarán los correos
+        $mail->Password   = "KekHut93"; // Password de la cuenta de correo
 
         $mail->IsHTML(true);
         $mail->AddAddress($destinatario);
-        $mail->SetFrom("", "Vota EJA");
+        $mail->SetFrom("jbernabeucaballero.cf@iesesteveterradas.cat", "Vota EJA");
 
         $mail->Subject = $title;
         $mail->MsgHTML($content);
@@ -179,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_GET['validToken'])) {
                     </div>
                     <div class="loginImg">
                         <!-- Puedes personalizar esta parte según tus necesidades -->
-                        <img src="./img/change_password.svg">
+                        <img src="./img/forgotPassword.svg">
                     </div>
                 </section>
                 <?php include './components/footer.php'; ?>
@@ -233,12 +233,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_GET['validToken'])) {
                     <h3>Ingresa tu correo electrónico</h3>
                     <form method="POST" action="" onsubmit="return validatePassword()">
                         <input type="email" name="userEmail" placeholder="Correo Electrónico" required>
-                        <button type="submit" class="btnForm">Cambiar Contraseña</button>
+                        <button type="submit" class="btnForm">Enviar email</button>
                     </form>
                 </div>
             </div>
             <div class="loginImg">
-                <img src="./img/forgot_password.svg">
+                <img src="./img/forgotPassword.svg">
             </div>
         </section>
         <?php include './components/footer.php'; ?>

@@ -9,7 +9,6 @@
             } else {
                 $tokenQuestion = $_GET["tokenQuestion"];
             }
-            echo $tokenQuestion;
 
             include("config.php"); # codigo repetido ... sobra
             try {

@@ -3,3 +3,26 @@
 2024-02-05 16:13:24 [LOGIN] Credenciales incorrectos
 2024-02-05 16:13:31 [DASHBOARD] Login correcto del user63 con username javii
 2024-02-05 16:16:07 [logout] El usuario 63 ha cerrado sesion
+2024-02-05 16:48:57 [LOGIN] Credenciales incorrectos
+2024-02-05 16:49:02 [LOGIN] Credenciales incorrectos
+2024-02-05 16:49:20 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-05 16:49:55 [logout] El usuario 63 ha cerrado sesion
+2024-02-05 16:50:11 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-05 16:50:51 [logout] El usuario 63 ha cerrado sesion
+2024-02-05 16:51:24 [logout] El usuario 63 ha cerrado sesion
+2024-02-05 16:52:08 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-05 16:52:17 [logout] El usuario 63 ha cerrado sesion
+2024-02-05 16:52:39 [logout] El usuario 63 ha cerrado sesion
+2024-02-05 16:53:00 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-05 18:02:01 [DASHBOARD] Token de validación inválido
+2024-02-05 18:03:50 [DASHBOARD] Token de validación inválido
+2024-02-05 18:03:55 [DASHBOARD] Token de validación inválido
+2024-02-05 18:06:03 [DASHBOARD] Vaya, parece que no tienes respuestas, user: javii
+2024-02-05 18:06:03 [VOTE] Voto registrado
+2024-02-05 18:06:13 [DASHBOARD] Vaya, parece que no tienes respuestas, user: javii
+2024-02-05 18:06:13 [VOTE] Voto registrado
+2024-02-05 18:11:03 [DASHBOARD] Token de validación inválido
+2024-02-05 18:11:10 [DASHBOARD] Vaya, parece que no tienes respuestas, user: javii
+2024-02-05 18:11:10 [VOTE] Voto registrado
+2024-02-05 18:11:49 [VOTE] Voto registrado
+2024-02-05 18:11:59 [VOTE] Link inválido

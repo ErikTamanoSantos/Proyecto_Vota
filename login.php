@@ -57,11 +57,11 @@
                     $_SESSION["UserID"] = $row["ID"];
                     $_SESSION["Username"] = $row["Username"];
                     $_SESSION["isAuthenticated"] = $row["IsAuthenticated"];
-                    header("Location:./dashboard.php");
+                    header("Location:dashboard.php");
                     if ($row["IsAuthenticated"] == 1) {
                         $correct = true;
                         $_SESSION["login"] = "correcto";
-                        header("Location:./dashboard.php");
+                        header("Location:dashboard.php");
                     }
                 }
                 if (!$correct) {

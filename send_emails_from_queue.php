@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '/var/www/html/Proyecto_Vota/components/log.php';
 include("config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -19,22 +18,19 @@ function getTokenFromEmail($email, $pollID) {
 
         $stmt = $pdo->prepare("SELECT PIU.tokenQuestion 
                               FROM email_queue EQ
-                              JOIN Users U ON EQ.email = U.email
+                              JOIN Users U ON EQ.email = U.Email
                               JOIN Poll_InvitedUsers PIU ON U.ID = PIU.UserID AND EQ.PollID = PIU.PollID
-                              WHERE U.email = ? AND EQ.PollID = ?");
+                              WHERE U.Email = ? AND EQ.PollID = ?");
         $stmt->bindParam(1, $email);
         $stmt->bindParam(2, $pollID);
         $stmt->execute();
         $result = $stmt->fetch();
-
-        
 
         if ($result !== false) {
             return $result['tokenQuestion'];
         } else {
             return null;
         }
-
             
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -42,16 +38,12 @@ function getTokenFromEmail($email, $pollID) {
     }
 }
 
-
-
-
 function enviarCorreo($pdo, $destinatario, $username, $pollID) {
     
     $token = getTokenFromEmail($destinatario, $pollID);
-
-
+    echo $token;
     $title = "Has sido invitado para votar, " . $username . "!";
-    $content = "";
+    $content = "Has sido invitado a votar a una encuesta! Accede a este enlace y realiza tu votación!<a href='localhost/Proyecto_Vota/votePoll.php?tokenQuestion=".$token."'>Accede a la votación</a><br>El equipo de VOTA EJA.";
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->Mailer = "smtp";
@@ -61,12 +53,12 @@ function enviarCorreo($pdo, $destinatario, $username, $pollID) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = "etamanosantos.cf@iesesteveterradas.cat"; 
-    $mail->Password   = "Dennis12Erik19!"; 
+    $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat"; 
+    $mail->Password   = "KekHut93"; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("etamanosantos.cf@iesesteveterradas.cat", "Vota EJA");
+    $mail->SetFrom("jbernabeucaballero.cf@iesesteveterradas.cat", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);
@@ -97,22 +89,23 @@ try {
     if ($mysqli->connect_error) {
         die("Error de conexión a la base de datos: " . $mysqli->connect_error);
     }
-    $result = $mysqli->query("SELECT email, pollID FROM email_queue LIMIT 5");
+    $result = $mysqli->query("SELECT email, PollID FROM email_queue LIMIT 5");
 
     if ($result->num_rows > 0) {
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->Mailer = "smtp";
+        $mail->SMTPDebug  = 2;
         $mail->SMTPAuth   = TRUE;
         $mail->SMTPSecure = "tls";
         $mail->Port       = 587;
         $mail->Host       = "smtp.gmail.com";
-        $mail->Username   = "";
-        $mail->Password   = ""; // Password de la cuenta de correo
+        $mail->Username   = "jbernabeucaballero.cf@iesesteveterradas.cat";
+        $mail->Password   = "KekHut93"; // Password de la cuenta de correo
 
         while ($row = $result->fetch_assoc()) {
             $email = $row['email'];
-            $pollID = $row['pollID'];
+            $pollID = $row['PollID'];
         
             $token = getTokenFromEmail($email, $pollID);
         
@@ -120,7 +113,9 @@ try {
                 if (enviarCorreo($pdo, $email, "Nombre de Usuario", $pollID)) {
                     echo "Correo enviado a: $email<br>";
                 } else {
-                    echo "Error al enviar correo a: $email<br>";
+                    // hacer echo del error:
+                    $error = $mail->ErrorInfo;
+                    echo "Error al enviar correo a: $email. Detalles del error: $error<br>";
                 }
             } else {
                 echo "No se encontró token para el correo: $email<br>";
