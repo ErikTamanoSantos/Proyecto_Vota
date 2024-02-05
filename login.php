@@ -34,6 +34,7 @@
             <img src="./img/login.svg">
         </div>
     </section>
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
     <?php
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
@@ -59,6 +60,7 @@
                     header("Location:./dashboard.php");
                     if ($row["IsAuthenticated"] == 1) {
                         $correct = true;
+                        $_SESSION["login"] = "correcto";
                         header("Location:./dashboard.php");
                     }
                 }

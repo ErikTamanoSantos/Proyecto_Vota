@@ -1,10 +1,12 @@
 <?php
     session_start();
+    include './components/log.php';
     if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
         if(isset($_POST['closeSession'])){
             session_destroy();
+            escribirEnLog("[logout] El usuario ".$_SESSION["UserID"]." ha cerrado sesion");
             header("Location:./index.php");
         }
         if(isset($_POST['returnToDashboard'])){
@@ -32,7 +34,7 @@
         </form>
     </div>
 
-
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 </html>

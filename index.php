@@ -11,7 +11,7 @@
     <title>Vota EJA | 2024</title>
 </head>
 
-<body>
+<body id="index">
     <?php include './components/header.php'; ?>
     <?php include("./components/log.php")?>
     <div id="notificationContainer"></div>
@@ -19,6 +19,8 @@
     <?php 
         if (isset($_SESSION['justVoted'])) {
             echo "<script>showNotification('success', '¡Tu voto ha sido registrado! Regístrate para ver tus votaciones y poder crearlas.')</script>";
+            //log
+            escribirEnLog("[VOTE] Voto registrado");
             unset($_SESSION['justVoted']);
         } elseif (isset($_SESSION['alreadyVoted'])) {
             echo "<script>showNotification('error', 'Link inválido.')</script>";
@@ -26,11 +28,14 @@
             escribirEnLog("[VOTE] Link inválido");
             unset($_SESSION['alreadyVoted']);
         }
+        $_SESSION["index"] = 1;
     ?>
 
     <section class="firstSec flex flex-col justify-center">
         <h1>VOTA EJA</h1>
         <h3>Portal de votaciones</h3>
+        <?php include './components/rail.php' ?>
+
         <div class="firstSecFlex flex flex-row">
             <div class="firstSecText">
                 <p><strong>Vota EJA</strong> es un proyecto para lograr hacer un portal de votaciones que permita <strong>crear, distribuir y administrar</strong> votaciones en linea.
@@ -42,6 +47,8 @@
             </div>
         </div>
     </section>
+
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 

@@ -44,6 +44,17 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['emails'])) {
         $emails = $_POST['emails'];
+        try {
+            $hostname = "localhost";
+            $dbname = "project_vota";
+            $username = $dbUser;
+            $pw = $dbPass;
+            $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
+        } catch (PDOException $e) {
+            echo "Failed to get DB handle: ". $e->getMessage();
+            escribirEnLog("[invite] ".$e);
+            exit;
+        }
 
         // Obtener el pollID de la variable GET
         $pollID = isset($_GET['pollID']) ? $_GET['pollID'] : null;
@@ -214,9 +225,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 </script>
 
-<?php
+<?php 
+include './components/banner.php';
 include './components/footer.php';
 ?>
 
 </body>
+
 </html>

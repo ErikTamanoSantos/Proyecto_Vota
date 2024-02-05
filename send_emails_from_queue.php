@@ -61,12 +61,12 @@ function enviarCorreo($pdo, $destinatario, $username, $pollID) {
     $mail->SMTPSecure = "tls";
     $mail->Port       = 587;
     $mail->Host       = "smtp.gmail.com";
-    $mail->Username   = ""; 
-    $mail->Password   = ""; 
+    $mail->Username   = "etamanosantos.cf@iesesteveterradas.cat"; 
+    $mail->Password   = "Dennis12Erik19!"; 
 
     $mail->IsHTML(true);
     $mail->AddAddress($destinatario);
-    $mail->SetFrom("", "Vota EJA");
+    $mail->SetFrom("etamanosantos.cf@iesesteveterradas.cat", "Vota EJA");
 
     $mail->Subject = $title;
     $mail->MsgHTML($content);

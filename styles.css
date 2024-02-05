@@ -20,6 +20,11 @@ html,body {
     --textoAzulNormal: #065374;
     --textoAzulClaroMedio: #00638d;
     --textoAzulClaro: #0076ab;
+
+    --color-green: #00a878;
+    --color-red: #fe5e41;
+    --color-button: #fdffff;
+    --color-black: #000;
 }
 
 body {
@@ -62,6 +67,7 @@ body {
     position: absolute;
     display: flex;
     width: fit-content;
+
 
     height: 40px;
     padding: 1%;
@@ -229,8 +235,9 @@ footer a {
     color: #000;
     font-weight: 400;
     line-height: 1.4;
-    height:750px;
+    height:calc(100vh + 300px);
     padding-bottom: 200px;
+    clip-path: polygon(50% 100%, 100% 85%, 100% 0, 0 0, 0 85%);
 }
 
 .firstSec > h1 {
@@ -645,8 +652,26 @@ footer a {
 
 }
 
-.userInfo > h2, .userInfo > h4  {
+.userInfo > h2, .userInfo > h4, .userInfo > a {
     color:  var(--azulClaro);
+}
+
+.userInfo > a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.7);
+    color: var(--azulClaro);
+    border-radius: 25px;
+    padding: 15px;
+    background-color: var(--azulOscuroMedio);
+    box-shadow: 2px 2px 20px var(--textoAzulNormal);
+}
+
+.userInfo > a:hover {
+    color: var(--textoAzulOscuro);
+    text-shadow: 5px 5px 20px #000;
+    transform: scale(1.2);
 }
 
 .navDashboard {
@@ -905,7 +930,18 @@ footer a {
     font-weight: 700;
 }
 
-.circleRegisterForm > form input {
+.circleRegisterForm > form input:not([type="submit"]) {
+    grid-area: 1 / 2 / 2 / 3;
+    background: transparent;
+    border: 0;
+    border-radius: 10px;
+    border-bottom: 1px solid var(--azulClaro);
+    margin: 5px;
+    padding: 10px;
+    color: #fff !important;
+}
+
+.circleRegisterForm > form select {
     grid-area: 1 / 2 / 2 / 3;
     background: transparent;
     border: 0;
@@ -1438,6 +1474,28 @@ footer a {
     color: #fff;
 }
 
+#saveChanges {
+    background-color: var(--textoAzulClaroMedio);
+    color: var(--azulClaro);
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 40%;
+    padding: 10px;
+    height: 40px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px var(--textoAzulClaroMedio);
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+#saveChanges:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}
+
 #pollGraphs {
     border: 1px solid var(--azulOscuroMedio);
     border-radius: 16px;
@@ -1501,6 +1559,47 @@ footer a {
     flex-direction: column;
 
 }
+
+.switch-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.switch-button .switch-button__checkbox {
+    display: none;
+}
+.switch-button .switch-button__label {
+    background-color: var(--azulOscuroMedio);
+    width: 4rem;
+    height: 2rem;
+    border-radius: 3rem;
+    display: inline-block;
+    position: relative;
+}
+.switch-button .switch-button__label:before {
+    transition: .2s;
+    display: block;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--azulOscuro);
+    content: '';
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 1px var(--azulClaro);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+    background-color: var(--azulClaroMedio);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+    transform: translateX(2rem);
+}
+
+.switch-button label:nth-child(1) {
+    color: var(--azulClaro);
+    font-weight: 700;
+    margin-right: 20px;
+}
+
  
 /* Invitar emails */
 
@@ -1578,4 +1677,238 @@ footer a {
 
 .formInviteUsers form textarea::placeholder {
     color: var(--azulClaro);
+}
+
+/* Banner */
+
+.bannerSection {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.index::before {
+    background-image: url(img/background.webp);
+    filter: blur(10px);
+}
+
+.bannerSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.banner {
+    z-index: 10000;
+    filter: blur(0);
+    max-width: 970px;
+    max-height: 250px;
+}
+
+.banner img {
+    border-radius: 20px;
+    box-shadow: 2px 2px 20px var(--azulOscuro);
+}
+
+#index {
+    background-color: rgba(149, 149, 149, 0.28);
+}
+
+.btn2 {
+    background-color: var(--textoAzulClaroMedio);
+    border: 1px solid var(--azulOscuro);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 10px var(--textoAzulClaroMedio);
+    padding: 10px;
+    margin: 2%;
+}
+
+.btn2:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}
+
+/* Change password */
+
+.changePassword {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: calc(40px + 2%);
+    min-height: 60vh;
+}
+
+.changePasswordForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border: 1px solid var(--azulOscuro);
+    padding: 5%;
+    margin:7.5%;
+    background-color: var(--azulOscuro);
+    border-radius: 16px;
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+    color: var(--azulClaro);
+    font-size: 20px;
+}
+
+
+.changePassword form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border: 1px solid var(--azulOscuro);
+    padding: 5%;
+    background-color: var(--azulOscuro);
+    border-radius: 16px;
+    box-shadow: 3px 1px 20px var(--azulOscuro);
+}
+
+.changePassword form input {
+    margin: 5%;
+    padding: 3%;
+    border-radius: 10px;
+    border: 1px solid var(--azulOscuro);
+    font-size: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--azulClaro);
+    color: #fff;
+}
+
+.changePassword form input::placeholder {
+    color: #fff;
+}
+
+.changePassword form input:focus {
+    outline: none;
+}
+
+.changePassword form input[type="submit"] {
+    background-color: var(--textoAzulClaroMedio);
+    padding: 20px;
+    border: 0;
+    border-radius: 40px;
+    box-shadow: 2px 2px 20px var(--azulOscuro);
+    font-size: 20px;
+    color: var(--azulClaro);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+.changePassword form input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: var(--textoAzulClaroMedio);
+    transform: scale(1.05);
+}
+
+.changePasswordInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 5%;
+    border-radius: 16px;
+    color: var(--azulClaro);
+}
+
+.changePasswordInfo > p {
+    font-size: 20px;
+    text-align: center;
+    color: var(--azulClaro);
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
+    padding-bottom:10px;
+}
+
+.changePasswordInfo > h2 {
+    font-size: 50px;
+    text-align: center;
+    color: var(--azulClaro);
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+
+}
+
+.changePasswordInfo img {
+    width: 30%;
+    height: 30%;
+    filter: drop-shadow(2px 1px 5px #000000);
+}
+
+/* Rail */
+
+.scroll {
+    position: relative;
+    display: flex;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #fff 25%, #fff 75%, transparent);
+}
+
+.scroll div:nth-child(1) {
+    white-space: nowrap;
+    animation: animate var(--t) linear infinite;
+    animation-delay: calc(var(--t) * -1);
+}
+
+.scroll div:nth-child(2) {
+    white-space: nowrap;
+    animation: animate2 var(--t) linear infinite;
+    animation-delay: calc(var(--t) / -2);
+}
+
+
+@keyframes animate {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+.scroll div span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 30px;
+    background: transparent;
+    color: var(--azulClaro);
+    transition: 0.5s;
+    width: 500px;
+}
+
+.scroll div span:hover {
+    transform: scale(1.05);
+}
+
+.scroll div span img {
+    border-radius: 30px;
+    box-shadow: 2px 2px 20px var(--azulOscuro);
 }

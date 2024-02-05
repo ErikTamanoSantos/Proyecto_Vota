@@ -64,6 +64,8 @@
                             
                             header("Location:./dashboard.php");
                             echo "<script>showNotification('success', 'Términos de uso aceptados correctamente');</script>";
+                            //log
+                            escribirEnLog("[DASHBOARD] Términos de uso aceptados correctamente");
                         } catch (PDOException $e) {
                             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal al actualizar la base de datos');</script>";
                             escribirEnLog("[DASHBOARD] ".$e);
@@ -111,6 +113,7 @@
                         echo "<h4> Telefono: ".$row["Phone"]."</h4>";
                         echo "<h4> Pais: ".$row["Country"]."</h4>";
                         echo "<h4> Ciudad: ".$row["City"]."</h4>";
+                        echo "<br><br><a href='changePassword.php' id='changePassword'>Cambiar contraseña</a>";
                         //echo "<h4>".$row["Username"]."</h4>"; futuro es validated
 
                         $row = $query->fetch();
@@ -119,6 +122,8 @@
                     echo "</ul>";
                     if (!$correct) {
                         echo "<script>showNotification('info', 'Vaya, parece que no deberias estar aqui')</script>";
+                        // log
+                        escribirEnLog("[DASHBOARD] El user".$_SESSION['UserID']." no deberia estar aqui");
                     }
                 } catch (PDOException $e){
                     echo $e->getMessage();
@@ -147,9 +152,16 @@
             </div>
         </div>
     </section> 
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 </html>
 <?php
-    echo "<script>showNotification('success', 'Login Correcto');</script>";}
+    if ($_SESSION["login"] == "correcto") {
+        echo "<script>showNotification('success', 'Login Correcto');</script>";
+        //log
+        escribirEnLog("[DASHBOARD] Login correcto del user".$_SESSION['UserID']." con username ".$_SESSION['Username']);
+        unset($_SESSION["login"]);
+    }
+}
 ?>

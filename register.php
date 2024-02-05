@@ -37,7 +37,7 @@
             <img src="./img/register.svg">
         </div>
     </section>
-
+    <?php include './components/banner.php'; ?>
     <?php include("./components/footer.php")?>
 
     <?php 
@@ -325,6 +325,8 @@
 
                 if ($mail->Send()) {
                     echo '<script>showNotification("success", "¡Registro completado!");</script>';
+                    //log
+                    escribirEnLog("[REGISTER] Registro completado correctamente del user " . $username . " con email " . $email);
                 } else {
                     echo '<script>showNotification("error", "Vaya, parece que no se ha enviado el correo. ' . $mail->ErrorInfo . '");</script>';
                     //log

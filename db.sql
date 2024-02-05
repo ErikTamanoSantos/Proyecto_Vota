@@ -32,7 +32,7 @@ CREATE TABLE `answers` (
   `Text` varchar(255) DEFAULT NULL,
   `PollID` int(11) DEFAULT NULL,
   `ImagePath` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `answers`
@@ -300,6 +300,22 @@ CREATE TABLE `password_recovery_requests` (
   `token` varchar(64) NOT NULL,
   `request_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Table structure for table `Poll_InvitedUsers`
+--
+
+DROP TABLE IF EXISTS `Poll_InvitedUsers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Poll_InvitedUsers` (
+  `UserID` int DEFAULT NULL,
+  `PollID` int DEFAULT NULL,
+  `tokenQuestion` varchar(255) DEFAULT NULL,
+  UNIQUE KEY `Poll_InvitedUsers_unique` (`UserID`,`PollID`),
+  KEY `Poll_InvitedUsers_Poll` (`PollID`),
+  CONSTRAINT `Poll_InvitedUsers_Poll` FOREIGN KEY (`PollID`) REFERENCES `Polls` (`ID`),
+  CONSTRAINT `Poll_InvitedUsers_User` FOREIGN KEY (`UserID`) REFERENCES `Users` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Volcado de datos para la tabla `password_recovery_requests`
@@ -345,14 +361,24 @@ CREATE TABLE `poll_admins` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `poll_invitedusers`
+-- Table structure for table `User_Vote`
 --
 
-CREATE TABLE `poll_invitedusers` (
-  `UserID` int(11) DEFAULT NULL,
+DROP TABLE IF EXISTS `User_Vote`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `User_Vote` (
+  `UserID` int DEFAULT NULL,
+  `AnswerID` int DEFAULT NULL,
   `PollID` int(11) DEFAULT NULL,
-  `tokenQuestion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  UNIQUE KEY `User_Vote_unique` (`UserID`,`AnswerID`),
+  KEY `User_Vote_Answer` (`AnswerID`),
+  KEY `PollID` (`PollID`),
+  CONSTRAINT `User_Vote_Answer` FOREIGN KEY (`AnswerID`) REFERENCES `Answers` (`ID`),
+  CONSTRAINT `User_Vote_User` FOREIGN KEY (`UserID`) REFERENCES `Users` (`ID`),
+  CONSTRAINT `user_vote_ibfk_1` FOREIGN KEY (`PollID`) REFERENCES `polls` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Volcado de datos para la tabla `poll_invitedusers`
@@ -390,7 +416,7 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `user_vote` (
-  `UserID` int(11) DEFAULT NULL,
+  `UserID` varchar(255)(11) DEFAULT NULL,
   `AnswerID` int(11) DEFAULT NULL,
   `PollID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

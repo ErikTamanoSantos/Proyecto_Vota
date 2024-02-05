@@ -210,7 +210,7 @@ function showStep(step = 0, animate = true) {
                         } else {
                             $("form").append(`
                             <div class="inputContainer">
-                                <input type="submit" value="Crear usuario" class="btn" id="registerSubmit">
+                                <input type="submit" value="Crear usuario" class="btn2" id="registerSubmit">
                             </div>
                         `)
                         }
