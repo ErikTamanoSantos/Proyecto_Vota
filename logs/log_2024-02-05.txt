@@ -1,0 +1,5 @@
+2024-02-05 16:13:08 [LOGIN] Credenciales incorrectos
+2024-02-05 16:13:13 [LOGIN] Credenciales incorrectos
+2024-02-05 16:13:24 [LOGIN] Credenciales incorrectos
+2024-02-05 16:13:31 [DASHBOARD] Login correcto del user63 con username javii
+2024-02-05 16:16:07 [logout] El usuario 63 ha cerrado sesion

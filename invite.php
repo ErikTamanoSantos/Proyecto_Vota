@@ -310,6 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </script>
 
 <?php 
+include './components/banner.php';
 include './components/footer.php';
 ?>
 

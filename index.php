@@ -28,11 +28,14 @@
             escribirEnLog("[VOTE] Link inválido");
             unset($_SESSION['alreadyVoted']);
         }
+        $_SESSION["index"] = 1;
     ?>
 
     <section class="firstSec flex flex-col justify-center">
         <h1>VOTA EJA</h1>
         <h3>Portal de votaciones</h3>
+        <?php include './components/rail.php' ?>
+
         <div class="firstSecFlex flex flex-row">
             <div class="firstSecText">
                 <p><strong>Vota EJA</strong> es un proyecto para lograr hacer un portal de votaciones que permita <strong>crear, distribuir y administrar</strong> votaciones en linea.
@@ -44,6 +47,7 @@
             </div>
         </div>
     </section>
+
     <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>

@@ -37,7 +37,7 @@
             <img src="./img/register.svg">
         </div>
     </section>
-
+    <?php include './components/banner.php'; ?>
     <?php include("./components/footer.php")?>
 
     <?php 

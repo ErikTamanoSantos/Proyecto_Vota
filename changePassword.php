@@ -38,6 +38,7 @@
             <img src="./img/changePassword.svg" alt="">
         </div>
     </div>
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php' ?>
         <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

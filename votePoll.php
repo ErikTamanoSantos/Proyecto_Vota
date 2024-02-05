@@ -19,7 +19,10 @@
                 $query = $pdo->prepare("SELECT * FROM Polls");
                 $query->execute();
                 
-                $row = $query->fetch();
+                $row = $query->fetch(); 
+                
+                $statePoll = $row["State"];
+                echo $statePoll;
                 $correct = false;
                 $questions = 0;
                 echo "<ul>";
@@ -159,7 +162,6 @@
                             $updateQuery->execute();
 
                             $_SESSION['justVoted'] = true;
-                            unset($_SESSION['tokenQuestion']);
                             header("Location:./index.php");
                         } catch (PDOException $e) {
                             echo $e->getMessage();
@@ -174,17 +176,18 @@
                     }
                 }
             }
-            
+            unset($_SESSION['tokenQuestion']);
 
         } catch (PDOException $e){
             echo $e->getMessage();
             escribirEnLog("[votePoll] ".$e);
             echo "<script>showNotification('error', 'Vaya, parece que algo ha salido mal')</script>";
         }
+
     ?>
         </div>
     </div>
-
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
 </body>
 </html>

@@ -57,6 +57,7 @@
             <img src="./img/createPoll.svg">
         </div>
     </div>
+    <?php include './components/banner.php'; ?>
 
     <?php include("./components/footer.php")?>
     <?php 

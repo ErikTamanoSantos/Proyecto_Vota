@@ -32,6 +32,7 @@
             <img src="./img/login.svg">
         </div>
     </section>
+    <?php include './components/banner.php'; ?>
     <?php include './components/footer.php'; ?>
     <?php
         if(isset($_POST['userEmail']) && isset($_POST['pwd'])){
