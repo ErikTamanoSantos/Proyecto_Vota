@@ -1,0 +1,13 @@
+2024-02-06 15:37:59 [invite] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\invite.php:37
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\invite.php(37): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+2024-02-06 16:33:03 [REGISTER] PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Proyecto_Vota\register.php:54
+Stack trace:
+#0 C:\xampp\htdocs\Proyecto_Vota\register.php(54): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 {main}
+2024-02-06 16:34:40 [REGISTER] Registro completado correctamente del user jovao348@gmail.com con email jovao348@gmail.com
+2024-02-06 16:39:21 [REGISTER] Registro completado correctamente del user jovao348@gmail.com con email jovao348@gmail.com
+2024-02-06 16:41:26 [REGISTER] Registro completado correctamente del user jovao348@gmail.com con email jovao348@gmail.com
+2024-02-06 16:42:03 [REGISTER] Registro completado correctamente del user jovao348@gmail.com con email jovao348@gmail.com
+2024-02-06 16:45:16 [REGISTER] Registro completado correctamente del user jovao348@gmail.com con email jovao348@gmail.com
