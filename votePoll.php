@@ -14,36 +14,6 @@
             try {
                 $dsn = "mysql:host=localhost;dbname=project_vota";
                 $pdo = new PDO($dsn, $dbUser, $dbPass);
-                
-                $query = $pdo->prepare("SELECT * FROM Polls");
-                $query->execute();
-                
-                $row = $query->fetch(); 
-                
-                $statePoll = $row["State"];
-                echo $statePoll;
-                $correct = false;
-                $questions = 0;
-                echo "<ul>";
-                while ($row) {
-                    $questions ++;
-                    echo "<li><div class='pollItem'>";
-                    $creationDate = new DateTime($row["CreationDate"]);
-                    echo "<span class='datePollItem'>".$creationDate->format("d/m/Y")."</span>";
-                    echo "<span class='nameQuestionPollItem'>".$row["Question"]."</span>";
-                    if ($row["QuestionVisibility"] == "hidden") {
-                        echo "<span class='visibilityPollItem'>Oculto</span>";
-                    }
-                    echo "</div></li>";
-                    $row = $query->fetch();
-                    $correct = true;
-                }
-                echo "</ul>";
-                if (!$correct) {
-                    echo "<script>showNotification('info', 'Vaya, parece que no tienes encuestas')</script>";
-                    // log
-                    escribirEnLog("[DASHBOARD] Vaya, parece que no tienes encuestas");
-                }
             } catch (PDOException $e){
                 echo $e->getMessage();
                 escribirEnLog("[votePoll] ".$e);
@@ -57,16 +27,27 @@
             $userRow = $validationQuery->fetch();
 
             if ($userRow) {
-                $_SESSION["tokenQuestion"] = $userRow["tokenQuestion"];
-                $query = $pdo->prepare("SELECT * FROM Users WHERE ID = ?");
-                $query->bindParam(1, $userRow["UserID"]);
-                $query->execute();
-                $row = $query->fetch();
-                if ($row["password"] != "") {
-                    $_SESSION["redirectTo"] = "login";
-                    header("Location:./login.php");
-                } else {
-                    header("Location:./votePoll.php"); 
+                $isBlockedQuery = $pdo->prepare("SELECT p.State FROM Poll_InvitedUsers piu JOIN Polls p ON piu.PollID = p.ID WHERE tokenQuestion = :Token");
+                $isBlockedQuery->bindParam(":Token", $_SESSION["tokenQuestion"]);
+                $isBlockedQuery->execute();
+                $isBlockedRow = $isBlockedQuery->fetch();
+                if ($isBlockedRow) {
+                    if ($isBlockedRow["State"] == "blocked") {
+                        $_SESSION["pollBlocked"] = true;
+                        header("Location:./index.php");
+                    } else {
+                        $_SESSION["tokenQuestion"] = $userRow["tokenQuestion"];
+                        $query = $pdo->prepare("SELECT * FROM Users WHERE ID = ?");
+                        $query->bindParam(1, $userRow["UserID"]);
+                        $query->execute();
+                        $row = $query->fetch();
+                        if ($row["Password"] != "") {
+                            $_SESSION["redirectTo"] = "login";
+                            header("Location:./login.php");
+                        } else {
+                            header("Location:./votePoll.php"); 
+                        }
+                    }
                 }
             } else {
                 echo "<script>showNotification('error', 'Token de validación inválido');</script>";
@@ -115,6 +96,9 @@
             $query->execute();
             $row = $query->fetch();
             $question = $row['Question'];
+            if ($row["ImagePath"] != "") {
+                echo "<img src='".$row["ImagePath"]."' alt='Imagen de la pregunta'>";
+            }
             echo "<h1>".$question."</h1>";
             echo '<div class="answers">';
             $query = $pdo->prepare("SELECT UserID, PollID from Poll_InvitedUsers WHERE tokenQuestion = :Token");
@@ -210,7 +194,6 @@
                     }
                 }
             }
-            unset($_SESSION['tokenQuestion']);
 
         } catch (PDOException $e){
             echo $e->getMessage();

@@ -3,38 +3,6 @@
     if (!isset($_SESSION['UserID'])) {
         include('./errors/error403.php');
     } else {
-?><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="./img/vota-si.png" />
-    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="functions.js"></script>
-    <script src="newPoll.js"></script>
-    <title>Nueva Encuesta | Vota EJA</title>
-</head>
-<body>
-    <?php include("./components/log.php")?>
-    <?php include("./components/header.php")?>
-    <div id="notificationContainer"></div>
-    <div class="createPollDiv">
-        <div class="createPollForm">
-            <h2>Crea una nueva encuesta</h2>
-            <form method="POST" enctype="multipart/form-data">
-            </form>
-        </div>
-        <div class="createPollImg">
-            <img src="./img/createPoll.svg">
-        </div>
-    </div>
-    <?php include './components/banner.php'; ?>
-
-    <?php include("./components/footer.php")?>
-    <?php 
-        echo var_dump($_FILES);
         if (isset($_POST["question"])) {
             if (!isset($_POST["answers"][0]) || !isset($_POST["answers"][1]) || $_POST["answers"][0] == "" || $_POST["answers"][1] == "") {
                 echo "
@@ -100,7 +68,7 @@
                     $answerImage = null;
                     if (isset($_FILES["answerImage".$index]) && $_FILES["answerImage".$index]["name"] != "") {
                         $answerImage = "./uploads/".basename($_FILES["answerImage".$index]["name"]);   
-                        move_uploaded_file($_FILES['questionImage']['tmp_name'], $answerImage);
+                        move_uploaded_file($_FILES['answerImage'.$index]['tmp_name'], $answerImage);
                     }
                     $query = $pdo -> prepare("INSERT INTO Answers(`Text`, PollID, ImagePath) VALUES (?, ?, ?)");
                     $query->bindParam(1, $value);
@@ -109,10 +77,43 @@
                     $query->execute();
                     $index++;
                 }
+                $_SESSION["pollCreated"] = true;
                 header("Location:./dashboard.php");
 
             }    
         }
+?><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./img/vota-si.png" />
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="functions.js"></script>
+    <script src="newPoll.js"></script>
+    <title>Nueva Encuesta | Vota EJA</title>
+</head>
+<body>
+    <?php include("./components/log.php")?>
+    <?php include("./components/header.php")?>
+    <div id="notificationContainer"></div>
+    <div class="createPollDiv">
+        <div class="createPollForm">
+            <h2>Crea una nueva encuesta</h2>
+            <form method="POST" enctype="multipart/form-data">
+            </form>
+        </div>
+        <div class="createPollImg">
+            <img src="./img/createPoll.svg">
+        </div>
+    </div>
+    <?php include './components/banner.php'; ?>
+
+    <?php include("./components/footer.php")?>
+    <?php 
+        
     ?>
 </body>
 </html>

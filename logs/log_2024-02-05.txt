@@ -56,3 +56,7 @@ Stack trace:
 2024-02-05 18:11:10 [VOTE] Voto registrado
 2024-02-05 18:11:49 [VOTE] Voto registrado
 2024-02-05 18:11:59 [VOTE] Link inválido
+2024-02-05 18:22:38 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-05 18:22:50 [DASHBOARD] Login correcto del user2 con username Erik
+2024-02-05 18:26:47 [LOGIN] Credenciales incorrectos
+2024-02-05 18:26:59 [DASHBOARD] Login correcto del user2 con username Erik

@@ -1,3 +1,40 @@
+<?php 
+session_start();
+if (!isset($_SESSION["UserID"])) {
+    include("./errors/error403.php");
+} else {
+    include './components/log.php';
+    include './components/header.php';
+    include("config.php");
+    
+    function generarToken($length = 40) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $token = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = rand(0, strlen($characters) - 1);
+            $token .= $characters[$randomIndex];
+        }
+        return $token;
+    }
+    
+    try {
+        $hostname = "localhost";
+        $dbname = "project_vota";
+        $username = $dbUser;
+        $pw = $dbPass;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
+    } catch (PDOException $e) {
+        echo "Failed to get DB handle: " . $e->getMessage();
+        escribirEnLog("[invite] " . $e);
+        exit;
+    }
+    $query = $pdo->prepare("SELECT * FROM Polls WHERE ID = ? AND CreatorID = ?");
+    $query->bindParam(1, $_GET["pollID"]);
+    $query->bindParam(2, $_SESSION["UserID"]);
+    $query->execute();
+    $row = $query->fetch();
+    if ($row) {
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,32 +51,6 @@
 <body>
 <div id="notificationContainer"></div>
 <?php
-session_start();
-include './components/log.php';
-include './components/header.php';
-include("config.php");
-
-function generarToken($length = 40) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $token = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomIndex = rand(0, strlen($characters) - 1);
-        $token .= $characters[$randomIndex];
-    }
-    return $token;
-}
-
-try {
-    $hostname = "localhost";
-    $dbname = "project_vota";
-    $username = $dbUser;
-    $pw = $dbPass;
-    $pdo = new PDO("mysql:host=$hostname;dbname=$dbname", "$username", "$pw");
-} catch (PDOException $e) {
-    echo "Failed to get DB handle: " . $e->getMessage();
-    escribirEnLog("[invite] " . $e);
-    exit;
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['emails'])) {
@@ -233,3 +244,9 @@ include './components/footer.php';
 </body>
 
 </html>
+<?php
+    } else {
+        include("./errors/error403.php");
+    }
+}
+?>

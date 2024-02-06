@@ -163,5 +163,11 @@
         escribirEnLog("[DASHBOARD] Login correcto del user".$_SESSION['UserID']." con username ".$_SESSION['Username']);
         unset($_SESSION["login"]);
     }
+    if (isset($_SESSION["pollCreated"])) {
+        echo "<script>showNotification('success', 'Encuesta creada correctamente.');</script>";
+        //log
+        escribirEnLog("[CREATE POLL] El usuario ".$_SESSION['UserID']." ha creado una encuesta");
+        unset($_SESSION["login"]);
+    }
 }
 ?>

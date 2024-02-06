@@ -27,6 +27,9 @@
             //log 
             escribirEnLog("[VOTE] Link inválido");
             unset($_SESSION['alreadyVoted']);
+        } elseif (isset($_SESSION['pollBlocked'])) {
+            echo "<script>showNotification('error', 'La encuesta ha sido bloqueada.')</script>";
+            escribirEnLog("[VOTE] Encuesta bloqueada");
         }
         $_SESSION["index"] = 1;
     ?>

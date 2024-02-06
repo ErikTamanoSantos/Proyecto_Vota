@@ -15,6 +15,7 @@
 <body>
      <div id="notificationContainer"></div>
     <?php 
+    include("./components/header.php");
     include("config.php");
     include './components/log.php'; 
 

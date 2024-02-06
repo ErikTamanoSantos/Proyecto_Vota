@@ -1410,7 +1410,6 @@ footer a {
     width: 100px;
     height: 100px;
     margin: 10px;
-    border-radius: 50%;
     border: 1px solid var(--azulOscuro);
     justify-self: flex-end;
 }
@@ -1911,4 +1910,9 @@ footer a {
 .scroll div span img {
     border-radius: 30px;
     box-shadow: 2px 2px 20px var(--azulOscuro);
+}
+
+.circleLoginForm > p > a {
+    color: var(--azulClaro);
+    font-family: 'Quicksand', 'sans-serif';
 }
