@@ -1,0 +1,51 @@
+2024-02-21 17:37:40 [LOGIN] Credenciales incorrectos
+2024-02-21 17:37:46 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 17:38:59 [logout] El usuario 1 ha cerrado sesion
+2024-02-21 17:39:27 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 17:39:48 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-21 17:40:20 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:43:11 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:43:38 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:47:08 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-21 17:48:22 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:49:05 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:49:49 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:58:05 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 17:59:23 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-21 18:00:21 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-21 18:00:56 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-21 18:10:14 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-21 18:10:53 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:11:04 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:24:15 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:34:13 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:34:52 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:35:12 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:39:18 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:39:32 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:42:55 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:43:24 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:44:00 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:44:34 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:45:05 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:45:42 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:45:56 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 18:46:36 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:01:01 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:01:25 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:10:32 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:14:32 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:15:12 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:15:48 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:16:39 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:16:55 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:17:08 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:18:51 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:19:15 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:19:44 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:20:00 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:20:37 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:21:16 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:21:29 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:26:47 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-21 19:26:49 [CREATE POLL] El usuario 1 ha creado una encuesta

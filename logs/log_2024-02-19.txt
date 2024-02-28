@@ -1,0 +1,6 @@
+2024-02-19 21:10:17 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-19 21:22:29 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-19 21:23:56 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-19 21:25:51 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-19 21:26:28 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com
+2024-02-19 21:28:56 [REGISTER] Registro completado correctamente del user Selenium Tester con email selenium@test.com

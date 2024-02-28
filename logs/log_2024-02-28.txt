@@ -1,0 +1,94 @@
+2024-02-28 17:38:58 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:39:57 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:40:43 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:41:18 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:41:49 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:41:53 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:43:44 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:43:45 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:44:13 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:44:18 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:44:46 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:44:51 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:45:15 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:45:19 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:47:11 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:47:15 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:49:30 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:49:34 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:50:46 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:50:50 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:51:35 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:51:39 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:52:00 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:52:04 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:52:32 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:52:37 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:53:51 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:53:51 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:55:01 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:55:02 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 17:58:44 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 17:58:48 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:14:13 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:14:17 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:15:37 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:15:38 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:16:22 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:16:23 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:17:47 [pollDetails] Cambios guardados del usuario 1 en la encuesta 1
+2024-02-28 18:18:45 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:18:46 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:19:15 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:19:16 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:19:39 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:19:43 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:19:44 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:20:10 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:20:14 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:20:15 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:21:02 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:23:17 [REGISTER] Error al enviar el correo de validación: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
+2024-02-28 18:23:56 [REGISTER] Email inválido (ya enlazado a una cuenta)
+2024-02-28 18:24:27 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:25:34 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:25:38 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:25:38 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:26:10 [logout] El usuario 2 ha cerrado sesion
+2024-02-28 18:26:29 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:26:33 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:26:34 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:26:34 [LOGIN] Credenciales incorrectos
+2024-02-28 18:27:00 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:27:04 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:27:05 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:27:05 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:27:59 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:28:03 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:28:04 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:28:05 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:28:30 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:28:34 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:28:35 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:28:36 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:30:54 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:31:16 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:31:20 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:31:21 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:31:22 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:37:21 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:37:25 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:37:26 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:37:27 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:40:06 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:40:07 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:40:08 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:40:08 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:41:06 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:41:07 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:41:08 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:41:09 [DASHBOARD] Login correcto del user2 con username eri
+2024-02-28 18:42:09 [DASHBOARD] Login correcto del user1 con username Erik
+2024-02-28 18:42:10 [CREATE POLL] El usuario 1 ha creado una encuesta
+2024-02-28 18:42:10 [logout] El usuario 1 ha cerrado sesion
+2024-02-28 18:42:11 [DASHBOARD] Login correcto del user2 con username eri

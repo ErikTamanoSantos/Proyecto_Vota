@@ -7,4 +7,4 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $SCRIPT_DIR
 
 # engeguem el PHP server
-php -S 0.0.0.0:8000
+php -S 0.0.0.0:8080
